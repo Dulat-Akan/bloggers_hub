@@ -1,0 +1,85 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title class="center">
+
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="no-scroll">
+
+<ion-searchbar #searchBox id="search-box" (input)="search(searchBox.value)"  color="primary" ></ion-searchbar>
+
+  <!-- <ul class="heroes">
+    <li *ngFor="let detail of details;index as i;trackBy: trackByFn;">
+      <a routerLink="/detail/{{detail.id}}" [queryParams]="{unit: detail.number}">
+        <span class="badge">{{i+1}}</span> {{detail.fromPoint}}
+      </a>
+    </li>
+  </ul> -->
+
+
+<div class="globtwo">
+
+  <ul class="myhidescrolledtwo" >
+    <li class="listv" *ngFor="let detail of details;index as i;trackBy: trackByFn;" (click)="detailRoute(detail.id)">
+      <div class="leftBlock">
+
+        <div class="level1">{{i+1}}</div>
+        <div class="level2">{{ detail.time }} (24h)</div>
+        <div class="level3">{{ detail.date }}</div>
+
+      </div>
+      <div class="rightBlock">
+
+
+        <div class="Rlevel1">
+            <div class="RHaad1">
+
+              <div class="RHaad1_child">
+                <div class="RHaad1_child1"><ion-icon name="radio-button-off"></ion-icon></div>
+                <div class="RHaad1_child2"><ion-icon name="radio-button-on"></ion-icon></div>
+                <div class="RHaad1_child3"><ion-icon name="radio-button-on"></ion-icon></div>
+                <div class="RHaad1_child4"><ion-icon name="radio-button-on"></ion-icon></div>
+                <div class="RHaad1_child5"><ion-icon name="radio-button-off"></ion-icon></div>
+              </div>
+
+            </div>
+
+            <div class="RHaad2">
+              <div class="RHaad2_ch1">{{detail.fromPoint}}</div>
+              <div class="RHaad2_ch2"><hr></div>
+              <div class="RHaad2_ch3">{{detail.toPoint}}</div>
+            </div>
+
+
+        </div>
+        <div class="Rlevel2">
+            <div class="Rlevel2_child1">
+              <div class="Rlevel2_child1_child1">Request</div>
+              <div class="Rlevel2_child1_child2">{{i+1}}</div>
+            </div>
+            <div class="Rlevel2_child2">
+              <div class="Rlevel2_child1_child1">Amount</div>
+              <div class="Rlevel2_child1_child2">{{detail.sum}} $</div>
+            </div>
+            <div class="Rlevel2_child3">
+              <div class="Rlevel2_child1_child1">Weight</div>
+              <div class="Rlevel2_child1_child2">{{detail.weight}}</div>
+            </div>
+
+        </div>
+
+
+      </div>
+    </li>
+  </ul>
+
+</div>
+
+
+
+</ion-content>

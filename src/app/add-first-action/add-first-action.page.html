@@ -1,0 +1,73 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>description</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <form [formGroup]="sendForm" (ngSubmit)="onSubmit()">
+
+  <ion-item>
+      <ion-label position="stacked">From Place</ion-label>
+      <ion-input type="text" placeholder="from city" formControlName="fromPlace" #searchBox id="search-box" (input)="searchCity(searchBox.value)"  required ></ion-input>
+  </ion-item>
+
+  <ion-list class="hidecitylist"   *ngFor="let city of citylist" (click)="clickCity(city.Name)" >
+          <ion-item *ngIf="checkformnumber == 1" color='primary'>
+            <ion-label>{{city.Name}}</ion-label>
+          </ion-item>
+  </ion-list>
+
+
+
+  <ion-item>
+      <ion-label position="stacked">To Place</ion-label>
+      <ion-input type="text" placeholder="to city" formControlName="toPlace" #searchBoxtwo id="search-boxtwo" (input)="searchCityto(searchBoxtwo.value)" required></ion-input>
+  </ion-item>
+
+  <ion-list class="hidecitylistto"  *ngFor="let city of citylist" (click)="clickCity(city.Name)" >
+          <ion-item color='primary' *ngIf="checkformnumber == 2">
+            <ion-label>{{city.Name}}</ion-label>
+          </ion-item>
+  </ion-list>
+
+  <!-- <ion-item>
+      <ion-label position="stacked">Date</ion-label>
+      <ion-input type="text" formControlName="date" required></ion-input>
+  </ion-item> -->
+  <ion-item>
+    <ion-label position="stacked">Date</ion-label>
+    <ion-input type="date" formControlName="date" required></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="stacked">Time H:mm</ion-label>
+    <ion-datetime displayFormat="H:mm" placeholder="desired started time format 24h" formControlName="time" required></ion-datetime>
+  </ion-item>
+
+  <ion-item>
+      <ion-label position="stacked">Desired shipping amount</ion-label>
+      <ion-input type="number" formControlName="amount" placeholder="you desired amount $" required></ion-input>
+  </ion-item>
+  <ion-item>
+      <ion-label position="stacked">Weight</ion-label>
+      <ion-input type="number" formControlName="weight" placeholder="Weight" required></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="stacked">Description</ion-label>
+    <!-- <ion-input type="text" formControlName="description" required></ion-input> -->
+    <ion-textarea type="text" formControlName="description" placeholder="you description,example box size..etc.." required rows="4" cols="20"></ion-textarea>
+  </ion-item>
+
+  <ion-button type="submit" *ngIf="checksendForm == 0" [disabled]="!sendForm.valid" expand="block" >Create</ion-button>
+
+
+<!-- formGroupName="address" -->
+
+    </form>
+
+</ion-content>

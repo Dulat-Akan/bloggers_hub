@@ -1,0 +1,22 @@
+<ion-header >
+  <ion-toolbar color="primary" >
+    <ion-title class="center">NYC SHELTERS</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+
+
+      <div class="grid grid-pad">
+        <a *ngFor="let hero of heroes"  class="col-1-4"
+            routerLink="/detail/{{hero.id}}">
+          <div class="module">
+            <div>{{hero.name}}</div>
+          </div>
+        </a>
+      </div>
+
+
+
+</ion-content>

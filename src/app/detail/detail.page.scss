@@ -1,0 +1,224 @@
+ion-content{
+  --background: linear-gradient(to right, #e6efff 0%, #b3cfff 100%);
+}
+
+$app_color:#3880ff;
+$light_grey:#b3b3b3;
+$text_opacity:0.6;
+$text_size:1.2em;
+.newcard{
+    width:93.7%;
+    height: 96%;
+    background-color: white;
+    margin-left: 3%;
+    overflow: hidden;
+    border-radius: 10px;
+    margin-top:4%;
+}
+.newLevel_1{
+  width:100%;
+  height: 22%;
+  margin-top:5%;
+}
+//childrens
+
+.newLevel_1_2_1{
+    float:left;
+    width:30%;
+    height: 100%;
+
+}
+
+//childrens
+.newLevel_1_2_1_1{
+  margin-left:20%;
+  width:80%;
+  height: 20%;
+  font-size: 1em;
+  font-weight: 500;
+  text-transform:uppercase;
+
+  color:$light_grey;
+}
+.newLevel_1_2_1_2{
+  border-radius: 10px;
+  margin-top:2%;
+  margin-left:20%;
+  width:80%;
+  height: 79%;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+//childrens
+
+
+.newLevel_1_2_2{
+    float:left;
+    width:70%;
+    height: 100%;
+}
+//childrens
+//childrens
+.newLevel_1_2_2_1{
+    width:100%;
+    height: 28%;
+    font-size: 1.3em;
+    font-weight: 500;
+    margin-top:10.5%;
+    margin-left:5%;
+    opacity: $text_opacity;
+}
+.newLevel_1_2_2_2{
+    width:100%;
+    height: 30%;
+    margin-left:5%;
+    color:$app_color;
+}
+//childrens
+
+
+
+
+.newLevel_2{
+  width:90%;
+  display: block;
+  height: 1px;
+  border: 0;
+  border-top: 1px solid #ccc;
+  margin-top: 0.8em;
+  margin-left:5%;
+  padding: 0;
+}
+.newLevel_3{
+  margin-top: 0.5em;
+  margin-left:5%;
+  width:90%;
+  height:7.5%;
+}
+
+//childrens
+.newLevel_3_1{
+  float:left;
+  width:50%;
+  height: 100%;
+
+}
+
+//childrens
+.newLevel_3_1_1{
+  font-size: 1em;
+  text-transform:uppercase;
+  color:$light_grey;
+  font-weight: 500;
+
+}
+.newLevel_3_1_2{
+  margin-top:2.2%;
+  font-size: $text_size;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding-right: 5%;
+  font-weight: 500;
+  opacity: $text_opacity;
+}
+.newLevel_3_1_3{
+  font-size: $text_size;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding-right: 5%;
+  font-weight: 500;
+  opacity: $text_opacity;
+}
+//childrens
+.newLevel_3_2{
+  float:left;
+  width:50%;
+  height: 100%;
+}
+//childrens
+.newLevel_4{
+    width:91%;
+    margin-left:4.5%;
+    margin-top: 10%;
+    height: 8%;
+}
+
+.newLevel_5{
+
+    width:91%;
+    margin-left:4.5%;
+    margin-top:3%;
+    margin-bottom: 3%;
+    height: 20%;
+    overflow-y: scroll;
+
+}
+
+//childrens
+.newLevel_5_1{
+  width:100%;
+  height: 13%;
+  font-size: 1em;
+  text-transform:uppercase;
+  color:$light_grey;
+  font-weight: 500;
+  text-align: center;
+  text-overflow: ellipsis;
+
+}
+.newLevel_5_2{
+  width:100%;
+  height: 85%;
+  margin-top:2%;
+  font-size: 1em;
+  font-weight: 500;
+  opacity: $text_opacity;
+}
+//childrens
+
+.newLevel_6{
+  width: 100%;
+  height: 5%;
+  margin-top:10%;
+}
+
+//childrens
+.newLevel_6_1{
+  float: left;
+  font-size: 1.7em;
+  width:10%;
+  color:$app_color;
+}
+.newLevel_6_2{
+  float: left;
+  font-size: 1.7em;
+  width:10%;
+  margin-left:40%;
+  color:$app_color;
+}
+.newLevel_6_3{
+  float: left;
+  font-size: 1.7em;
+  width:10%;
+  color:$app_color;
+}
+
+.leftM{
+  margin-left:2%;
+  margin-top: -4%;
+}
+
+.appcolor{
+  color:$app_color;
+}
+
+//childrens
+
+
+ion-button {
+  --background: #ffaa00 !important;
+  // --color:#b3b3b3;
+  --border-radius:7px;
+}

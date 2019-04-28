@@ -1,0 +1,102 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title class="center"></ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+
+<div *ngIf="Users != undefined" class="newcard">
+
+  <div class="newLevel_1">
+      <div class="newLevel_1_2_1">
+          <div class="newLevel_1_2_1_1">sender</div>
+          <div class="newLevel_1_2_1_2" [style.backgroundImage]="'url('+ Users.image_url +')'" ></div>
+      </div>
+      <div class="newLevel_1_2_2">
+          <div class="newLevel_1_2_2_1">{{ Users.name }}</div>
+          <div class="newLevel_1_2_2_2"><ion-icon name="star"></ion-icon><ion-icon name="star"></ion-icon><ion-icon name="star"></ion-icon><ion-icon name="star"></ion-icon><ion-icon name="star-outline"></ion-icon></div>
+      </div>
+  </div>
+  <div class="newLevel_2">
+      <hr>
+  </div>
+  <div class="newLevel_3">
+        <div class="newLevel_3_1">
+            <div class="newLevel_3_1_1">From</div>
+            <div class="newLevel_3_1_2">{{UsersData.fromPoint}}</div>
+        </div>
+        <div class="newLevel_3_2">
+          <div class="newLevel_3_1_1">To</div>
+          <div class="newLevel_3_1_2">{{UsersData.toPoint}}</div>
+        </div>
+  </div>
+  <div class="newLevel_2">
+      <hr>
+  </div>
+  <div class="newLevel_3">
+        <div class="newLevel_3_1">
+            <div class="newLevel_3_1_1">Start Date</div>
+            <div class="newLevel_3_1_2">{{UsersData.date}}</div>
+        </div>
+        <div class="newLevel_3_2">
+          <div class="newLevel_3_1_1">Start time</div>
+          <div class="newLevel_3_1_2">{{UsersData.time}}</div>
+        </div>
+  </div>
+
+  <div class="newLevel_2">
+      <hr>
+  </div>
+
+  <div class="newLevel_5">
+
+    <div class="newLevel_5_1">Description</div>
+    <div class="newLevel_5_2">{{UsersData.description}}</div>
+
+  </div>
+
+  <div class="newLevel_6" >
+
+    <div class="newLevel_6_1">
+      <ion-fab horizontal="start" edge slot="left" class="leftM">
+       <ion-fab-button>
+         <ion-icon name="logo-whatsapp"></ion-icon>
+       </ion-fab-button>
+       <ion-fab-list side="top">
+      <ion-fab-button><a href="tel:{{Users.phone}}"><i class="material-icons appcolor">phone_callback</i></a></ion-fab-button>
+        </ion-fab-list>
+       <ion-fab-list side="end">
+         <ion-fab-button><i class="material-icons appcolor">message</i></ion-fab-button>
+       </ion-fab-list>
+       <ion-fab-list side="bottom">
+          <ion-fab-button><a href = "mailto:{{Users.email}}"><i class="material-icons appcolor">email</i></a></ion-fab-button>
+        </ion-fab-list>
+      </ion-fab>
+    </div>
+    <div class="newLevel_6_2"><ion-icon *ngIf="favoriteState == false" name="heart-empty" (click)="Favorite('enable')"></ion-icon><ion-icon *ngIf="favoriteState == true" name="heart" (click)="Favorite('disable')"></ion-icon></div>
+    <div class="newLevel_6_3"><ion-icon name="share" (click)="ShareLink()"></ion-icon></div>
+    <input type="hidden" value="" id="copyurl">
+
+  </div>
+
+
+  <div class="newLevel_4">
+
+    <ion-button  expand="block">Send Request</ion-button>
+
+  </div>
+
+
+
+
+</div>
+
+
+
+
+</ion-content>

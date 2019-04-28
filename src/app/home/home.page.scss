@@ -1,0 +1,71 @@
+/* DashboardComponent's private CSS styles */
+[class*='col-'] {
+  float: left;
+
+}
+[class*='col-']:last-of-type {
+  padding-right: 0;
+}
+a {
+  text-decoration: none;
+}
+*, *:after, *:before {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+h3 {
+  text-align: center;
+  margin-bottom: 0;
+}
+
+.grid {
+  margin: 0;
+}
+.col-1-4 {
+  width: 33.3%;
+  height: 25vh;
+
+  background: url("https://maps.googleapis.com/maps/api/streetview?channel=pdp-publicrecord&location=1226+Flushing+Ave%2C+Brooklyn%2C+NY+11237&size=665x441&client=gme-redfin&signature=8jo2DfR2gWgoRMrVKM8wtqr1uTs=") center / cover no-repeat;
+
+}
+
+.module {
+
+  margin:0px;
+  padding:0px;
+  text-align: center;
+  color: #eee;
+  width: 100%;
+  background: rgba(0,0,0,.3);
+  opacity: 0.9;
+  position: relative;
+  font-size: 20px;
+
+
+
+}
+.module:hover {
+  background-color: #eee;
+  cursor: pointer;
+  color: #607d8b;
+}
+.grid-pad {
+  // padding: 10px 0;
+}
+.grid-pad > [class*='col-']:last-of-type {
+  // padding-right: 20px;
+}
+@media (max-width: 600px) {
+  .module {
+    font-size: 10px;
+    max-height: 75px; }
+}
+@media (max-width: 1024px) {
+  .grid {
+    margin: 0;
+  }
+  .module {
+    min-width: 60px;
+  }
+}

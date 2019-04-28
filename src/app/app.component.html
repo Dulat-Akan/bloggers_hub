@@ -1,0 +1,72 @@
+<ion-app>
+  <ion-split-pane>
+    <ion-menu side="start" menuId="first">
+
+      <ion-content>
+
+        <ion-grid>
+          <ion-row>
+            <ion-col size="3">
+
+                <img src="../img/logo.png" alt="">
+
+            </ion-col>
+            <ion-col size="6">
+                  <img style="margin-top:25px;" class="circle" src="http://kazpoisk.kz/assets/entry/uploads/1a8a0bf4a784da40b765a3875fbedd11.jpg">
+          </ion-col>
+            <ion-col size="3"></ion-col>
+
+          </ion-row>
+          <ion-row>
+
+            <ion-col size="12">
+                  <h4 style="margin-top:0px;margin-bottom:0px;" class="userName" text-center>Sunny Yoall</h4>
+                  <p style="margin-top:0px;color:#C40C1F;" text-center><b>User</b></p>
+                  <p  text-center>Settings</p>
+            </ion-col>
+
+          </ion-row>
+
+        </ion-grid>
+
+        <ion-list>
+          <ion-item>
+            <ion-label>
+
+            </ion-label>
+
+          </ion-item>
+            <ion-item >
+              <ion-label><ion-button (click)="autoClose()" routerLink="/add-first-action" >Create description</ion-button></ion-label>
+            </ion-item>
+
+            <ion-item class="logininput">
+              <ion-label >
+                    <ion-button id="customBtn">Registration / Login</ion-button>
+              </ion-label>
+            </ion-item>
+            <ion-item>
+              <ion-label>Личный кабинет</ion-label>
+            </ion-item>
+            <ion-item>
+              <ion-label>Режим риэлтора</ion-label>
+            </ion-item>
+            <ion-item>
+              <ion-label>Обратная связь</ion-label>
+            </ion-item>
+            <ion-item>
+              <ion-label>Оставить отзыв</ion-label>
+            </ion-item>
+            <ion-item>
+              <ion-label>Предложить друзьям</ion-label>
+            </ion-item>
+
+        </ion-list>
+
+      </ion-content>
+    </ion-menu>
+
+
+    <ion-router-outlet main></ion-router-outlet>
+  </ion-split-pane>
+</ion-app>
