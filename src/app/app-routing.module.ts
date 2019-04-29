@@ -25,6 +25,7 @@ const routes: Routes = [
   },
   { path: 'login-modal', loadChildren: './login-modal/login-modal.module#LoginModalPageModule' },
   { path: 'add-first-action', loadChildren: './add-first-action/add-first-action.module#AddFirstActionPageModule' },
+  { path: 'chat', loadChildren: './chat/chat.module#ChatPageModule' },
 
 
 ];

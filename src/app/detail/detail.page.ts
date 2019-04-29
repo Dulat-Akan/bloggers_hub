@@ -45,7 +45,7 @@ export class DetailPage implements OnInit {
     this.detailservice.getDetailData()
     .subscribe(data => {
 
-        console.log(data);
+        //console.log(data);
         this.UsersData = data.UsersData;
         this.Users = data.Users;
 
@@ -79,6 +79,11 @@ export class DetailPage implements OnInit {
         //document.addEventListener("backbutton", this.Backbutton(), false);
     }
 
+    routeToMessage(){
+      this.router.navigate(['/chat']);
+    }
+
+
 
   Favorite(name){
 
@@ -94,7 +99,7 @@ export class DetailPage implements OnInit {
   checkFavoriteStates(){
     this.storeservice.buttonstateObservable.subscribe(data => {
         if(data == true){
-          this.favoriteState = true;      
+          this.favoriteState = true;
         }else{
           this.favoriteState = false;
         }
