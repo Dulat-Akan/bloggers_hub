@@ -45,9 +45,12 @@ export class DetailPage implements OnInit {
     this.detailservice.getDetailData()
     .subscribe(data => {
 
-        //console.log(data);
+        
         this.UsersData = data.UsersData;
         this.Users = data.Users;
+        localStorage.setItem("sendemail",data.Users.email);
+        localStorage.setItem("sendimage_url",data.Users.image_url);
+
 
     });
   }

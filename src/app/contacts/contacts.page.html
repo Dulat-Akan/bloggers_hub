@@ -1,0 +1,45 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>contacts</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-list *ngIf="contacts" lines="none">
+
+    <div  class="main_list" *ngFor="let contact of contacts;index as i;trackBy: trackByFn;" (click)="routeToChat(contact)">
+        <div class="pleft_block">
+          <div [style.backgroundImage]="'url(' + 'https://images.pexels.com/photos/556667/pexels-photo-556667.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500' + ')'" class="pleft_block_1"></div>
+          <div class="pleft_block_2">
+                <i *ngIf="contact.online == 1" class="mysize material-icons">
+                fiber_manual_record
+                </i>
+                <i *ngIf="contact.online == 0" class="mysize_offline material-icons">
+                fiber_manual_record
+                </i>
+          </div>
+        </div>
+        <div class="pright_block">
+
+            <div class="pright_block_1">
+              <div class="pright_block_1_2">
+                {{contact.name}}
+              </div>
+              <div class="pright_block_1_3">{{contact.date}}</div>
+            </div>
+            <div class="pright_block_2">
+              <div class="pright_block_2_1">{{contact.message}}</div>
+              <div *ngIf="contact.count > 0" class="pright_block_2_2">{{contact.count}}</div>
+
+            </div>
+
+        </div>
+    </div>
+
+
+</ion-list>
+</ion-content>

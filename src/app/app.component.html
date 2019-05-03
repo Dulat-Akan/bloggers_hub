@@ -46,11 +46,15 @@
               </ion-label>
             </ion-item>
             <ion-item>
-              <ion-label>Личный кабинет</ion-label>
+              <ion-label><ion-button (click)="autoClose()" routerLink="/contacts" >Messages</ion-button></ion-label>
             </ion-item>
             <ion-item>
-              <ion-label>Режим риэлтора</ion-label>
+              <ion-label><ion-button (click)="autoClose()" routerLink="/favorite" >Favorite</ion-button></ion-label>
             </ion-item>
+            <ion-item>
+              <ion-label>Личный кабинет</ion-label>
+            </ion-item>
+
             <ion-item>
               <ion-label>Обратная связь</ion-label>
             </ion-item>

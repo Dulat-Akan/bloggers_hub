@@ -26,6 +26,10 @@ const routes: Routes = [
   { path: 'login-modal', loadChildren: './login-modal/login-modal.module#LoginModalPageModule' },
   { path: 'add-first-action', loadChildren: './add-first-action/add-first-action.module#AddFirstActionPageModule' },
   { path: 'chat', loadChildren: './chat/chat.module#ChatPageModule' },
+  { path: 'contacts', loadChildren: './contacts/contacts.module#ContactsPageModule' },
+  { path: 'favorite', loadChildren: './favorite/favorite.module#FavoritePageModule' },
+  { path: 'phonenumber', loadChildren: './phonenumber/phonenumber.module#PhonenumberPageModule' },
+  { path: 'selectrole', loadChildren: './selectrole/selectrole.module#SelectrolePageModule' },
 
 
 ];

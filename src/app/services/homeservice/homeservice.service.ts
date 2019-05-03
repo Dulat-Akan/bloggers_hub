@@ -143,7 +143,7 @@ export class HomeserviceService {
 
   }
 
-  getSearchApartments(): Observable<any>{
+  getSearchUsersData(): Observable<any>{
 
     return new Observable<any>(observer => {
 
@@ -188,6 +188,17 @@ export class HomeserviceService {
     });
 
   }
+
+
+
+  Notification_voice(){
+
+        let audioPlayer = <HTMLVideoElement> document.getElementById("myAudio");
+        audioPlayer.play();
+
+  }
+
+
 
 
 

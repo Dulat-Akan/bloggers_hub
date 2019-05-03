@@ -9,8 +9,12 @@ import { DashboardPage } from './dashboard.page';
 import { HeroDetailComponent } from '../components/hero-detail/hero-detail.component';
 import { MessagecomponentComponent } from '../components/messagecomponent/messagecomponent.component';
 import { LoginModalPage } from '../login-modal/login-modal.page';
+import { PhonenumberPage } from '../phonenumber/phonenumber.page';
+import { SelectrolePage } from '../selectrole/selectrole.page';
 
 import { HomeserviceService } from '../services/homeservice/homeservice.service';
+import { OnlineusersService } from '../services/onlineusers/onlineusers.service';
+import { NotificationService } from '../services/notification/notification.service';
 
 const routes: Routes = [
   {
@@ -27,10 +31,12 @@ const routes: Routes = [
 
     RouterModule.forChild(routes)
   ],
-  declarations: [DashboardPage,HeroDetailComponent,MessagecomponentComponent,LoginModalPage],
-  entryComponents:[LoginModalPage],
+  declarations: [DashboardPage,HeroDetailComponent,MessagecomponentComponent,LoginModalPage,PhonenumberPage,SelectrolePage],
+  entryComponents:[LoginModalPage,PhonenumberPage,SelectrolePage],
   providers: [
-    HomeserviceService // <-- List providers here
+    HomeserviceService, // <-- List providers here
+    OnlineusersService,
+    NotificationService
   ]
 })
 export class DashboardPageModule {}

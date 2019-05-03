@@ -1,0 +1,129 @@
+ion-content{
+  --background: linear-gradient(to right, #e6efff 0%, #b3cfff 100%);
+}
+
+ion-list{
+  background:none !important;
+}
+
+.main_list{
+    height: 13.5vh;
+    margin-top:2%;
+    margin-bottom:0.5%;
+    margin-left: 2%;
+    margin-right: 2%;
+    border-radius: 5px;
+    background-color: white;
+    -webkit-box-shadow: 0px 0px 11px 0px rgba(217,217,217,1);
+    -moz-box-shadow: 0px 0px 11px 0px rgba(217,217,217,1);
+    box-shadow: 0px 0px 11px 0px rgba(217,217,217,1);
+}
+
+$text_opacity:0.8;
+
+.pleft_block{
+    float:left;
+    width:25%;
+    height: 100%;
+}
+
+.pleft_block_1{
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 62%;
+  height: 66%;
+  margin-left: 20%;
+  margin-right: 15%;
+  border-radius: 50px;
+  margin-top: 17%;
+}
+
+.pleft_block_2{
+  width: 20%;
+  height: 20%;
+  margin-left: 68%;
+  font-size: 0.9em;
+  position: relative;
+  top: -15%;
+}
+
+
+
+.pright_block{
+    float:left;
+    width:73%;
+    height: 100%;
+}
+
+.pright_block_1{
+
+    width:100%;
+    height: 50%;
+}
+.pright_block_2{
+  width:100%;
+  height: 50%;
+  padding-top: 1%;
+}
+
+.pright_block_2_1{
+  width:78%;
+  height: 100%;
+  float:left;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 1.05em;
+  font-weight: 500;
+  opacity: $text_opacity;
+}
+.pright_block_2_2{
+  width: 15%;
+  height: 70%;
+  float: left;
+  opacity: 0.8;
+  font-size: 1.05em;
+  font-weight: 500;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  background-color: #3880ff;
+  padding: 2%;
+  border-radius: 10px;
+  text-align: center;
+  color:white;
+}
+
+.pright_block_1_2{
+  float:left;
+  width:70%;
+  height: 100%;
+  font-size: 1.3em;
+  font-weight: 500;
+  padding-top: 7%;
+  opacity: $text_opacity;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.pright_block_1_3{
+  float: left;
+  width: 30%;
+  height: 100%;
+  font-size: 1em;
+  font-weight: 500;
+  padding-top: 8%;
+  padding-left: 7%;
+  opacity: $text_opacity;
+}
+
+.mysize{
+  color: #00cc00;
+  font-size: 18px !important;
+}
+.mysize_offline{
+  color: #bfbfbf;
+  font-size: 18px !important;
+}

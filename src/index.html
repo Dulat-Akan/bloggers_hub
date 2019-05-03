@@ -51,15 +51,29 @@
               localStorage.setItem("image_url",profile.getImageUrl());
               localStorage.setItem("status","enable");
 
+
+
         }, function(error) {
           alert(JSON.stringify(error, undefined, 2));
         });
   }
+
+
+  // localStorage.setItem("email","electroninsuranse@gmail.com");
+  // localStorage.setItem("name","Electron Insuranse");
+  // localStorage.setItem("image_url","https://lh6.googleusercontent.com/-AdCV33Isw8M/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rffkZZf7XZ3uz2QT-cmVe2pmwOBIA/s96-c/photo.jpg");
+  // localStorage.setItem("status","enable");
+  //
+  // localStorage.setItem("sendemail","astana7777777@gmail.com");
   </script>
 
   <app-root></app-root>
 
-
+  <audio id="myAudio">
+    <source src="/assets/voice/to-the-point.ogg" type="audio/ogg">
+    <source src="/assets/voice/to-the-point.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
 
 <script>startApp();</script>
 </body>

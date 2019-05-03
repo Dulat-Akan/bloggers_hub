@@ -7,22 +7,30 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content
+[scrollEvents]="true"
+(ionScrollStart)="logScrollStart()"
+(ionScroll)="logScrolling($event)"
+(ionScrollEnd)="logScrollEnd()"
+>
 
-  <div class="chat">
 
-    <div class="friend">
+
+  <ion-list class="chat" lines="none">
+
+    <ion-item *ngFor="let chat of chat_array;index as i;trackBy: trackByFn;">
+    <div *ngIf="chat.fromEmail != email" class="friend" >
 
       <div class="friend_1" >
 
-        <div class="friend_1_avatar" [style.backgroundImage]="'url('+ 'https://www.w3schools.com/w3css/img_avatar3.png' +')'" >
+        <div *ngIf="sendimage_url != undefined" class="friend_1_avatar" [style.backgroundImage]="'url(' + sendimage_url + ')'" >
 
         </div>
       </div>
       <div class="friend_2">
 
           <div class="friend_2_1">
-                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est mollitia odio iure quaerat at inventore soluta dolorem fugit distinctio officiis ullam aperiam, placeat voluptatibus. Reiciendis fuga autem sapiente non quibusdam.
+                 {{chat.message}}
           </div>
 
       </div>
@@ -31,25 +39,29 @@
 
     </div>
 
-    <div class="my_message">
+    <div *ngIf="chat.fromEmail == email" class="my_message">
 
         <div class="my_message_1">
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque est perferendis similique quisquam doloremque cum. Accusamus optio tenetur vero, illum voluptatum perferendis magni ipsum libero odit, laudantium repudiandae quam dolores!
+            {{chat.message}}
         </div>
 
     </div>
 
-  </div>
+    </ion-item>
+
+  </ion-list>
 
   <div class="bottom_area">
           <div class="bottom_area_1">
-            <input class="message_input" type="text" placeholder="text..">
+            <input class="message_input" required [formControl]="inputstring" type="text" placeholder="text..">
           </div>
           <div class="bottom_area_2">
-              <i class="material-icons">
+              <i (click)="sendMessage()" class="material-icons">
                   send
               </i>
           </div>
   </div>
+
+
 
 </ion-content>

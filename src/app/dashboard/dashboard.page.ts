@@ -2,10 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { Observable, Subject, interval } from 'rxjs';
 import { Hero } from '../hero';
 import { HomeserviceService } from '../services/homeservice/homeservice.service';
+import { OnlineusersService } from '../services/onlineusers/onlineusers.service';
+import { NotificationService } from '../services/notification/notification.service';
 import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { ModalController,AlertController,MenuController } from '@ionic/angular';
 import { LoginModalPage } from '../login-modal/login-modal.page';
+import { PhonenumberPage } from '../phonenumber/phonenumber.page';
+import { SelectrolePage } from '../selectrole/selectrole.page';
 
 import * as $ from 'jquery';
 
@@ -23,6 +27,17 @@ export class DashboardPage implements OnInit {
   connection;
   deviceid:string;
 
+  constructor(public homeservice: HomeserviceService,
+              public onlineservice:OnlineusersService,
+              public notificationservice:NotificationService,
+              private modalCtrl:ModalController,
+              public alertController:AlertController,
+              private menu: MenuController,
+              private router: Router
+            ){
+        this.deviceid = this.homeservice.deviceid;
+  }
+
 
   // Push a search term into the observable stream.
   search(searchString: string): void {
@@ -30,9 +45,26 @@ export class DashboardPage implements OnInit {
   }
   // selectedHero: Hero;
 
-  async ShowModal(){
+  async LoginModal(){
     const modal = await this.modalCtrl.create({
       component: LoginModalPage,
+      componentProps: { value: 123 }
+    });
+
+    await modal.present();
+  }
+
+  async PhonenumberModal(){
+    const modal = await this.modalCtrl.create({
+      component: PhonenumberPage,
+      componentProps: { value: 123 }
+    });
+
+    await modal.present();
+  }
+  async SelectrolePageModal(){
+    const modal = await this.modalCtrl.create({
+      component: SelectrolePage,
       componentProps: { value: 123 }
     });
 
@@ -96,14 +128,7 @@ export class DashboardPage implements OnInit {
           });
     }
 
-  constructor(public homeservice: HomeserviceService,
-              private modalCtrl:ModalController,
-              public alertController:AlertController,
-              private menu: MenuController,
-              private router: Router
-            ){
-        this.deviceid = this.homeservice.deviceid;
-  }
+
 
 
 
@@ -127,10 +152,10 @@ export class DashboardPage implements OnInit {
 
   }
 
-  getSearchApartments(){
+  getSearchUsersData(){
       //const id = +this.route.snapshot.paramMap.get('id');
 
-      this.connection = this.homeservice.getSearchApartments()
+      this.connection = this.homeservice.getSearchUsersData()
         .subscribe(data => {
           this.details = data.sdata;
           //console.log(data.sdata);
@@ -170,6 +195,10 @@ export class DashboardPage implements OnInit {
             //hide login button
             $(".logininput").hide();
             //hide login button
+            //set Online user status
+            this.onlineservice.joinUser();
+            this.notificationservice.checkNotificationsMessages();
+            //set Online user status
 
 
 
@@ -205,7 +234,8 @@ export class DashboardPage implements OnInit {
 
             this.homeservice.email = data.email;
             localStorage.setItem("email",data.email);
-            this.presentAlert();
+            //this.presentAlert();
+            this.SelectrolePageModal();
 
           }else if(data.user == "olduser"){
 
@@ -213,7 +243,8 @@ export class DashboardPage implements OnInit {
             localStorage.setItem("email",data.email);
 
             if(data.role == 0){
-              this.presentAlert();
+              //this.presentAlert();
+              this.SelectrolePageModal();
             }else{
 
               this.homeservice.role = data.role;
@@ -241,21 +272,40 @@ trackByFn(index,item){
   }
 
 
+  listenNotificationsMessages(){
+    this.notificationservice.listenNotificationsMessages()
+    .subscribe(data => {
+
+        this.homeservice.Toast("You have " + data.count + " Messages");
+        this.homeservice.Notification_voice();
+    });
+  }
+
+
   Testfunction(){
 
-  
-    var  y = 100;
-    var i = 100000;
 
-    var k = i + y;
+    // var  y = 100;
+    // var i = 100000;
+    //
+    // var k = i + y;
+    //
+    // var h = "amir";
+    //
+    // var f = "sanzhar";
+    // var j = "dulat";
+    //
+    // console.log(k);
 
-    var h = "amir";
 
-    var f = "sanzhar";
-    var j = "dulat";
 
-    console.log(k);
+  }
 
+  listenjoinUser(){
+    this.onlineservice.listenjoinUser()
+    .subscribe(data => {
+      //console.log(data);
+    });
   }
 
 
@@ -265,12 +315,19 @@ trackByFn(index,item){
     this.checkPhoneMemory();//1
 
     this.checkInputSearchData();//2
-    this.getSearchApartments();//2
+    this.getSearchUsersData();//2
 
     this.listenAuth();//3
     this.roleListener();//4
-    //this.Testfunction();
+  //  this.Testfunction();
+    //check Onlineuser status
+    //check Onlineuser status
 
+    //listen app notifications
+    this.listenNotificationsMessages();
+    //listen app notifications
+
+    this.SelectrolePageModal();
 
 
   }
