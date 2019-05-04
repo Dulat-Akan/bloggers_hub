@@ -7,6 +7,9 @@ import { IonicModule } from '@ionic/angular';
 
 import { SelectrolePage } from './selectrole.page';
 
+import { SetroleserviceService } from '../services/setroleservice/setroleservice.service';
+import { HomeserviceService } from '../services/homeservice/homeservice.service';
+
 const routes: Routes = [
   {
     path: '',
@@ -21,6 +24,10 @@ const routes: Routes = [
     IonicModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [SelectrolePage]
+  declarations: [SelectrolePage],
+  providers: [
+    SetroleserviceService,
+    HomeserviceService
+  ]
 })
 export class SelectrolePageModule {}

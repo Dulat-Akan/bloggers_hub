@@ -50,11 +50,12 @@
               localStorage.setItem("name",profile.getName());
               localStorage.setItem("image_url",profile.getImageUrl());
               localStorage.setItem("status","enable");
+              localStorage.setItem("login","enable");
 
 
 
         }, function(error) {
-          alert(JSON.stringify(error, undefined, 2));
+          //alert(JSON.stringify(error, undefined, 2));
         });
   }
 

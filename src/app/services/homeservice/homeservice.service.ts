@@ -76,10 +76,20 @@ export class HomeserviceService {
         this.CheckStoragestate.next("checkmemory");
       }, 100);
 
-
       //console.log(role);
     }
 
+  }
+
+
+  checkFirstAuth():boolean{
+    var email = localStorage.getItem("email");
+
+    if(email){
+      return true;
+    }else{
+      return false;
+    }
   }
 
 
@@ -91,6 +101,20 @@ export class HomeserviceService {
       var name = localStorage.getItem("name");
       var image_url = localStorage.getItem("image_url");
       var status = localStorage.getItem("status");
+
+      var login = localStorage.getItem("login");
+
+      //stopping next
+      if(login){
+        if(login == "disable"){
+
+        }else{
+          return false;
+        }
+      }else{
+        return false;
+      }
+      //stopping next
 
       if(status){
 
@@ -116,21 +140,7 @@ export class HomeserviceService {
   }
 
 
-  sendRole(data){
-    this.socket.emit('setRole', data);
-  }
 
-  roleListener(): Observable<any>{
-
-    return new Observable<any>(observer => {
-
-        this.socket.on('setRole', (data) => {
-            observer.next(data);
-        });
-
-    });
-
-  }
 
 
   searchData(data){

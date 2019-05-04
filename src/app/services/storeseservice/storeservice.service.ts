@@ -72,7 +72,7 @@ export class StoreserviceService {
           this.buttonstateObservable.next(false);
           this.homeservice.Toast("removed from favorite..");
         }
-        console.log(buttonstate);
+        //console.log(buttonstate);
 
       });
 

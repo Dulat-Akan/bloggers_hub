@@ -1,7 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
+import { HomeserviceService } from '../services/homeservice/homeservice.service';
+import { PhonenumberserviceService } from '../services/phonenumberservice/phonenumberservice.service';
 
 import { IonicModule } from '@ionic/angular';
 
@@ -18,9 +20,15 @@ const routes: Routes = [
   imports: [
     CommonModule,
     FormsModule,
+    ReactiveFormsModule,
     IonicModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [PhonenumberPage]
+  declarations: [PhonenumberPage],
+  providers: [
+    HomeserviceService, // <-- List providers here
+    PhonenumberserviceService
+
+  ]
 })
 export class PhonenumberPageModule {}

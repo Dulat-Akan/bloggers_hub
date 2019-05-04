@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
@@ -15,6 +15,7 @@ import { SelectrolePage } from '../selectrole/selectrole.page';
 import { HomeserviceService } from '../services/homeservice/homeservice.service';
 import { OnlineusersService } from '../services/onlineusers/onlineusers.service';
 import { NotificationService } from '../services/notification/notification.service';
+import { SetroleserviceService } from '../services/setroleservice/setroleservice.service';
 
 const routes: Routes = [
   {
@@ -27,6 +28,7 @@ const routes: Routes = [
   imports: [
     CommonModule,
     FormsModule,
+    ReactiveFormsModule,
     IonicModule,
 
     RouterModule.forChild(routes)
@@ -36,7 +38,8 @@ const routes: Routes = [
   providers: [
     HomeserviceService, // <-- List providers here
     OnlineusersService,
-    NotificationService
+    NotificationService,
+    SetroleserviceService
   ]
 })
 export class DashboardPageModule {}

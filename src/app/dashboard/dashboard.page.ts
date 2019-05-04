@@ -10,6 +10,8 @@ import { ModalController,AlertController,MenuController } from '@ionic/angular';
 import { LoginModalPage } from '../login-modal/login-modal.page';
 import { PhonenumberPage } from '../phonenumber/phonenumber.page';
 import { SelectrolePage } from '../selectrole/selectrole.page';
+import { SetroleserviceService } from '../services/setroleservice/setroleservice.service';
+import { FormControl,Validators } from '@angular/forms';
 
 import * as $ from 'jquery';
 
@@ -30,6 +32,7 @@ export class DashboardPage implements OnInit {
   constructor(public homeservice: HomeserviceService,
               public onlineservice:OnlineusersService,
               public notificationservice:NotificationService,
+              public setroleservice:SetroleserviceService,
               private modalCtrl:ModalController,
               public alertController:AlertController,
               private menu: MenuController,
@@ -54,6 +57,7 @@ export class DashboardPage implements OnInit {
     await modal.present();
   }
 
+
   async PhonenumberModal(){
     const modal = await this.modalCtrl.create({
       component: PhonenumberPage,
@@ -71,66 +75,25 @@ export class DashboardPage implements OnInit {
     await modal.present();
   }
 
-  async presentAlert() {
-    const alert = await this.alertController.create({
-      header: 'Select your Role',
-      message: 'must choose one',
-      buttons: [
-        {
-          text: 'Find a person to deliver',
-          handler: () => {
 
-            var role = 1; //send
-
-            var datas = {
-              device:this.deviceid,
-              email:this.homeservice.email,
-              role:role,
-            }
-
-            this.homeservice.sendRole(datas);
-
-          }
-        }, {
-          text: 'Get the goods along the way',
-          handler: () => {
-
-            var role = 2;//deliver
-
-            var datas = {
-              device:this.deviceid,
-              email:this.homeservice.email,
-              role:role,
-            }
-
-            this.homeservice.sendRole(datas);
-
-          }
-        }
-      ]
-    });
-
-    await alert.present();
-  }
 
     roleListener(){
         //const id = +this.route.snapshot.paramMap.get('id');
 
-        this.connection = this.homeservice.roleListener()
+        this.connection = this.setroleservice.roleListener()
           .subscribe(data => {
 
             //console.log(data);
             this.homeservice.role = data.role;
             localStorage.setItem("role",data.role);
+            //getPhonefromUser
+            this.PhonenumberModal();
+            //getPhonefromUser
 
             this.loadAllData();
 
           });
     }
-
-
-
-
 
 
 
@@ -188,13 +151,17 @@ export class DashboardPage implements OnInit {
           this.details = data.sdata;
           //console.log(data.userdata);
           //set User Profile
+            if(data.userdata.length > 0){
+              $(".circle").attr("src",data.userdata[0].image_url);
+              $(".userName").text(data.userdata[0].name);
+              //hide login button
+              $(".logininput").hide();
+              //hide login button
 
-            $(".circle").attr("src",data.userdata[0].image_url);
-            $(".userName").text(data.userdata[0].name);
 
-            //hide login button
-            $(".logininput").hide();
-            //hide login button
+            }
+
+
             //set Online user status
             this.onlineservice.joinUser();
             this.notificationservice.checkNotificationsMessages();
@@ -309,6 +276,15 @@ trackByFn(index,item){
   }
 
 
+  checkFirstAuth(){
+    var lboolean = this.homeservice.checkFirstAuth();
+
+    if(lboolean == false){
+      this.LoginModal();
+    }
+  }
+
+
   ngOnInit() {
 
     this.getAllData();//1
@@ -326,8 +302,12 @@ trackByFn(index,item){
     //listen app notifications
     this.listenNotificationsMessages();
     //listen app notifications
+    this.checkFirstAuth();//check first auth
 
-    this.SelectrolePageModal();
+
+
+
+
 
 
   }

@@ -1,9 +1,22 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>phonenumber</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content>
-<ion-button (click)="dismiss()">close Modal</ion-button>
+
+
+<!-- <input type="text" > -->
+
+<div class="w_text">Please Enter Your Phone Number</div>
+
+<form [formGroup]="sendForm" (ngSubmit)="onSubmit()" class="phoneclass">
+  <ion-item>
+    <ion-label position="stacked">Phone Number</ion-label>
+    <ion-input placeholder="example: +14569820800" required formControlName="phonenumber"></ion-input>
+  </ion-item>
+
+
+
+  <ion-button *ngIf="checksendForm == 0" type="submit"  [disabled]="!sendForm.valid" expand="block" >Create</ion-button>
+</form>
+
+
+<!-- <ion-button (click)="dismiss()">close Modal</ion-button> -->
+
 </ion-content>

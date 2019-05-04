@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController,NavParams } from '@ionic/angular';
+import { LoginService } from '../services/login/login.service';
+import * as $ from 'jquery';
 
 @Component({
   selector: 'app-login-modal',
@@ -8,11 +10,30 @@ import { ModalController,NavParams } from '@ionic/angular';
 })
 export class LoginModalPage implements OnInit {
 
-  val:any;
 
-  constructor(public modalCtrl:ModalController,public navParams:NavParams) {
 
-    this.val = this.navParams.get("value");
+  constructor(public loginservice:LoginService,public modalCtrl:ModalController,public navParams:NavParams) {
+
+
+  }
+
+  interval:any;
+
+  trigger(){
+    $("#customBtn").trigger('click');
+    //console.log("trigger");
+
+  }
+
+  listenGoogle(){
+    var login = this.loginservice.checkGoogleAuth();
+
+    if(login == true){
+      localStorage.setItem("login","disable");
+      this.modalCtrl.dismiss();
+      clearInterval(this.interval);
+    }
+
   }
 
   dismiss(){
@@ -20,6 +41,12 @@ export class LoginModalPage implements OnInit {
   }
 
   ngOnInit() {
+
+    this.interval = setInterval(() => {
+                      this.listenGoogle();
+                      //console.log("listen");
+                    }, 500);
+
   }
 
 }

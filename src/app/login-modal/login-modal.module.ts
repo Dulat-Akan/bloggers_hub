@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
+import { LoginService } from '../services/login/login.service';
 
 import { LoginModalPage } from './login-modal.page';
 
@@ -21,6 +22,9 @@ const routes: Routes = [
     IonicModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [LoginModalPage]
+  declarations: [LoginModalPage],
+  providers: [
+    LoginService // <-- List providers here
+  ]
 })
 export class LoginModalPageModule {}
