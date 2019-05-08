@@ -29,25 +29,24 @@ export class HomeserviceService {
   public email = "";
   public role = "";
   public CheckStoragestate = new Subject<string>();
+  public nextAction = new Subject<string>();
 
   //public CheckStoragestate = new AsyncSubject();
   //let phone = localStorage.getItem("phone")
-    //baseurl:string = "http://localhost:3000";
-  //baseurl:string = "http://localhost:3000";
   baseurl:string = "http://localhost:8100";
 
   // const httpOptions = {
   //   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   // };
 
-  private url = 'http://localhost:3000';
+  private url = 'http://localhost:3002';
+  //private url = 'http://kazpoisk.kz:3002';
   public socket;
-
 
 
   constructor(public toastController: ToastController,private http: HttpClient,private messageService: MessageService) {
           this.initSocket();
-
+          this.reConnect();
 
           this.checkStorage();
 
@@ -55,9 +54,28 @@ export class HomeserviceService {
 
    }
 
+
+
   initSocket(){
-      this.socket = io(this.url);
+      this.socket = io.connect(this.url,{
+                    reconnection: true,
+                    reconnectionDelay: 1000,
+                    reconnectionDelayMax : 5000,
+                    reconnectionAttempts: Infinity
+                  });
         }
+
+
+   reConnect(){
+           this.socket.on('connect',function () {
+               console.log('connected to server');
+             });
+           this.socket.on('disconnect',function(){
+             console.log('disconnected from server');
+           });
+   }
+
+
 
 
   checkStorage(){
@@ -140,14 +158,7 @@ export class HomeserviceService {
   }
 
 
-
-
-
   searchData(data){
-
-    if(data.searchnumber == ""){
-      return false;
-    }
 
     this.socket.emit('searchUsersData', data);
 
@@ -210,13 +221,6 @@ export class HomeserviceService {
 
 
 
-
-
-
-
-
-
-
   getHeroes(): Observable<Hero[]> {
 
     this.messageService.add('HeroService: fetched heroes');
@@ -237,9 +241,6 @@ export class HomeserviceService {
   //   this.messageService.add(`HeroService: fetched hero id=${id}`);
   //   return of(HEROES.find(hero => hero.id === id));
   // }
-
-
-
 
 
   // updateHero(value:string): Observable<any>{

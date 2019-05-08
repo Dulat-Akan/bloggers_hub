@@ -1,35 +1,22 @@
-<ion-header>
-  <ion-toolbar color="primary">
-    <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
-    </ion-buttons>
-    <ion-title class="center">
-
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content class="no-scroll">
 
-<ion-searchbar #searchBox id="search-box" (input)="search(searchBox.value)"  color="primary" ></ion-searchbar>
-
-  <!-- <ul class="heroes">
-    <li *ngFor="let detail of details;index as i;trackBy: trackByFn;">
-      <a routerLink="/detail/{{detail.id}}" [queryParams]="{unit: detail.number}">
-        <span class="badge">{{i+1}}</span> {{detail.fromPoint}}
-      </a>
-    </li>
-  </ul> -->
+  <div class="mytoolbar">
+    <div class="inner_toolbar">
+        <ion-searchbar #searchBox id="search-box" (input)="search(searchBox.value)"  color="primary" ></ion-searchbar>
+    </div>
+  </div>
 
 
-<div class="globtwo">
+
+
+<div class="globtwo" *ngIf="language">
 
   <ul class="myhidescrolledtwo" >
     <li class="listv" *ngFor="let detail of details;index as i;trackBy: trackByFn;" (click)="detailRoute(detail.id)">
       <div class="leftBlock">
 
         <div class="level1">{{i+1}}</div>
-        <div class="level2">{{ detail.time }} (24h)</div>
+        <div class="level2">{{ detail.time }} {{language.twentyfour}}</div>
         <div class="level3">{{ detail.date }}</div>
 
       </div>
@@ -59,15 +46,15 @@
         </div>
         <div class="Rlevel2">
             <div class="Rlevel2_child1">
-              <div class="Rlevel2_child1_child1">Request</div>
+              <div class="Rlevel2_child1_child1">{{language.Request}}</div>
               <div class="Rlevel2_child1_child2">{{i+1}}</div>
             </div>
             <div class="Rlevel2_child2">
-              <div class="Rlevel2_child1_child1">Amount</div>
+              <div class="Rlevel2_child1_child1">{{language.Amount}}</div>
               <div class="Rlevel2_child1_child2">{{detail.sum}} $</div>
             </div>
             <div class="Rlevel2_child3">
-              <div class="Rlevel2_child1_child1">Weight</div>
+              <div class="Rlevel2_child1_child1">{{language.Weight}}</div>
               <div class="Rlevel2_child1_child2">{{detail.weight}}</div>
             </div>
 
@@ -81,5 +68,12 @@
 </div>
 
 
+<div class="my_menu">
+    <div class="first_icon">
+      <i (click)="openMenu()" class="menu_icon material-icons">
+        view_module
+        </i>
+    </div>
+</div>
 
 </ion-content>

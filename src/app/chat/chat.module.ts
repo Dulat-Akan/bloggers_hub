@@ -4,6 +4,7 @@ import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
 import { HomeserviceService } from '../services/homeservice/homeservice.service';
 import { ChatserviceService } from '../services/chatservice/chatservice.service';
+import { TranslateService } from '../services/translate/translate.service';
 
 import { IonicModule } from '@ionic/angular';
 
@@ -27,7 +28,8 @@ const routes: Routes = [
   declarations: [ChatPage],
   providers: [
     HomeserviceService, // <-- List providers here
-    ChatserviceService
+    ChatserviceService,
+    TranslateService
   ]
 })
 export class ChatPageModule {}

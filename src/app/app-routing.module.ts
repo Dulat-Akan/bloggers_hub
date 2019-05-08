@@ -30,6 +30,8 @@ const routes: Routes = [
   { path: 'favorite', loadChildren: './favorite/favorite.module#FavoritePageModule' },
   { path: 'phonenumber', loadChildren: './phonenumber/phonenumber.module#PhonenumberPageModule' },
   { path: 'selectrole', loadChildren: './selectrole/selectrole.module#SelectrolePageModule' },
+  { path: 'selectlanguage', loadChildren: './selectlanguage/selectlanguage.module#SelectlanguagePageModule' },
+  { path: 'slideshow', loadChildren: './slideshow/slideshow.module#SlideshowPageModule' },
 
 
 ];

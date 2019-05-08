@@ -6,6 +6,7 @@ import { Observable, Subject, interval } from 'rxjs';
 import { HomeserviceService } from '../services/homeservice/homeservice.service';
 import { DetailserviceService } from '../services/detailservice/detailservice.service';
 import { StoreserviceService } from '../services/storeseservice/storeservice.service';
+import { TranslateService } from '../services/translate/translate.service';
 
 import * as $ from 'jquery';
 import { ToastController } from '@ionic/angular';
@@ -22,7 +23,16 @@ export class DetailPage implements OnInit {
   favoriteState:boolean = false;
 
 
-  constructor(public storeservice:StoreserviceService,public detailservice: DetailserviceService,public homeservice: HomeserviceService,private route: ActivatedRoute,private router : Router,private location: Location){
+  constructor(
+    public storeservice:StoreserviceService,
+    public detailservice: DetailserviceService,
+    public homeservice: HomeserviceService,
+    private route: ActivatedRoute,
+    private router : Router,
+    private location: Location,
+    public translateservice:TranslateService
+
+  ){
 
       }
 
@@ -45,7 +55,7 @@ export class DetailPage implements OnInit {
     this.detailservice.getDetailData()
     .subscribe(data => {
 
-        
+
         this.UsersData = data.UsersData;
         this.Users = data.Users;
         localStorage.setItem("sendemail",data.Users.email);
@@ -109,6 +119,14 @@ export class DetailPage implements OnInit {
     });
   }
 
+  language:Observable<any>;
+
+  getTranslate(){
+    this.translateservice.getTranslate().subscribe(data => {
+        this.language = data;
+      });
+  }
+
 
 
   ngOnInit() {
@@ -125,6 +143,7 @@ export class DetailPage implements OnInit {
     this.storeservice.checkDetailsState(id);
 
     this.checkFavoriteStates()//listen button states
+    this.getTranslate();
     //this.storeservice.favoriteButtonStore.dispatch({ type: 'ENABLE',id:2 });
 
 

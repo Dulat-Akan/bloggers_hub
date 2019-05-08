@@ -4,7 +4,7 @@
 
 
 
-  <div class="w_text">Please Enter with Google</div>
+  <div class="w_text" *ngIf="language">{{language.enter}}</div>
 
   <div class="googleLogin"(click)="trigger()"></div>
 

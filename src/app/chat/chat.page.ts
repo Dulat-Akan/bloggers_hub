@@ -4,6 +4,7 @@ import { HomeserviceService } from '../services/homeservice/homeservice.service'
 import { ChatserviceService } from '../services/chatservice/chatservice.service';
 import { Observable, Subject, interval } from 'rxjs';
 import { FormControl,Validators } from '@angular/forms';
+import { TranslateService } from '../services/translate/translate.service';
 import * as $ from 'jquery';
 
 @Component({
@@ -35,7 +36,12 @@ export class ChatPage implements OnInit {
   chat_array:Array<{id:number,message: string, fromEmail: string,toEmail:string,date:string}>;
 
 
-  constructor(private homeservice:HomeserviceService,private chatservice:ChatserviceService) {
+  constructor(
+    private homeservice:HomeserviceService,
+    private chatservice:ChatserviceService,
+    public translateservice:TranslateService
+
+  ) {
       this.chat_array = [];
       this.email = this.homeservice.email;
       this.sendimage_url = this.chatservice.getSendImage();
@@ -138,6 +144,14 @@ export class ChatPage implements OnInit {
       //console.log("logScrollEnd : When Scroll Ends");
     }
 
+    language:Observable<any>;
+
+    getTranslate(){
+      this.translateservice.getTranslate().subscribe(data => {
+          this.language = data;
+        });
+    }
+
 
 
   ngOnInit() {
@@ -147,6 +161,7 @@ export class ChatPage implements OnInit {
     this.chatservice.checkGetAllMessages();//check all messages
     this.listenGetAllMessages();
     this.listenMutationObserver();
+    this.getTranslate();
 
 
 

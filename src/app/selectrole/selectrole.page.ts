@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ModalController,NavParams } from '@ionic/angular';
 import { SetroleserviceService } from '../services/setroleservice/setroleservice.service';
 import { HomeserviceService } from '../services/homeservice/homeservice.service';
+import { TranslateService } from '../services/translate/translate.service';
+import { Observable, Subject, interval } from 'rxjs';
 
 @Component({
   selector: 'app-selectrole',
@@ -16,7 +18,8 @@ export class SelectrolePage implements OnInit {
     public modalCtrl:ModalController,
     public navParams:NavParams,
     public setroleservice:SetroleserviceService,
-    public homeservice:HomeserviceService
+    public homeservice:HomeserviceService,
+    public translateservice:TranslateService
   ) { }
 
 
@@ -56,8 +59,16 @@ export class SelectrolePage implements OnInit {
     this.modalCtrl.dismiss();
   }
 
-  ngOnInit() {
+  language:Observable<any>;
 
+  getTranslate(){
+    this.translateservice.getTranslate().subscribe(data => {
+        this.language = data;
+      });
+  }
+
+  ngOnInit() {
+      this.getTranslate();
   }
 
 }

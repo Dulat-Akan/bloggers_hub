@@ -6,9 +6,9 @@ import { RouterModule } from '@angular/router';
 
 import { HomePage } from './home.page';
 
-import { HeroDetailComponent } from '../components/hero-detail/hero-detail.component';
-import { MessagecomponentComponent } from '../components/messagecomponent/messagecomponent.component';
-import { HomeserviceService } from '../services/homeservice/homeservice.service';
+// import { HeroDetailComponent } from '../components/hero-detail/hero-detail.component';
+// import { MessagecomponentComponent } from '../components/messagecomponent/messagecomponent.component';
+// import { HomeserviceService } from '../services/homeservice/homeservice.service';
 
 
 @NgModule({
@@ -26,9 +26,9 @@ import { HomeserviceService } from '../services/homeservice/homeservice.service'
 
 
   ],
-  declarations: [HomePage,HeroDetailComponent,MessagecomponentComponent],
+  declarations: [HomePage],
   providers: [
-    HomeserviceService // <-- List providers here
+  //  HomeserviceService // <-- List providers here
   ]
 
 })

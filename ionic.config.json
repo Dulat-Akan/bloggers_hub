@@ -1,5 +1,7 @@
 {
   "name": "nobodyRides_frontend",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }

@@ -6,6 +6,7 @@ import { IonicModule } from '@ionic/angular';
 import { AddFirstActionPage } from './add-first-action.page';
 import { HomeserviceService } from '../services/homeservice/homeservice.service';
 import { SearchserviceService } from '../services/searchservice/searchservice.service';
+import { TranslateService } from '../services/translate/translate.service';
 
 
 const routes: Routes = [
@@ -27,7 +28,8 @@ const routes: Routes = [
   declarations: [AddFirstActionPage],
   providers: [
     HomeserviceService, // <-- List providers here
-    SearchserviceService
+    SearchserviceService,
+    TranslateService
   ]
 })
 export class AddFirstActionPageModule {}

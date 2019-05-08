@@ -4,7 +4,73 @@
 <head>
   <meta charset="utf-8" />
 
-  <title>Ionic App</title>
+  <title>quick delivery by passengers быстрая доставка пассажирами</title>
+  <meta name="description" content="quick delivery by passengers through fly,bus,cars beetween city, country быстрая доставка пассажирами через самолеты, автобусы, автомобилем между городами, странами" />
+<meta name="keywords" content="quick delivery by passengers through fly,bus,cars beetween city, country быстрая доставка пассажирами через самолеты, автобусы, автомобилем между городами, странами" />
+<meta name="author" content="quick delivery by passengers">
+
+<div itemscope itemtype="http://schema.org/Store" style="height:0px;width:0px;visibility:hidden;">
+        <div>
+          <h1 itemprop="name">quick delivery by passengers</h1>
+          <p itemprop="description">how to deliver goods or package through passengers как доставить товар или посылку через пассажиров</p>
+          <p>Open: <span itemprop="openingHours" content="Mo-Fr 07:00-23:00">Monday-Sunday 7am-11pm</span></p>
+          <p>Phone: <span itemprop="telephone" content="+1(507) 591-1237">+1(507) 591-1237</span></p>
+        </div>
+        <address itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
+          <span itemprop="streetAddress">USA New York World Trade Center, Manhattan, New York, NY</span>,
+          <span itemprop="addressLocality">New York</span>,
+          <span itemprop="addressRegion">NY</span>, <span itemprop="addressCountry">US</span>
+        </address>
+        <img itemprop="image" src="http://www.kazpoisk.kz/assets/img/kazpoisk.png" alt="Обьявления казахстана"/>
+        <span itemprop="priceRange">1$</span>
+        <div itemprop="department" itemscope itemtype="http://schema.org/Pharmacy">
+          <h2 itemprop="name">Quick delivery by passengers</h2>
+          <p itemprop="description">how to deliver goods or package through passengers как доставить товар или посылку через пассажиров</p>
+          <p>Open: <span itemprop="openingHours" content="Mo-Th 09:00-12:00">Monday-Sunday 9am-noon</span></p>
+          <p>Phone: <span itemprop="telephone" content="+77085163091">+1(507) 591-1237</span></p>
+          <address itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
+            <span itemprop="streetAddress">USA New York World Trade Center, Manhattan, New York, NY</span>,
+            <span itemprop="addressLocality">New York</span>,
+            <span itemprop="addressRegion">NY</span>, <span itemprop="addressCountry">US</span>
+          </address>
+          <img itemprop="image" src="http://www.kazpoisk.kz/assets/img/kazpoisk.png" alt="Обьявления казахстана"/>
+          <span itemprop="priceRange">1$</span>
+        </div>
+      </div>
+
+      <div itemscope itemtype="http://schema.org/Order" style="height:0px;width:0px;visibility:hidden;">
+        <div itemprop="seller" itemscope itemtype="http://schema.org/Organization">
+          <b itemprop="name">Quick delivery by passengers</b>
+        </div>
+        <div itemprop="customer" itemscope itemtype="http://schema.org/Person">
+          <b itemprop="name">Quick delivery by passengers</b>
+        </div>
+        <div itemprop="orderedItem" itemscope itemtype="http://schema.org/OrderItem">
+          Item number: <span itemprop="orderItemNumber">Quick delivery by passengers</span>
+          <span itemprop="orderQuantity">1</span>
+          <div itemprop="orderedItem" itemscope itemtype="http://schema.org/Product">
+            <span itemprop="name">Widget</span>
+          </div>
+          <link itemprop="orderItemStatus" href="http://schema.org/OrderDelivered" />Delivered
+          <div itemprop="orderDelivery" itemscope itemtype="http://schema.org/ParcelDelivery">
+            <time="expectedArrivalFrom">2019-03-10</time>
+          </div>
+          <img itemprop="image" src="http://www.kazpoisk.kz/assets/img/kazpoisk.png" alt="Обьявления казахстана"/>
+          <p itemprop="description">how to deliver goods or package through passengers как доставить товар или посылку через пассажиров</p>
+        </div>
+        <div itemprop="orderedItem" itemscope itemtype="http://schema.org/OrderItem">
+          Item number: <span itemprop="orderItemNumber">Quick delivery by passengers</span>
+          <span itemprop="orderQuantity">4</span>
+          <div itemprop="orderedItem" itemscope itemtype="http://schema.org/Product">
+            <span itemprop="name">Widget accessories быстрая доставка пассажирами</span>
+          </div>
+          <link itemprop="orderItemStatus" href="http://schema.org/OrderInTransit" />Shipped
+          <div itemprop="orderDelivery" itemscope itemtype="http://schema.org/ParcelDelivery">
+            <time itemprop="expectedArrivalFrom">05/07/2019</time>
+            <time itemprop="expectedArrivalUntil">05/16/2019</time>
+          </div>
+        </div>
+      </div>
 
   <base href="/" />
 
@@ -28,7 +94,8 @@
     gapi.load('auth2', function(){
       // Retrieve the singleton for the GoogleAuth library and set up the client.
       auth2 = gapi.auth2.init({
-        client_id: '855529219378-o5jgbtsdo7juab5gov3bq0qg6b0l2fkg.apps.googleusercontent.com',
+        // client_id: '855529219378-o5jgbtsdo7juab5gov3bq0qg6b0l2fkg.apps.googleusercontent.com',
+        client_id: '783608753629-rqtcqppue4p8q5cv5l2pjfr81h009guf.apps.googleusercontent.com',
         cookiepolicy: 'single_host_origin',
         // Request scopes in addition to 'profile' and 'email'
         //scope: 'additional_scope'
@@ -38,7 +105,7 @@
   };
 
   function attachSignin(element) {
-    console.log(element.id);
+    //console.log(element.id);
     auth2.attachClickHandler(element, {},
         function(googleUser) {
 

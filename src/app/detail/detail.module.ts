@@ -10,6 +10,7 @@ import { DetailPage } from './detail.page';
 import { HomeserviceService } from '../services/homeservice/homeservice.service';
 import { StoreserviceService } from '../services/storeseservice/storeservice.service';
 import { DetailserviceService } from '../services/detailservice/detailservice.service';
+import { TranslateService } from '../services/translate/translate.service';
 
 const routes: Routes = [
   {
@@ -29,7 +30,8 @@ const routes: Routes = [
   providers: [
     HomeserviceService, // <-- List providers here
     DetailserviceService,
-    StoreserviceService
+    StoreserviceService,
+    TranslateService
   ]
 })
 export class DetailPageModule {}

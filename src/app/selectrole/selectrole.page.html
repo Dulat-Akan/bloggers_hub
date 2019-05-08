@@ -1,17 +1,17 @@
 
-<ion-content>
+<ion-content *ngIf="language">
 
 
 <div class="main_cl">
 
-<div class="selectrole">Select your Role</div>
+<div class="selectrole">{{language.role}}</div>
 
 <div class="upbutton">
-  <ion-button (click)="Find()" expand="block">Find a person to deliver</ion-button>
+  <ion-button (click)="Find()" expand="block">{{language.find}}</ion-button>
 </div>
 
 <div class="upbutton2">
-  <ion-button (click)="Get()" expand="block">Get the goods along the way</ion-button>
+  <ion-button (click)="Get()" expand="block">{{language.getway}}</ion-button>
 </div>
 
 

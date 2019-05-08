@@ -3,6 +3,9 @@ import { Component } from '@angular/core';
 import { Platform,ModalController,AlertController,MenuController } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
+import { TranslateService } from './services/translate/translate.service';
+import { Observable, Subject, interval } from 'rxjs';
+
 
 
 
@@ -36,7 +39,8 @@ export class AppComponent {
     private platform: Platform,
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
-    private menu: MenuController
+    private menu: MenuController,
+    public translateservice:TranslateService
   ) {
     this.initializeApp();
   }
@@ -47,10 +51,19 @@ export class AppComponent {
 
   }
 
+  language;
+
+  getTranslate(){
+    this.translateservice.currentLanguage.subscribe(data => {
+        this.language = data;
+      });
+  }
+
   initializeApp() {
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
+      this.getTranslate();
     });
   }
 }

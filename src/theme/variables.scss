@@ -89,17 +89,33 @@
   margin-top:2% !important;
 }
 
-
+$app_color:#3880ff;
 .circle{
     width:130px;
     height:130px;
     border-radius: 50%;
-    border:2px solid #3880ff;
+
 }
 
 .menu-size{
   font-size: 40px !important;
 }
+
+.menu-background{
+  --background: linear-gradient(to right, #e6efff 0%, #b3cfff 100%) !important;
+}
+
+.list-md{
+  background: linear-gradient(to right, #e6efff 0%, #b3cfff 100%) !important;
+}
+
+.userName{
+  margin-top:0px;margin-bottom:0px;
+  color:$app_color;
+  font-size: 1.3em;
+  font-weight: 600;
+}
+
 
 
 

@@ -5,6 +5,7 @@ import { FormBuilder, Validators, FormArray,FormGroup, FormControl} from '@angul
 //import { forbiddenNameValidator } from '../validators/forbiddenname.validator';
 import { HomeserviceService } from '../services/homeservice/homeservice.service';
 import { PhonenumberserviceService } from '../services/phonenumberservice/phonenumberservice.service';
+import { TranslateService } from '../services/translate/translate.service';
 
 import { PhoneValidator } from '../validators/phone.validator';
 
@@ -24,7 +25,8 @@ export class PhonenumberPage implements OnInit {
     public phonenumberservice:PhonenumberserviceService,
     public modalCtrl:ModalController,
     public navParams:NavParams,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    public translateservice:TranslateService,
   ) {
 
     }
@@ -71,8 +73,17 @@ export class PhonenumberPage implements OnInit {
       })
     }
 
+    language:Observable<any>;
+
+    getTranslate(){
+      this.translateservice.getTranslate().subscribe(data => {
+          this.language = data;
+        });
+    }
+
   ngOnInit() {
       this.listenPhone();
+      this.getTranslate();
   }
 
 }

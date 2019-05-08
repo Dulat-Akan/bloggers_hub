@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
 import { FavoriteserviceService } from '../services/favoriteservice/favoriteservice.service';
+import { TranslateService } from '../services/translate/translate.service';
 
 import { IonicModule } from '@ionic/angular';
 
@@ -24,7 +25,8 @@ const routes: Routes = [
   ],
   declarations: [FavoritePage],
   providers: [
-    FavoriteserviceService
+    FavoriteserviceService,
+    TranslateService
   ]
 })
 export class FavoritePageModule {}

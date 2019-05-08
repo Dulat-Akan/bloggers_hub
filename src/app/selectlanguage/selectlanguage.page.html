@@ -1,0 +1,57 @@
+<ion-content *ngIf="language">
+
+  <form  (ngSubmit)="onSubmit()">
+  <ion-grid>
+    <ion-row class="mt">
+        <ion-col class="selecttext">
+          Please Select Your language
+        </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+
+          <ion-list class="mlist">
+            <ion-radio-group radio-group (ionChange)="onChangeHandler($event.target.value)">
+
+              <ion-item>
+                <ion-label>English</ion-label>
+                <ion-radio   slot="start" value="en" ></ion-radio>
+              </ion-item>
+
+              <ion-item>
+                <ion-label>Russian</ion-label>
+                <ion-radio  slot="start" value="ru"></ion-radio>
+              </ion-item>
+
+              <ion-item>
+                <ion-label>Espanol</ion-label>
+                <ion-radio  slot="start" value="espanol"></ion-radio>
+              </ion-item>
+              <ion-item>
+                <ion-label>Chinese</ion-label>
+                <ion-radio  slot="start" value="chinese"></ion-radio>
+              </ion-item>
+              <ion-item>
+                <ion-label>Arabian</ion-label>
+                <ion-radio  slot="start" value="arabian"></ion-radio>
+              </ion-item>
+            </ion-radio-group>
+
+
+          </ion-list>
+
+
+
+      </ion-col>
+
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-button type="submit"  expand="block">Next</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  </form>
+
+</ion-content>

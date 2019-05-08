@@ -7,14 +7,14 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content *ngIf="language">
 
 
 <div *ngIf="Users != undefined" class="newcard">
 
   <div class="newLevel_1">
       <div class="newLevel_1_2_1">
-          <div class="newLevel_1_2_1_1">sender</div>
+          <div class="newLevel_1_2_1_1">{{language.sender}}</div>
           <div class="newLevel_1_2_1_2" [style.backgroundImage]="'url('+ Users.image_url +')'" ></div>
       </div>
       <div class="newLevel_1_2_2">
@@ -27,11 +27,11 @@
   </div>
   <div class="newLevel_3">
         <div class="newLevel_3_1">
-            <div class="newLevel_3_1_1">From</div>
+            <div class="newLevel_3_1_1">{{language.From}}</div>
             <div class="newLevel_3_1_2">{{UsersData.fromPoint}}</div>
         </div>
         <div class="newLevel_3_2">
-          <div class="newLevel_3_1_1">To</div>
+          <div class="newLevel_3_1_1">{{language.To}}</div>
           <div class="newLevel_3_1_2">{{UsersData.toPoint}}</div>
         </div>
   </div>
@@ -40,11 +40,11 @@
   </div>
   <div class="newLevel_3">
         <div class="newLevel_3_1">
-            <div class="newLevel_3_1_1">Start Date</div>
+            <div class="newLevel_3_1_1">{{language.startdate}}</div>
             <div class="newLevel_3_1_2">{{UsersData.date}}</div>
         </div>
         <div class="newLevel_3_2">
-          <div class="newLevel_3_1_1">Start time</div>
+          <div class="newLevel_3_1_1">{{language.starttime}}</div>
           <div class="newLevel_3_1_2">{{UsersData.time}}</div>
         </div>
   </div>
@@ -55,7 +55,7 @@
 
   <div class="newLevel_5">
 
-    <div class="newLevel_5_1">Description</div>
+    <div class="newLevel_5_1">{{language.Description}}</div>
     <div class="newLevel_5_2">{{UsersData.description}}</div>
 
   </div>

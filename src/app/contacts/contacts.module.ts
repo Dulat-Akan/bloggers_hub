@@ -10,6 +10,7 @@ import { ContactsPage } from './contacts.page';
 import { HomeserviceService } from '../services/homeservice/homeservice.service';
 import { ContactserviceService } from '../services/contactservice/contactservice.service';
 import { OnlineusersService } from '../services/onlineusers/onlineusers.service';
+import { TranslateService } from '../services/translate/translate.service';
 
 const routes: Routes = [
   {
@@ -29,7 +30,8 @@ const routes: Routes = [
   providers: [
     HomeserviceService, // <-- List providers here
     ContactserviceService,
-    OnlineusersService
+    OnlineusersService,
+    TranslateService
   ]
 })
 export class ContactsPageModule {}

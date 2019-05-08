@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Observable, of, Subject } from 'rxjs';
 import { FavoriteserviceService } from '../services/favoriteservice/favoriteservice.service';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { TranslateService } from '../services/translate/translate.service';
 
 @Component({
   selector: 'app-favorite',
@@ -12,7 +13,12 @@ export class FavoritePage implements OnInit {
 
   details: Observable<any>;
 
-  constructor(private favoriteservice:FavoriteserviceService,private router: Router) {
+  constructor(
+    private favoriteservice:FavoriteserviceService,
+    private router: Router,
+    public translateservice:TranslateService
+
+  ) {
 
 
   }
@@ -32,9 +38,18 @@ export class FavoritePage implements OnInit {
       this.router.navigate(['/detail/' + id]);
   }
 
+  language:Observable<any>;
+
+  getTranslate(){
+    this.translateservice.getTranslate().subscribe(data => {
+        this.language = data;
+      });
+  }
+
   ngOnInit() {
     this.listenFavorite();
     this.checkFavorite();
+    this.getTranslate();
   }
 
 }

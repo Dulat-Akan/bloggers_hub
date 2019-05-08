@@ -33,7 +33,7 @@ export class DetailserviceService {
         this.socket.on("getDetailData",data => {
               observer.next(data);
         })
-     })
+     });
 
    }
 }

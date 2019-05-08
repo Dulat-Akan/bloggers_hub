@@ -3,11 +3,11 @@
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
-    <ion-title>favorite</ion-title>
+    <ion-title *ngIf="language">{{language.favorite}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content *ngIf="language">
 
   <div class="globtwo">
 
@@ -16,7 +16,7 @@
         <div class="leftBlock">
 
           <div class="level1">{{i+1}}</div>
-          <div class="level2">{{ detail.time }} (24h)</div>
+          <div class="level2">{{ detail.time }} {{language.twentyfour}}</div>
           <div class="level3">{{ detail.date }}</div>
 
         </div>
@@ -46,15 +46,15 @@
           </div>
           <div class="Rlevel2">
               <div class="Rlevel2_child1">
-                <div class="Rlevel2_child1_child1">Request</div>
+                <div class="Rlevel2_child1_child1">{{language.Request}}</div>
                 <div class="Rlevel2_child1_child2">{{i+1}}</div>
               </div>
               <div class="Rlevel2_child2">
-                <div class="Rlevel2_child1_child1">Amount</div>
+                <div class="Rlevel2_child1_child1">{{language.Amount}}</div>
                 <div class="Rlevel2_child1_child2">{{detail.sum}} $</div>
               </div>
               <div class="Rlevel2_child3">
-                <div class="Rlevel2_child1_child1">Weight</div>
+                <div class="Rlevel2_child1_child1">{{language.Weight}}</div>
                 <div class="Rlevel2_child1_child2">{{detail.weight}}</div>
               </div>
 

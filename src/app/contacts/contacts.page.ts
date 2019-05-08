@@ -7,6 +7,7 @@ import { OnlineusersService } from '../services/onlineusers/onlineusers.service'
 import { Event as NavigationEvent } from "@angular/router";
 import { filter } from "rxjs/operators";
 import { NavigationStart } from "@angular/router";
+import { TranslateService } from '../services/translate/translate.service';
 
 
 @Component({
@@ -19,7 +20,14 @@ export class ContactsPage implements OnInit {
   contacts: Observable<any>;
   data:any;
 
-  constructor(public onlineservice:OnlineusersService,private router: Router,private homeservice:HomeserviceService,private contactservice:ContactserviceService) {
+  constructor(
+    public onlineservice:OnlineusersService,
+    private router: Router,
+    private homeservice:HomeserviceService,
+    private contactservice:ContactserviceService,
+    public translateservice:TranslateService
+
+  ) {
 
   }
 
@@ -82,12 +90,21 @@ export class ContactsPage implements OnInit {
      });
           }
 
+          language:Observable<any>;
+
+          getTranslate(){
+            this.translateservice.getTranslate().subscribe(data => {
+                this.language = data;
+              });
+          }
+
   ngOnInit() {
     this.getContactData(); //listen first meesages
     this.sendContactData();
     //check Onlineuser status
     this.listenjoinUser();
     this.RouteListener();
+    this.getTranslate();
     //check Onlineuser status
   }
 

@@ -9,12 +9,13 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { TranslateService } from './services/translate/translate.service';
 
 
 
 
 
-//import { reducers } from './store/reducers/reducers';
+
 
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 
@@ -32,13 +33,17 @@ import { HttpClientModule, HttpClient } from '@angular/common/http';
     HttpClientModule,
     ReactiveFormsModule,
 
+
   ],
   providers: [
     StatusBar,
     SplashScreen,
+    TranslateService,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]
 
 })
 export class AppModule {}
+
+// required for AOT compilation

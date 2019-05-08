@@ -1,8 +1,34 @@
 ion-content{
   --background: linear-gradient(to right, #e6efff 0%, #b3cfff 100%);
+}
 
+.mytoolbar{
+  position: fixed;
+  left:0%;
+  top:0%;
+  width:100%;
+  height: 5%;
+  z-index: 100;
+}
+.my_menu{
+  position: fixed;
+  left: 3%;
+  bottom: 2%;
+  width: 15%;
+  height: 6%;
+  z-index: 100;
+}
+
+.first_icon{
 
 }
+.menu_icon{
+  font-size: 45px;
+  color:white;
+}
+
+
+
 
 .no-scroll {
     // --overflow: hidden;
@@ -98,8 +124,9 @@ td, th {
 
 .globtwo{
   width: 100%;
-  margin-top: -1vh;
-
+  margin-top: 13%;
+  overflow: hidden;
+  z-index: 50;
 }
 
 .myhidescrolledtwo {
@@ -110,6 +137,7 @@ td, th {
   margin-left: 4%;
   margin-right: 4%;
   padding: 0px;
+  overflow: hidden;
 
 }
 

@@ -4,6 +4,7 @@ import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
 import { HomeserviceService } from '../services/homeservice/homeservice.service';
 import { PhonenumberserviceService } from '../services/phonenumberservice/phonenumberservice.service';
+import { TranslateService } from '../services/translate/translate.service';
 
 import { IonicModule } from '@ionic/angular';
 
@@ -24,10 +25,12 @@ const routes: Routes = [
     IonicModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [PhonenumberPage],
+  //declarations: [PhonenumberPage],
+  declarations: [],
   providers: [
     HomeserviceService, // <-- List providers here
-    PhonenumberserviceService
+    PhonenumberserviceService,
+    TranslateService
 
   ]
 })

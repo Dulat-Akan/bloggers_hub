@@ -4,6 +4,7 @@ import { FormBuilder, Validators, FormArray,FormGroup, FormControl} from '@angul
 import { Observable, Subject, interval } from 'rxjs';
 import { HomeserviceService } from '../services/homeservice/homeservice.service';
 import { SearchserviceService } from '../services/searchservice/searchservice.service';
+import { TranslateService } from '../services/translate/translate.service';
 import { ToastController } from '@ionic/angular';
 import { Location } from '@angular/common';
 import * as $ from 'jquery';
@@ -17,7 +18,16 @@ import * as $ from 'jquery';
 })
 export class AddFirstActionPage implements OnInit {
 
-  constructor(public toastController: ToastController,private location: Location,private router: Router,private fb: FormBuilder,public homeservice:HomeserviceService,public searchservice:SearchserviceService){
+  constructor(
+    public toastController: ToastController,
+    private location: Location,
+    private router: Router,
+    private fb: FormBuilder,
+    public homeservice:HomeserviceService,
+    public searchservice:SearchserviceService,
+    public translateservice:TranslateService,
+
+  ){
 
    }
 
@@ -74,17 +84,8 @@ export class AddFirstActionPage implements OnInit {
 
     });
   }
-//this.name.setValue('Nancy');
-// this.profileForm.patchValue({
-//     firstName: 'Nancy',
-//     address: {
-//       street: '123 Drew Street'
-//     }
-//   });
 
-// get name() { return this.heroForm.get('name'); }
-//
-// get power() { return this.heroForm.get('power'); }
+
 
   citylist: Observable<any>;
   checkformnumber = 1;
@@ -107,6 +108,7 @@ export class AddFirstActionPage implements OnInit {
   checkCitySearchData(){
       this.searchservice.getCity().subscribe(data => {
 
+          //console.log(data.data);
           this.citylist = data.data;
 
           if(this.cityListStatus == 0){
@@ -168,6 +170,14 @@ export class AddFirstActionPage implements OnInit {
     toast.present();
   }
 
+  language:Observable<any>;
+
+  getTranslate(){
+    this.translateservice.getTranslate().subscribe(data => {
+        this.language = data;
+      });
+  }
+
 
 
 
@@ -175,6 +185,7 @@ export class AddFirstActionPage implements OnInit {
 
     this.checkCitySearchData();
     this.getFormDataResponse();
+    this.getTranslate();
 
   }
 

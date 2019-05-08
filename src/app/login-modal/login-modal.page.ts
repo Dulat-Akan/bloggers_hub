@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController,NavParams } from '@ionic/angular';
 import { LoginService } from '../services/login/login.service';
+import { TranslateService } from '../services/translate/translate.service';
 import * as $ from 'jquery';
+import { Observable, Subject, interval } from 'rxjs';
 
 @Component({
   selector: 'app-login-modal',
@@ -12,7 +14,12 @@ export class LoginModalPage implements OnInit {
 
 
 
-  constructor(public loginservice:LoginService,public modalCtrl:ModalController,public navParams:NavParams) {
+  constructor(
+    public loginservice:LoginService,
+    public modalCtrl:ModalController,
+    public navParams:NavParams,
+    public translateservice:TranslateService
+  ) {
 
 
   }
@@ -40,12 +47,23 @@ export class LoginModalPage implements OnInit {
     this.modalCtrl.dismiss();
   }
 
+  language:Observable<any>;
+
+  getTranslate(){
+    this.translateservice.getTranslate().subscribe(data => {
+        this.language = data;
+        //console.log(data);
+      });
+  }
+
   ngOnInit() {
 
     this.interval = setInterval(() => {
                       this.listenGoogle();
                       //console.log("listen");
                     }, 500);
+
+    this.getTranslate();
 
   }
 
