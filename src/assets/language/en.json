@@ -27,5 +27,18 @@
   "phone":"Phone Number",
   "role":"Select your Role",
   "find":"Find a person to deliver",
-  "getway":"Get the goods along the way"
+  "getway":"Get the goods along the way",
+  "slideone":"Find a person or leave a request",
+  "slidetwo":"Travel and make money",
+  "three":"Save Money",
+  "four":"Save Time",
+  "five":"Quick individual delivery",
+  "next":"Next",
+  "email":"email",
+  "name":"name",
+  "password":"password",
+  "registration":"registration",
+  "Registration":"Registration",
+  "SingIn":"Sign In",
+  "Forgot_password":"Forgot password"
 }

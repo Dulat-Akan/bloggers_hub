@@ -20,6 +20,7 @@ import { SlideshowPage } from '../slideshow/slideshow.page';
 
 
 
+
 import * as $ from 'jquery';
 
 //declare function TransferAuth(data):any;
@@ -36,6 +37,7 @@ export class DashboardPage implements OnInit {
   connection;
   deviceid:string;
   fixedUpdating = 1;
+  permitForUpdating = 0;
 
   constructor(public homeservice: HomeserviceService,
               public onlineservice:OnlineusersService,
@@ -111,6 +113,7 @@ export class DashboardPage implements OnInit {
             //getPhonefromUser
 
             this.loadAllData();
+            this.permitForUpdating = 1;
 
           });
     }
@@ -206,6 +209,7 @@ loggingsearch;
     this.homeservice.CheckStoragestate.subscribe(data => {
 
         this.loadAllData(); //send Request after load memory
+        this.permitForUpdating = 1;
 
     });
   }
@@ -249,6 +253,7 @@ loggingsearch;
               localStorage.setItem("role",data.role);
 
               this.loadAllData();
+              this.permitForUpdating = 1;
             }
 
 
@@ -329,6 +334,8 @@ loggingsearch;
     this.homeservice.nextAction
     .subscribe(data => {
         if(data == "1"){
+          this.SlideShowModal();
+        }else if(data == "2"){
           this.LoginModal();
         }
 
@@ -339,13 +346,19 @@ loggingsearch;
 
   UpdateDataThroughInterval(){
       setInterval(() => {
-        if(this.fixedUpdating == 1){
-          //this.just update all data
-          this.loadAllData();
-        }else if(this.fixedUpdating == 0){
-          //this.working for update search data
-          this.homeservice.searchData(this.loggingsearch);
+
+        if(this.permitForUpdating == 1){
+          if(this.fixedUpdating == 1){
+            //this.just update all data
+            this.loadAllData();
+            //console.log("alldata");
+          }else if(this.fixedUpdating == 0){
+            //this.working for update search data
+            //console.log("logsearch");
+            this.homeservice.searchData(this.loggingsearch);
+          }
         }
+
       }, 10000);
   }
 
@@ -375,7 +388,7 @@ loggingsearch;
     //update data
     //this.SelectlanguageModal();
     //this.SlideShowModal();
-    //this.LoginModal();
+    this.LoginModal();
 
   }
 

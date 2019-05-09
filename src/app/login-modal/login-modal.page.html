@@ -1,12 +1,65 @@
-<ion-content>
+<ion-content *ngIf="language">
+
+
+  <mat-tab-group>
+    <mat-tab label="{{language.Registration}}">
+
+      <form [formGroup]="sendForm" (ngSubmit)="onSubmit()" class="phoneclass">
+        <ion-item>
+          <ion-label position="stacked">{{language.email}}</ion-label>
+          <ion-input placeholder="example: rex@gmail.com" required formControlName="email"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="stacked">{{language.name}}</ion-label>
+          <ion-input placeholder="example: Nicole" required formControlName="name"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="stacked">{{language.password}}</ion-label>
+          <ion-input  placeholder="example: 12345" required formControlName="password"></ion-input>
+        </ion-item>
+
+        <ion-button *ngIf="checksendForm == 0" type="submit"  [disabled]="!sendForm.valid" expand="block" >{{language.Registration}}</ion-button>
+      </form>
+
+    </mat-tab>
+    <mat-tab label="{{language.SingIn}}">
+
+      <form [formGroup]="sendLogin" (ngSubmit)="onSubmitLogin()" class="phoneclass">
+        <ion-item>
+          <ion-label position="stacked">{{language.email}}</ion-label>
+          <ion-input placeholder="example: rex@gmail.com" required formControlName="email"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="stacked">{{language.password}}</ion-label>
+          <ion-input  placeholder="example: 12345" required formControlName="password"></ion-input>
+        </ion-item>
+
+        <ion-button *ngIf="checksendLogin == 0" type="submit"  [disabled]="!sendLogin.valid" expand="block" >{{language.SingIn}}</ion-button>
+      </form>
+
+     </mat-tab>
+     <mat-tab label="{{language.Forgot_password}}">
+
+       <form [formGroup]="sendForgot" (ngSubmit)="onsendForgot()" class="phoneclass">
+         <ion-item>
+           <ion-label position="stacked">{{language.email}}</ion-label>
+           <ion-input placeholder="example: rex@gmail.com" required formControlName="email"></ion-input>
+         </ion-item>
+
+         <ion-button *ngIf="checksendForgot == 0" type="submit"  [disabled]="!sendForgot.valid" expand="block" >{{language.Forgot_password}}</ion-button>
+       </form>
+
+      </mat-tab>
+  </mat-tab-group>
 
 
 
 
 
-  <div class="w_text" *ngIf="language">{{language.enter}}</div>
 
-  <div class="googleLogin"(click)="trigger()"></div>
+  <!-- <div class="w_text" *ngIf="language">{{language.enter}}</div>
+
+  <div class="googleLogin"(click)="trigger()"></div> -->
 
 
 

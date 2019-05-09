@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
@@ -10,6 +11,7 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TranslateService } from './services/translate/translate.service';
+import { Device } from '@ionic-native/device/ngx';
 
 
 
@@ -26,7 +28,8 @@ import { HttpClientModule, HttpClient } from '@angular/common/http';
   declarations: [AppComponent],
   entryComponents: [],
   imports: [
-    BrowserModule,
+    //BrowserModule,
+    BrowserAnimationsModule,
     IonicModule.forRoot(),
     AppRoutingModule,
     FormsModule,
@@ -39,6 +42,7 @@ import { HttpClientModule, HttpClient } from '@angular/common/http';
     StatusBar,
     SplashScreen,
     TranslateService,
+    Device,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]

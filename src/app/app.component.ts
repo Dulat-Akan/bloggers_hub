@@ -51,12 +51,16 @@ export class AppComponent {
 
   }
 
-  language;
+  language:Observable<any>;
 
   getTranslate(){
-    this.translateservice.currentLanguage.subscribe(data => {
+    this.translateservice.getTranslate().subscribe(data => {
         this.language = data;
       });
+  }
+
+  triggerComponent(){
+    $("#customBtn").trigger('click');
   }
 
   initializeApp() {

@@ -1,7 +1,92 @@
-<ion-content>
+<ion-content *ngIf="language">
     <ion-slides pager="false" [options]="slideOpts">
           <ion-slide>
-            <h1>Slide 1</h1>
+
+
+
+              <div class="main_slide">
+
+                <div class="fr_parent">
+                  <div class="fr_im">
+
+                  </div>
+                </div>
+
+                <div class="newlist">
+
+                  <ion-list>
+
+
+                    <ion-item >
+                      <ion-thumbnail slot="start">
+                        <i class="myiconst material-icons">
+                          search
+                          </i>
+                      </ion-thumbnail>
+                      <ion-label class="mytext">
+                        {{language.slideone}}
+                      </ion-label>
+                    </ion-item>
+
+                    <ion-item >
+                      <ion-thumbnail slot="start">
+                        <i class="myiconst material-icons">
+                          thumb_up
+                          </i>
+                      </ion-thumbnail>
+                      <ion-label class="mytext">
+                        {{language.slidetwo}}
+                      </ion-label>
+
+                    </ion-item>
+
+
+                    <ion-item >
+                      <ion-thumbnail slot="start">
+                        <i class="myiconst material-icons">
+                          attach_money
+                          </i>
+                      </ion-thumbnail>
+                      <ion-label class="mytext">
+                        {{language.three}}
+                      </ion-label>
+
+                    </ion-item>
+                    <ion-item >
+                      <ion-thumbnail slot="start">
+                        <i class="myiconst material-icons">
+                          timer
+                          </i>
+                      </ion-thumbnail>
+                      <ion-label class="mytext">
+                        {{language.four}}
+                      </ion-label>
+
+                    </ion-item>
+                    <ion-item >
+                      <ion-thumbnail slot="start">
+                        <i class="myiconst material-icons">
+                          airplanemode_active
+                          </i>
+                      </ion-thumbnail>
+                      <ion-label class="mytext">
+                        {{language.five}}
+                      </ion-label>
+
+                    </ion-item>
+
+                  </ion-list>
+
+
+
+                </div>
+                <ion-button class="mybtnn" (click)="nextPage()" color="primary">{{language.next}}</ion-button>
+
+
+              </div>
+
+
+
           </ion-slide>
           <ion-slide>
             <h1>Slide 2</h1>

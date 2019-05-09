@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient,HttpParams } from '@angular/common/http';
 import { ToastController } from '@ionic/angular';
 import * as io from 'socket.io-client';
+import { Device } from '@ionic-native/device/ngx';
 
 //import { HttpClient,HttpParams } from '@angular/http';
 import { Observable, of, Subject } from 'rxjs';
@@ -39,18 +40,24 @@ export class HomeserviceService {
   //   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   // };
 
-  private url = 'http://localhost:3002';
-  //private url = 'http://kazpoisk.kz:3002';
+  //private url = 'http://localhost:3002';
+  private url = 'http://kazpoisk.kz:3002';
   public socket;
 
 
-  constructor(public toastController: ToastController,private http: HttpClient,private messageService: MessageService) {
+  constructor(
+    public toastController: ToastController,
+    private http: HttpClient,
+    private messageService: MessageService,
+    private device: Device
+  ) {
           this.initSocket();
           this.reConnect();
 
           this.checkStorage();
 
           this.checkAuthData();
+          this.initDeviceId();
 
    }
 
@@ -63,6 +70,7 @@ export class HomeserviceService {
                     reconnectionDelayMax : 5000,
                     reconnectionAttempts: Infinity
                   });
+
         }
 
 
@@ -280,6 +288,40 @@ export class HomeserviceService {
     return this.http.post(this.baseurl + "/api/registration", json);
 
   };
+
+  generateRandomNumber(min_value , max_value)
+  {
+      return Math.random() * (max_value-min_value) + min_value;
+  }
+
+
+  initDeviceId(){
+
+            var phoneid = this.device.uuid;//window.device.uuid;
+
+            var checkdeviceid = localStorage.getItem("deviceid");
+
+            var fixdevicememory = 0;
+
+            if(checkdeviceid){
+                localStorage.setItem("deviceid",checkdeviceid);
+                this.deviceid = checkdeviceid;
+                fixdevicememory = 1;
+            }
+
+            if((phoneid == null) && (fixdevicememory == 0)){
+
+              var generatevalue = this.generateRandomNumber(1,5555555555555);
+              localStorage.setItem("deviceid",generatevalue);
+              this.deviceid = generatevalue;
+
+            }else if(phoneid != null){
+              localStorage.setItem("deviceid",phoneid);
+              this.deviceid = phoneid;
+            }
+
+            //console.log(this.deviceid);
+  }
 
 
   async Toast(message) {

@@ -19,6 +19,8 @@ import { OnlineusersService } from '../services/onlineusers/onlineusers.service'
 import { NotificationService } from '../services/notification/notification.service';
 import { SetroleserviceService } from '../services/setroleservice/setroleservice.service';
 import { TranslateService } from '../services/translate/translate.service';
+import {MatButtonModule, MatCheckboxModule} from '@angular/material';
+import { MatTabsModule } from '@angular/material';
 
 const routes: Routes = [
   {
@@ -33,6 +35,9 @@ const routes: Routes = [
     FormsModule,
     ReactiveFormsModule,
     IonicModule,
+    MatButtonModule,
+    MatCheckboxModule,
+    MatTabsModule,
 
     RouterModule.forChild(routes)
   ],
