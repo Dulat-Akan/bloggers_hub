@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ModalController,NavParams } from '@ionic/angular';
 import { LoginService } from '../services/login/login.service';
 import { TranslateService } from '../services/translate/translate.service';
+import { HomeserviceService } from '../services/homeservice/homeservice.service';
 import * as $ from 'jquery';
 import { Observable, Subject, interval } from 'rxjs';
 import { FormBuilder, Validators, FormArray,FormGroup, FormControl} from '@angular/forms';
@@ -19,7 +20,8 @@ export class LoginModalPage implements OnInit {
     public loginservice:LoginService,
     public modalCtrl:ModalController,
     public navParams:NavParams,
-    public translateservice:TranslateService
+    public translateservice:TranslateService,
+    public homeservice:HomeserviceService
   ) {
 
 
@@ -62,6 +64,7 @@ export class LoginModalPage implements OnInit {
           Validators.minLength(1),
         ]),
   });
+
   sendForgot = new FormGroup({
     'email': new FormControl('',[
         Validators.required,
@@ -78,36 +81,82 @@ export class LoginModalPage implements OnInit {
   checksendForgot = 0;
 
    onSubmit(){
-       this.checksendForm = 1;
-       //var phone = this.sendForm.get('phonenumber').value;
-       //console.log(phone);
-       //this.setPhone(phone);
+       //this.checksendForm = 1;
+       var email = this.sendForm.get('email').value;
+       var name = this.sendForm.get('name').value;
+       var password = this.sendForm.get('password').value;
+
+       var data = {
+         "email":email,
+         "name":name,
+         "password":password
+       }
+       //console.log(data);
+       this.loginservice.setRegistration(data);
+   }
+
+   listenRegistration(){
+     this.loginservice.listenRegistration()
+     .subscribe(data => {
+
+        console.log(data);
+        if(data.status == "olduser"){
+          this.homeservice.Toast("User already Registered Please SignIn");
+        }else if(data.status == "newuser"){
+          this.homeservice.Toast("Thanks! For Registration!");
+        }
+
+         //this.modalCtrl.dismiss();
+
+     })
    }
    onSubmitLogin(){
-       this.checksendLogin = 1;
+       //this.checksendLogin = 1;
+       var email = this.sendLogin.get('email').value;
+       var password = this.sendLogin.get('password').value;
+
+       var data = {
+         "email":email,
+         "password":password
+       }
+       this.loginservice.setLogin(data);
        //var phone = this.sendForm.get('phonenumber').value;
        //console.log(phone);
        //this.setPhone(phone);
+   }
+
+   listenLogin(){
+     this.loginservice.listenLogin()
+     .subscribe(data => {
+
+        console.log(data);
+         //this.modalCtrl.dismiss();
+
+     })
    }
    onsendForgot(){
-       this.checksendForgot = 1;
-       //var phone = this.sendForm.get('phonenumber').value;
-       //console.log(phone);
-       //this.setPhone(phone);
+       //this.checksendForgot = 1;
+       var email = this.sendLogin.get('email').value;
+
+       var data = {
+         "email":"email"
+       }
+       this.loginservice.setForgot(data);
    }
 
-   setPhone(data){
-     //this.phonenumberservice.setPhone(data);
+   listenForgot(){
+     this.loginservice.listenForgot()
+     .subscribe(data => {
+
+        console.log(data);
+         //this.modalCtrl.dismiss();
+
+     })
    }
 
-   listenPhone(){
-     // this.phonenumberservice.listenPhone()
-     // .subscribe(data => {
-     //   if(data.status == "ok"){
-     //     this.modalCtrl.dismiss();
-     //   }
-     // })
-   }
+
+
+
 
   trigger(){
     $("#customBtn").trigger('click');
@@ -147,6 +196,10 @@ export class LoginModalPage implements OnInit {
                     }, 500);
 
     this.getTranslate();
+
+    this.listenRegistration();
+    this.listenLogin();
+    this.listenForgot();
 
   }
 

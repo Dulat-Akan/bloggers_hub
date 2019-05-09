@@ -40,8 +40,8 @@ export class HomeserviceService {
   //   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   // };
 
-  //private url = 'http://localhost:3002';
-  private url = 'http://kazpoisk.kz:3002';
+  private url = 'http://localhost:3002';
+  //private url = 'http://kazpoisk.kz:3002';
   public socket;
 
 

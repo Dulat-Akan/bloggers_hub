@@ -6,6 +6,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 import { LoginService } from '../services/login/login.service';
 import { TranslateService } from '../services/translate/translate.service';
+import { HomeserviceService } from '../services/homeservice/homeservice.service';
 
 import { LoginModalPage } from './login-modal.page';
 
@@ -28,7 +29,8 @@ const routes: Routes = [
   //declarations: [LoginModalPage],
   providers: [
     LoginService,
-    TranslateService
+    TranslateService,
+    HomeserviceService
   ]
 })
 export class LoginModalPageModule {}
