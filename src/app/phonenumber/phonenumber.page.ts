@@ -52,7 +52,12 @@ export class PhonenumberPage implements OnInit {
         this.checksendForm = 1;
         var phone = this.sendForm.get('phonenumber').value;
         //console.log(phone);
-        this.setPhone(phone);
+        var data = {
+          email:this.homeservice.email,
+          phonenumber:phone
+        }
+
+        this.setPhone(data);
     }
 
 

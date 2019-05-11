@@ -33,5 +33,12 @@
   "three":"Ahorrar dinero",
   "four":"Ahorre tiempo",
   "five":"Entrega rápida individual",
-  "next":"Siguiente"
+  "next":"Siguiente",
+  "email":"correo electrónico",
+  "name":"nombre",
+  "password":"contraseña",
+  "registration":"registro",
+  "Registration":"Registro",
+  "SingIn":"Registrarse",
+  "Forgot_password":"Se te olvidó tu contraseña"
 }

@@ -182,7 +182,13 @@ loggingsearch;
           //console.log(data.userdata);
           //set User Profile
             if(data.userdata.length > 0){
-              $(".circle").attr("src",data.userdata[0].image_url);
+
+              if(data.userdata[0].image_url == "0"){
+
+              }else{
+                $(".circle").attr("src",data.userdata[0].image_url);
+              }
+
               $(".userName").text(data.userdata[0].name);
               //hide login button
               $(".logininput").hide();
@@ -337,6 +343,12 @@ loggingsearch;
           this.SlideShowModal();
         }else if(data == "2"){
           this.LoginModal();
+        }else if(data == "selectrole"){
+          this.SelectrolePageModal();
+        }else if(data == "loadalldata"){
+          //console.log("loadalldata");
+          this.permitForUpdating = 1;
+          this.loadAllData();
         }
 
         this.translateservice.setLanguage();
@@ -388,7 +400,7 @@ loggingsearch;
     //update data
     //this.SelectlanguageModal();
     //this.SlideShowModal();
-    this.LoginModal();
+    //this.LoginModal();
 
   }
 

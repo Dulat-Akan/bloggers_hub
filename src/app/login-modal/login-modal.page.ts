@@ -80,6 +80,8 @@ export class LoginModalPage implements OnInit {
   checksendLogin = 0;
   checksendForgot = 0;
 
+  tempdata:any;
+
    onSubmit(){
        //this.checksendForm = 1;
        var email = this.sendForm.get('email').value;
@@ -91,6 +93,8 @@ export class LoginModalPage implements OnInit {
          "name":name,
          "password":password
        }
+
+       this.tempdata = data;
        //console.log(data);
        this.loginservice.setRegistration(data);
    }
@@ -99,11 +103,19 @@ export class LoginModalPage implements OnInit {
      this.loginservice.listenRegistration()
      .subscribe(data => {
 
-        console.log(data);
+        //console.log(data);
         if(data.status == "olduser"){
           this.homeservice.Toast("User already Registered Please SignIn");
         }else if(data.status == "newuser"){
           this.homeservice.Toast("Thanks! For Registration!");
+          localStorage.setItem("email",this.tempdata.email);
+          localStorage.setItem("name",this.tempdata.name);
+          localStorage.setItem("image_url","0");
+          this.homeservice.email = this.tempdata.email;
+          this.modalCtrl.dismiss();
+          clearInterval(this.interval);
+          this.homeservice.nextAction.next("selectrole");
+
         }
 
          //this.modalCtrl.dismiss();
@@ -129,17 +141,36 @@ export class LoginModalPage implements OnInit {
      this.loginservice.listenLogin()
      .subscribe(data => {
 
-        console.log(data);
+        console.log(data);//
+        if(data.status == "usernotfound"){
+            this.homeservice.Toast("User not found..");
+        }else if(data.status == "correct"){
+            this.homeservice.Toast("Correct");
+
+            localStorage.setItem("email",data.data.email);
+            localStorage.setItem("name",data.data.name);
+            localStorage.setItem("image_url",data.data.image_url);
+            localStorage.setItem("role",data.data.role);
+            this.homeservice.role = data.data.role;
+            this.homeservice.email = data.data.email;
+            this.modalCtrl.dismiss();
+            clearInterval(this.interval);
+            this.homeservice.nextAction.next("loadalldata");
+
+        }else if(data.status == "notcorrect"){
+            this.homeservice.Toast("Password incorrect.. Please check your password!");
+        }
          //this.modalCtrl.dismiss();
 
      })
    }
    onsendForgot(){
        //this.checksendForgot = 1;
-       var email = this.sendLogin.get('email').value;
+       var email = this.sendForgot.get('email').value;
 
        var data = {
-         "email":"email"
+         "deviceid":this.homeservice.deviceid,
+         "sendemail":email
        }
        this.loginservice.setForgot(data);
    }
@@ -148,7 +179,14 @@ export class LoginModalPage implements OnInit {
      this.loginservice.listenForgot()
      .subscribe(data => {
 
-        console.log(data);
+        //console.log(data);
+
+        if(data.status == "sended"){
+          this.homeservice.Toast("Password has been sent to your email!");
+        }else if(data.status == "notfound"){
+          this.homeservice.Toast("User not found!");
+        }
+        //status: "sended"
          //this.modalCtrl.dismiss();
 
      })

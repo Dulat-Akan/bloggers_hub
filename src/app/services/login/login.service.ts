@@ -57,18 +57,12 @@ export class LoginService {
   }
 
   setForgot(datas){
-
-    var data = {
-      "deviceid":this.homeservice.deviceid,
-      "email":datas.email
-    }
-
-    this.socket.emit("setForgot",data);
+    this.socket.emit("sendmail",datas);
   }
 
   listenForgot():Observable<any>{
     return new Observable<any>(observer => {
-        this.socket.on("setForgot",data => {
+        this.socket.on("sendmail",data => {
             observer.next(data);
         });
     });

@@ -21,6 +21,10 @@
         <ion-button *ngIf="checksendForm == 0" type="submit"  [disabled]="!sendForm.valid" expand="block" >{{language.Registration}}</ion-button>
       </form>
 
+      <!-- <div class="w_text" *ngIf="language">{{language.enter}}</div> -->
+
+      <div class="googleLogin"(click)="trigger()"></div>
+
     </mat-tab>
     <mat-tab label="{{language.SingIn}}">
 
@@ -36,6 +40,8 @@
 
         <ion-button *ngIf="checksendLogin == 0" type="submit"  [disabled]="!sendLogin.valid" expand="block" >{{language.SingIn}}</ion-button>
       </form>
+
+      <div class="googleLogin"(click)="trigger()"></div>
 
      </mat-tab>
      <mat-tab label="{{language.Forgot_password}}">
@@ -57,9 +63,7 @@
 
 
 
-  <!-- <div class="w_text" *ngIf="language">{{language.enter}}</div>
 
-  <div class="googleLogin"(click)="trigger()"></div> -->
 
 
 

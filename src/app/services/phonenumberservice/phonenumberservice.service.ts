@@ -9,17 +9,11 @@ export class PhonenumberserviceService {
 
   private socket;
 
-  constructor(private homeservice:HomeserviceService) {
+  constructor(public homeservice:HomeserviceService) {
       this.socket = this.homeservice.socket;
   }
 
-  setPhone(number){
-
-    var data = {
-      email:this.homeservice.email,
-      phonenumber:number
-    }
-
+  setPhone(data){
     this.socket.emit("setPhoneNumber",data);
   }
 

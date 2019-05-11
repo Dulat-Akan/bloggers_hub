@@ -33,5 +33,12 @@
   "three":"省錢",
   "four":"節省時間",
   "five":"快速個人交付",
-  "next":"下一個"
+  "next":"下一個",
+  "email":"電子郵件",
+  "name":"名稱",
+  "password":"密碼",
+  "registration":"註冊",
+  "Registration":"註冊",
+  "SingIn":"登入",
+  "Forgot_password":"忘記密碼"
 }
