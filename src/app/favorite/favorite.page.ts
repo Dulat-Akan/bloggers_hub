@@ -35,6 +35,11 @@ export class FavoritePage implements OnInit {
     });
   }
 
+  trackByFn(index,item){
+      //do what ever logic you need to come up with the unique identifier of your item in loop, I will just return the object id.
+      return item.id;
+   }
+
   detailRoute(id){
       this.router.navigate(['/detail/' + id]);
   }

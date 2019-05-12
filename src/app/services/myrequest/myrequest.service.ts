@@ -34,5 +34,24 @@ export class MyrequestService {
      });
    }
 
+   setDeleteorUpdate(data){
+
+     var datas = {
+       email:this.homeservice.email,
+       id:data.id,
+       status:data.status
+     }
+
+     this.socket.emit("setDeleteorUpdate",datas);
+   }
+
+   listensetDeleteorUpdate():Observable<any>{
+     return new Observable<any>(observe => {
+         this.socket.on("setDeleteorUpdate",data => {
+             observe.next(data);
+         });
+     });
+   }
+
 
 }

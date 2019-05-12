@@ -41,5 +41,6 @@
   "Registration":"Registro",
   "SingIn":"Registrarse",
   "Forgot_password":"Se te olvidó tu contraseña",
-  "myrequest":"mis solicitudes"
+  "myrequest":"mis solicitudes",
+  "status":"estado"
 }

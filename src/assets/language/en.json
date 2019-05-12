@@ -41,5 +41,6 @@
   "Registration":"Registration",
   "SingIn":"Sign In",
   "Forgot_password":"Forgot password",
-  "myrequest":"My request"
+  "myrequest":"My request",
+  "status":"status"
 }

@@ -12,8 +12,8 @@
   <div class="globtwo">
 
     <ul class="myhidescrolledtwo" >
-      <li class="listv" *ngFor="let detail of details;index as i;trackBy: trackByFn;" (click)="detailRoute(detail.usersdata_page_id)">
-        <div class="leftBlock">
+      <li class="listv" *ngFor="let detail of details;index as i;trackBy: trackByFn;"  >
+        <div class="leftBlock" (click)="detailRoute(detail.id)">
 
           <div class="level1">{{i+1}}</div>
           <div class="level2">{{ detail.time }} {{language.twentyfour}}</div>
@@ -23,7 +23,7 @@
         <div class="rightBlock">
 
 
-          <div class="Rlevel1">
+          <div class="Rlevel1" (click)="detailRoute(detail.id)">
               <div class="RHaad1">
 
                 <div class="RHaad1_child">
@@ -46,21 +46,35 @@
           </div>
           <div class="Rlevel2">
               <div class="Rlevel2_child1">
-                <div class="Rlevel2_child1_child1">{{language.Request}}</div>
-                <div class="Rlevel2_child1_child2">{{i+1}}</div>
+                <div class="Rlevel2_child1_child1">{{language.status}}</div>
+                <div class="Rlevel2_child1_child2">
+
+                  <ion-button *ngIf="detail.status == 1" (click)="setDeleteorUpdate(detail)" size="small" color="danger">
+                    delete
+                  </ion-button>
+
+                  <ion-button *ngIf="detail.status == 0" (click)="setDeleteorUpdate(detail)" size="small" color="secondary">
+                    restore
+                  </ion-button>
+
+                </div>
               </div>
-              <div class="Rlevel2_child2">
+              <!-- <div class="Rlevel2_child2">
                 <div class="Rlevel2_child1_child1">{{language.Amount}}</div>
                 <div class="Rlevel2_child1_child2">{{detail.sum}} $</div>
               </div>
               <div class="Rlevel2_child3">
                 <div class="Rlevel2_child1_child1">{{language.Weight}}</div>
                 <div class="Rlevel2_child1_child2">{{detail.weight}}</div>
-              </div>
+              </div> -->
 
           </div>
 
 
+        </div>
+
+        <div>
+          ddfd
         </div>
       </li>
     </ul>

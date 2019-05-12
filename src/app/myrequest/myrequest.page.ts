@@ -28,13 +28,39 @@ export class MyrequestPage implements OnInit {
   listenMyRequest(){
     this.listenMyRequest$ = this.myrequestservice.listenMyRequest()
     .subscribe(data => {
+      //console.log(data);
       this.details = data.data;
     });
+  }
+
+  setDeleteorUpdate(detail){
+
+      var data = {
+        id:detail.id,
+        status:detail.status
+      }
+      this.myrequestservice.setDeleteorUpdate(data);
+  }
+
+  listensetDeleteorUpdate$;
+
+  listensetDeleteorUpdate(){
+      this.listensetDeleteorUpdate$ = this.myrequestservice.listensetDeleteorUpdate()
+      .subscribe(data => {
+        if(data.status == "updated"){
+          this.checkMyrequest();
+        }
+      });
   }
 
   detailRoute(id){
       this.router.navigate(['/detail/' + id]);
   }
+
+  trackByFn(index,item){
+      //do what ever logic you need to come up with the unique identifier of your item in loop, I will just return the object id.
+      return item.id;
+   }
 
   language:Observable<any>;
 
@@ -50,11 +76,13 @@ export class MyrequestPage implements OnInit {
     this.listenMyRequest();
     this.checkMyrequest();
     this.getTranslate();
+    this.listensetDeleteorUpdate();
   }
 
   ngOnDestroy(){
     this.listenMyRequest$.unsubscribe();
     this.getTranslate$.unsubscribe();
+    this.listensetDeleteorUpdate$.unsubscribe();
   }
 
 }
