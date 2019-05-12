@@ -17,10 +17,7 @@ export class MyrequestService {
    }
 
 
-   checkMyrequest(){
-     var data = {
-       email:this.homeservice.email
-     }
+   checkMyrequest(data){
 
      this.socket.emit("checkMyrequest",data);
 
@@ -36,13 +33,8 @@ export class MyrequestService {
 
    setDeleteorUpdate(data){
 
-     var datas = {
-       email:this.homeservice.email,
-       id:data.id,
-       status:data.status
-     }
+     this.socket.emit("setDeleteorUpdate",data);
 
-     this.socket.emit("setDeleteorUpdate",datas);
    }
 
    listensetDeleteorUpdate():Observable<any>{

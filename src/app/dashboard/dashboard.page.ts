@@ -34,7 +34,7 @@ export class DashboardPage implements OnInit {
 
   details: Observable<any>;
   private Observablesearch = new Subject<string>();
-  connection;
+
   deviceid:string;
   fixedUpdating = 1;
   permitForUpdating = 0;
@@ -102,7 +102,7 @@ export class DashboardPage implements OnInit {
     roleListener(){
         //const id = +this.route.snapshot.paramMap.get('id');
 
-        this.connection = this.setroleservice.roleListener()
+        this.setroleservice.roleListener()
           .subscribe(data => {
 
             //console.log(data);
@@ -126,7 +126,7 @@ loggingsearch;
       this.Observablesearch.subscribe(searchnumber => {
 
           var data = {
-            device:this.deviceid,
+            device:this.homeservice.deviceid,
             email:this.homeservice.email,
             role:this.homeservice.role,
             searchnumber:searchnumber
@@ -148,7 +148,7 @@ loggingsearch;
   getSearchUsersData(){
       //const id = +this.route.snapshot.paramMap.get('id');
 
-      this.connection = this.homeservice.getSearchUsersData()
+      this.homeservice.getSearchUsersData()
         .subscribe(data => {
           this.details = data.sdata;
           //console.log(data.sdata);
@@ -164,7 +164,7 @@ loggingsearch;
   loadAllData(){
 
     var data = {
-      device:this.deviceid,
+      device:this.homeservice.deviceid,
       email:this.homeservice.email,
       role:this.homeservice.role,
       message:"1"
@@ -176,7 +176,7 @@ loggingsearch;
   getAllData(){
       //const id = +this.route.snapshot.paramMap.get('id');
 
-      this.connection = this.homeservice.getAllData()
+      this.homeservice.getAllData()
         .subscribe(data => {
           this.details = data.sdata;
           //console.log(data.userdata);
@@ -231,12 +231,12 @@ loggingsearch;
 
   listenAuth(){
 
-      this.connection = this.homeservice.checkAuth()
+      this.homeservice.checkAuthNew()
         .subscribe(data => {
 
+          console.log(data);
           this.menu.close('first');
           //this.menu.open('first');
-
 
           if(data.user == "newuser"){
 
@@ -264,8 +264,6 @@ loggingsearch;
 
 
           }
-
-          //console.log(data);
 
         });
 
@@ -302,26 +300,6 @@ loggingsearch;
 
 
 
-
-  Testfunction(){
-
-
-    // var  y = 100;
-    // var i = 100000;
-    //
-    // var k = i + y;
-    //
-    // var h = "amir";
-    //
-    // var f = "sanzhar";
-    // var j = "dulat";
-    //
-    // console.log(k);
-
-
-
-  }
-
   listenjoinUser(){
     this.onlineservice.listenjoinUser()
     .subscribe(data => {
@@ -339,8 +317,11 @@ loggingsearch;
   }
 
   ListenerNextAction(){
+
     this.homeservice.nextAction
     .subscribe(data => {
+
+      console.log(data);
         if(data == "1"){
           this.SlideShowModal();
         }else if(data == "2"){
@@ -352,6 +333,7 @@ loggingsearch;
           this.permitForUpdating = 1;
           this.loadAllData();
         }
+
 
         this.translateservice.setLanguage();
     });
@@ -379,7 +361,7 @@ loggingsearch;
 
   ngOnInit() {
 
-    console.log("init");
+    //console.log("init");
 
     this.getAllData();//1
     this.checkPhoneMemory();//1
@@ -389,27 +371,17 @@ loggingsearch;
 
     this.listenAuth();//3
     this.roleListener();//4
-  //  this.Testfunction();
-    //check Onlineuser status
-    //check Onlineuser status
 
-    //listen app notifications
     this.listenNotificationsMessages();
-    //listen app notifications
-    this.checkFirstAuth();//check first auth
+    //this.checkFirstAuth();//check first auth
     this.getTranslate();
     this.ListenerNextAction();//action listener
-    // //this.working for update search and just data
     this.UpdateDataThroughInterval();
-    //update data
-    //this.SelectlanguageModal();
-    //this.SlideShowModal();
-    //this.LoginModal();
 
   }
 
   ngOnDestroy() {
-    this.connection.unsubscribe();
+
   }
 
 }

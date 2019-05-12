@@ -16,12 +16,7 @@ export class ContactserviceService {
 
   }
 
-  sendContactData(){
-
-    var data = {
-      deviceid:this.homeservice.deviceid,
-      email: this.homeservice.email
-    }
+  sendContactData(data){
 
     this.socket.emit("getAllContactsMessages",data);
 

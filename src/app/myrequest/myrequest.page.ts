@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable, of, Subject } from 'rxjs';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { HomeserviceService } from '../services/homeservice/homeservice.service';
 import { MyrequestService } from '../services/myrequest/myrequest.service';
 import { TranslateService } from '../services/translate/translate.service';
 
@@ -14,6 +15,7 @@ export class MyrequestPage implements OnInit {
   details: Observable<any>;
 
   constructor(
+    private homeservice:HomeserviceService,
     private myrequestservice:MyrequestService,
     private router: Router,
     public translateservice:TranslateService
@@ -21,7 +23,11 @@ export class MyrequestPage implements OnInit {
   ) { }
 
   checkMyrequest(){
-    this.myrequestservice.checkMyrequest();
+    var data = {
+      email:this.homeservice.email
+    }
+
+    this.myrequestservice.checkMyrequest(data);
   }
 
   listenMyRequest$;
@@ -37,7 +43,8 @@ export class MyrequestPage implements OnInit {
 
       var data = {
         id:detail.id,
-        status:detail.status
+        status:detail.status,
+        email:this.homeservice.email
       }
       this.myrequestservice.setDeleteorUpdate(data);
   }

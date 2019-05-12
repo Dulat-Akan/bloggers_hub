@@ -3,8 +3,10 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
 
+import { HomeserviceService } from '../services/homeservice/homeservice.service';
 import { MyrequestService } from '../services/myrequest/myrequest.service';
 import { TranslateService } from '../services/translate/translate.service';
+
 
 import { IonicModule } from '@ionic/angular';
 
@@ -26,6 +28,7 @@ const routes: Routes = [
   ],
   declarations: [MyrequestPage],
   providers: [
+    HomeserviceService,
     MyrequestService,
     TranslateService
   ]

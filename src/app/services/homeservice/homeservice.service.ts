@@ -3,21 +3,11 @@ import { HttpClient,HttpParams } from '@angular/common/http';
 import { ToastController } from '@ionic/angular';
 import * as io from 'socket.io-client';
 import { Device } from '@ionic-native/device/ngx';
-
-//import { HttpClient,HttpParams } from '@angular/http';
 import { Observable, of, Subject } from 'rxjs';
-
-// import { debounceTime } from 'rxjs/operators/debounceTime';
-// import { map } from 'rxjs/operators';
-// import 'rxjs/add/operator/catch';
 import { catchError, map, tap, timeout } from 'rxjs/operators';
 import { Hero } from '../../hero';
 import { HEROES } from '../../mock-heroes';
 import { MessageService } from '../message/message.service';
-
-// import { share } from "rxjs/operator/share";
-// import  "rxjs/operator/share";
-// import 'rxjs/add/observable/throw';
 
 @Injectable({
   providedIn: 'root'
@@ -31,6 +21,7 @@ export class HomeserviceService {
   public role = "";
   public CheckStoragestate = new Subject<string>();
   public nextAction = new Subject<string>();
+
 
   //public CheckStoragestate = new AsyncSubject();
   //let phone = localStorage.getItem("phone")
@@ -58,6 +49,14 @@ export class HomeserviceService {
 
           this.checkAuthData();
           this.initDeviceId();
+
+
+          // this.checkAuthNew().subscribe(data => {
+          //   console.log(data);
+          // });
+
+
+
 
    }
 
@@ -91,12 +90,18 @@ export class HomeserviceService {
     var email = localStorage.getItem("email");
     var role = localStorage.getItem("role");
 
+
     if(email){
       this.email = email;
-      //console.log(email);
+
     }
+
+    //console.log(role);
+
     if(role){
       this.role = role;
+
+
 
       setTimeout(() => {
         this.CheckStoragestate.next("checkmemory");
@@ -122,17 +127,25 @@ export class HomeserviceService {
       this.socket.emit('google_auth', data);
   }
 
-  checkAuth(): Observable<any>{
+
+  checkAuthNew(): Observable<any>{
 
     return new Observable<any>(observer => {
 
-        this.socket.on('google_auth', (data) => {
-            observer.next(data);
-        });
+        // this.socket.on('google_auth', (data) => {
+        //     observer.next(data);
+        // });
+
+        setInterval(() => {
+          observer.next("1");
+        },2000);
 
     });
 
   }
+
+  
+
 
 
   checkAuthData(){
@@ -145,6 +158,8 @@ export class HomeserviceService {
       var status = localStorage.getItem("status");
 
       var login = localStorage.getItem("login");
+
+
 
       //stopping next
       if(login){
@@ -161,6 +176,8 @@ export class HomeserviceService {
       if(status){
 
           if(status == "enable"){
+
+            //console.log(email);
 
                 var data = {
                   device:this.deviceid,

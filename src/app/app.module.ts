@@ -10,6 +10,7 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HomeserviceService } from './services/homeservice/homeservice.service';
 import { TranslateService } from './services/translate/translate.service';
 import { Device } from '@ionic-native/device/ngx';
 
@@ -41,6 +42,7 @@ import { HttpClientModule, HttpClient } from '@angular/common/http';
   providers: [
     StatusBar,
     SplashScreen,
+    HomeserviceService,
     TranslateService,
     Device,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }

@@ -15,10 +15,7 @@ export class FavoriteserviceService {
 
   }
 
-  checkFavorite(){
-    var data = {
-      email:this.homeservice.email
-    }
+  checkFavorite(data){
 
     this.socket.emit("checkFavorite",data);
 

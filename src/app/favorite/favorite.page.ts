@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable, of, Subject } from 'rxjs';
+import { HomeserviceService } from '../services/homeservice/homeservice.service';
 import { FavoriteserviceService } from '../services/favoriteservice/favoriteservice.service';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { TranslateService } from '../services/translate/translate.service';
@@ -14,6 +15,7 @@ export class FavoritePage implements OnInit {
   details: Observable<any>;
 
   constructor(
+    private homeservice:HomeserviceService,
     private favoriteservice:FavoriteserviceService,
     private router: Router,
     public translateservice:TranslateService
@@ -24,7 +26,12 @@ export class FavoritePage implements OnInit {
   }
 
   checkFavorite(){
-    this.favoriteservice.checkFavorite();
+
+    var data = {
+      email:this.homeservice.email
+    }
+
+    this.favoriteservice.checkFavorite(data);
   }
 
   listenFavorite$;

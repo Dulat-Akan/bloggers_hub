@@ -32,7 +32,13 @@ export class ContactsPage implements OnInit {
   }
 
   sendContactData(){
-      this.contactservice.sendContactData();
+
+      var data = {
+        deviceid:this.homeservice.deviceid,
+        email: this.homeservice.email
+      }
+
+      this.contactservice.sendContactData(data);
   }
 
   getContactData$;
