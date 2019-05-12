@@ -5,6 +5,7 @@ import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { TranslateService } from './services/translate/translate.service';
 import { Observable, Subject, interval } from 'rxjs';
+import * as $ from 'jquery';
 
 
 

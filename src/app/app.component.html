@@ -8,7 +8,7 @@
           <ion-row>
             <ion-col size="3">
 
-                <img src="../img/logo.png" alt="">
+                <img src="assets/icon/logo.png" alt="">
 
             </ion-col>
             <ion-col size="6">
@@ -37,7 +37,7 @@
 
             <ion-item class="logininput menu-background">
               <ion-label>
-                    <div (click)="triggerComponent()">{{language.registration}}</div>
+                    <ion-button (click)="triggerComponent()" >{{language.registration}}</ion-button>
               </ion-label>
               <i class="menu-size material-icons" slot="end">
                 supervised_user_circle
@@ -48,6 +48,9 @@
             </ion-item>
             <ion-item class="menu-background">
               <ion-label><ion-button (click)="autoClose()" routerLink="/favorite" >{{language.Favorite}}</ion-button></ion-label>
+            </ion-item>
+            <ion-item class="menu-background">
+              <ion-label><ion-button (click)="autoClose()" routerLink="/myrequest" >{{language.myrequest}}</ion-button></ion-label>
             </ion-item>
             <!-- <ion-item>
               <ion-label>Личный кабинет</ion-label>

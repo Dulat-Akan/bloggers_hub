@@ -1,35 +1,32 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable, of, Subject } from 'rxjs';
-import { FavoriteserviceService } from '../services/favoriteservice/favoriteservice.service';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { MyrequestService } from '../services/myrequest/myrequest.service';
 import { TranslateService } from '../services/translate/translate.service';
 
 @Component({
-  selector: 'app-favorite',
-  templateUrl: './favorite.page.html',
-  styleUrls: ['./favorite.page.scss'],
+  selector: 'app-myrequest',
+  templateUrl: './myrequest.page.html',
+  styleUrls: ['./myrequest.page.scss'],
 })
-export class FavoritePage implements OnInit {
+export class MyrequestPage implements OnInit {
 
   details: Observable<any>;
 
   constructor(
-    private favoriteservice:FavoriteserviceService,
+    private myrequestservice:MyrequestService,
     private router: Router,
     public translateservice:TranslateService
 
-  ) {
+  ) { }
 
-
+  checkMyrequest(){
+    this.myrequestservice.checkMyrequest();
   }
 
-  checkFavorite(){
-    this.favoriteservice.checkFavorite();
-  }
-
-  listenFavorite$;
-  listenFavorite(){
-    this.listenFavorite$ = this.favoriteservice.listenFavorite()
+  listenMyRequest$;
+  listenMyRequest(){
+    this.listenMyRequest$ = this.myrequestservice.listenMyRequest()
     .subscribe(data => {
       this.details = data.data;
     });
@@ -50,13 +47,13 @@ export class FavoritePage implements OnInit {
   }
 
   ngOnInit() {
-    this.listenFavorite();
-    this.checkFavorite();
+    this.listenMyRequest();
+    this.checkMyrequest();
     this.getTranslate();
   }
 
   ngOnDestroy(){
-    this.listenFavorite$.unsubscribe();
+    this.listenMyRequest$.unsubscribe();
     this.getTranslate$.unsubscribe();
   }
 

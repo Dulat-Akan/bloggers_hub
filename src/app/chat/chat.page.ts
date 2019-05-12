@@ -47,10 +47,13 @@ export class ChatPage implements OnInit {
       this.sendimage_url = this.chatservice.getSendImage();
    }
 
+   getMessage$;
+   getAllMessages$;
+   getTranslate$;
 
   listenMessages(){
 
-    this.chatservice.getMessage().subscribe(data => {
+    this.getMessage$ = this.chatservice.getMessage().subscribe(data => {
 
         this.chat_array.push({
           message:data.message,
@@ -99,7 +102,7 @@ export class ChatPage implements OnInit {
    }
 
    listenGetAllMessages(){
-     this.chatservice.getAllMessages().subscribe(data => {
+     this.getAllMessages$ = this.chatservice.getAllMessages().subscribe(data => {
         //console.log(data);
         this.chat_array = data.data;
 
@@ -147,7 +150,7 @@ export class ChatPage implements OnInit {
     language:Observable<any>;
 
     getTranslate(){
-      this.translateservice.getTranslate().subscribe(data => {
+      this.getTranslate$ = this.translateservice.getTranslate().subscribe(data => {
           this.language = data;
         });
     }
@@ -163,8 +166,12 @@ export class ChatPage implements OnInit {
     this.listenMutationObserver();
     this.getTranslate();
 
+  }
 
-
+  ngOnDestroy() {
+    this.getMessage$.unsubscribe();
+    this.getAllMessages$.unsubscribe();
+    this.getTranslate$.unsubscribe();
   }
 
 }

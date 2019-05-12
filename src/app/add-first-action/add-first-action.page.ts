@@ -64,9 +64,10 @@ export class AddFirstActionPage implements OnInit {
 
 
       }
+  getFormData$;
 
   getFormDataResponse(){
-    this.searchservice.getFormData()
+    this.getFormData$ = this.searchservice.getFormData()
     .subscribe(data => {
 
         if(data.status == "ok"){
@@ -105,8 +106,10 @@ export class AddFirstActionPage implements OnInit {
 
   cityListStatus = 0;
 
+  getCity$;
+
   checkCitySearchData(){
-      this.searchservice.getCity().subscribe(data => {
+      this.getCity$ = this.searchservice.getCity().subscribe(data => {
 
           //console.log(data.data);
           this.citylist = data.data;
@@ -171,9 +174,10 @@ export class AddFirstActionPage implements OnInit {
   }
 
   language:Observable<any>;
+  getTranslate$;
 
   getTranslate(){
-    this.translateservice.getTranslate().subscribe(data => {
+    this.getTranslate$ = this.translateservice.getTranslate().subscribe(data => {
         this.language = data;
       });
   }
@@ -187,6 +191,12 @@ export class AddFirstActionPage implements OnInit {
     this.getFormDataResponse();
     this.getTranslate();
 
+  }
+
+  ngOnDestroy(){
+    this.getFormData$.unsubscribe();
+    this.getCity$.unsubscribe();
+    this.getTranslate$.unsubscribe();
   }
 
 }

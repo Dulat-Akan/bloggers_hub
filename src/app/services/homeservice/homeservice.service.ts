@@ -118,6 +118,22 @@ export class HomeserviceService {
     }
   }
 
+  sendAuth(data){
+      this.socket.emit('google_auth', data);
+  }
+
+  checkAuth(): Observable<any>{
+
+    return new Observable<any>(observer => {
+
+        this.socket.on('google_auth', (data) => {
+            observer.next(data);
+        });
+
+    });
+
+  }
+
 
   checkAuthData(){
 
@@ -154,7 +170,8 @@ export class HomeserviceService {
                 }
 
                 this.sendAuth(data);
-                console.log("checking..");
+                //console.log("checking..");
+                //this.nextAction.next("selectrole");
 
                 localStorage.setItem("status","disable");
 
@@ -202,21 +219,7 @@ export class HomeserviceService {
 
   }
 
-  sendAuth(data){
-      this.socket.emit('google_auth', data);
-  }
 
-  checkAuth(): Observable<any>{
-
-    return new Observable<any>(observer => {
-
-        this.socket.on('google_auth', (data) => {
-            observer.next(data);
-        });
-
-    });
-
-  }
 
 
 

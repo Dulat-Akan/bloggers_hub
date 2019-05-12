@@ -40,5 +40,6 @@
   "registration":"регистрация",
   "Registration":"Регитрация",
   "SingIn":"Вход",
-  "Forgot_password":"Восстановление пароля"
+  "Forgot_password":"Восстановление пароля",
+  "myrequest":"Мои заявки"
 }

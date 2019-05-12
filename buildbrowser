@@ -1,0 +1,9 @@
+cd /Users/apple/myproject/shelter_front/platforms/browser/www
+sudo rm -r *
+cd /Users/apple/myproject/shelter_front
+ionic cordova build browser --prod
+cd /Users/apple/myproject/shelter_front/platforms/browser
+sudo rm -r www.zip
+zip -r www.zip www
+
+

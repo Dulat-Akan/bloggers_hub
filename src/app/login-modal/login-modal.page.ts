@@ -141,7 +141,7 @@ export class LoginModalPage implements OnInit {
      this.loginservice.listenLogin()
      .subscribe(data => {
 
-        console.log(data);//
+        //console.log(data);//
         if(data.status == "usernotfound"){
             this.homeservice.Toast("User not found..");
         }else if(data.status == "correct"){

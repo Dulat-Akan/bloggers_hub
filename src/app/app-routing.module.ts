@@ -32,7 +32,8 @@ const routes: Routes = [
   { path: 'selectrole', loadChildren: './selectrole/selectrole.module#SelectrolePageModule' },
   { path: 'selectlanguage', loadChildren: './selectlanguage/selectlanguage.module#SelectlanguagePageModule' },
   { path: 'slideshow', loadChildren: './slideshow/slideshow.module#SlideshowPageModule' },
-  {path: '**', redirectTo: '/'}
+  {path: '**', redirectTo: '/'},
+  { path: 'myrequest', loadChildren: './myrequest/myrequest.module#MyrequestPageModule' }
 
 
 ];

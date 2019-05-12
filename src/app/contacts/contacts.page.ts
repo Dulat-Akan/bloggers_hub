@@ -35,8 +35,10 @@ export class ContactsPage implements OnInit {
       this.contactservice.sendContactData();
   }
 
+  getContactData$;
+
   getContactData(){
-    this.contactservice.getContactData()
+    this.getContactData$ = this.contactservice.getContactData()
     .subscribe(data => {
         //console.log(data);
         this.contacts = data.data;
@@ -51,7 +53,14 @@ export class ContactsPage implements OnInit {
 
    routeToChat(contact){
 
-      localStorage.setItem("sendemail",contact.toEmail);
+      var myemail = this.homeservice.email;
+
+      if(contact.toEmail != myemail){
+        localStorage.setItem("sendemail",contact.toEmail);
+      }else{
+        localStorage.setItem("sendemail",contact.fromEmail);
+      }
+
       localStorage.setItem("sendimage_url",contact.image_url);
 
       setTimeout(() => {
@@ -60,8 +69,10 @@ export class ContactsPage implements OnInit {
 
    }
 
+   listenjoinUser$;
+
    listenjoinUser(){
-     this.onlineservice.listenjoinUser()
+     this.listenjoinUser$ = this.onlineservice.listenjoinUser()
      .subscribe(data => {
        //console.log(data);
 
@@ -75,8 +86,10 @@ export class ContactsPage implements OnInit {
      });
    }
 
+   router$;
+
    RouteListener(){
-     this.router.events
+     this.router$ = this.router.events
      .pipe(
          filter(
              ( event: NavigationEvent ) => {
@@ -90,10 +103,11 @@ export class ContactsPage implements OnInit {
      });
           }
 
+          getTranslate$;
           language:Observable<any>;
 
           getTranslate(){
-            this.translateservice.getTranslate().subscribe(data => {
+            this.getTranslate$ = this.translateservice.getTranslate().subscribe(data => {
                 this.language = data;
               });
           }
@@ -107,5 +121,13 @@ export class ContactsPage implements OnInit {
     this.getTranslate();
     //check Onlineuser status
   }
+
+  ngOnDestroy(){
+    this.getContactData$.unsubscribe();
+    this.listenjoinUser$.unsubscribe();
+    this.router$.unsubscribe();
+    this.getTranslate$.unsubscribe();
+  }
+
 
 }

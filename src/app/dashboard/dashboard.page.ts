@@ -236,7 +236,7 @@ loggingsearch;
 
           this.menu.close('first');
           //this.menu.open('first');
-          //console.log(data);
+
 
           if(data.user == "newuser"){
 
@@ -264,6 +264,8 @@ loggingsearch;
 
 
           }
+
+          //console.log(data);
 
         });
 
@@ -376,6 +378,8 @@ loggingsearch;
 
 
   ngOnInit() {
+
+    console.log("init");
 
     this.getAllData();//1
     this.checkPhoneMemory();//1
