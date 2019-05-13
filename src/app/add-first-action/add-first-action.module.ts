@@ -7,7 +7,7 @@ import { AddFirstActionPage } from './add-first-action.page';
 import { HomeserviceService } from '../services/homeservice/homeservice.service';
 import { SearchserviceService } from '../services/searchservice/searchservice.service';
 import { TranslateService } from '../services/translate/translate.service';
-
+import {MatButtonModule, MatCheckboxModule,MatInputModule,MatAutocompleteModule,MatDatepickerModule,MatNativeDateModule } from '@angular/material';
 
 const routes: Routes = [
   {
@@ -22,7 +22,10 @@ const routes: Routes = [
     FormsModule,
     ReactiveFormsModule,
     IonicModule,
-
+    MatInputModule,
+    MatAutocompleteModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
     RouterModule.forChild(routes)
   ],
   declarations: [AddFirstActionPage],

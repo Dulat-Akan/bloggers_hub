@@ -89,7 +89,7 @@ export class AddFirstActionPage implements OnInit {
 
 
   citylist: Observable<any>;
-  checkformnumber = 1;
+  //checkformnumber = 1;
 
   //searchone
   searchCity(search: string): void {
@@ -99,61 +99,29 @@ export class AddFirstActionPage implements OnInit {
       search:search
     }
 
-    this.checkformnumber = 1;
+    //this.checkformnumber = 1;
     this.searchservice.searchCity(data);
 
   }
 
-  cityListStatus = 0;
+  //cityListStatus = 0;
 
   getCity$;
 
   checkCitySearchData(){
       this.getCity$ = this.searchservice.getCity().subscribe(data => {
 
-          //console.log(data.data);
+
           this.citylist = data.data;
 
-          if(this.cityListStatus == 0){
-
-            if(this.checkformnumber == 1){
-
-              this.checkformnumber = 1;
-
-              setTimeout(() => {
-                this.checkformnumber = 5;
-              }, 6000);
-
-            }else if(this.checkformnumber == 2){
-
-              setTimeout(() => {
-                this.checkformnumber = 5;
-              }, 6000);
-
-            }
-
-            this.cityListStatus = 1;
-          }
-          //console.log(data);
 
       });
   }
 
-  clickCity(name){
-      if(this.checkformnumber == 1){
-        this.sendForm.controls['fromPlace'].setValue(name);
-      }else if(this.checkformnumber == 2){
-        this.sendForm.controls['toPlace'].setValue(name);
-      }
-      this.checkformnumber = 5;
-      this.cityListStatus = 1;
-  }
-  //searchone
-  //searchTo
+
 
   searchCityto(search: string): void {
 
-    this.checkformnumber = 2;
 
     var data = {
       deviceid:this.homeservice.deviceid,

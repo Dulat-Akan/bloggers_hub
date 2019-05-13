@@ -409,7 +409,7 @@ loggingsearch;
     this.ListenerNextAction();//action listener
     this.UpdateDataThroughInterval();
     this.listenAuth();
-    //this.SelectrolePageModal();
+  //  this.LoginModal();
   }
 
 

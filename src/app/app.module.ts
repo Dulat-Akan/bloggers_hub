@@ -18,6 +18,8 @@ import { OnlineusersService } from './services/onlineusers/onlineusers.service';
 import { AuthService } from './services/auth/auth.service';
 import { NotificationService } from './services/notification/notification.service';
 import { SetroleserviceService } from './services/setroleservice/setroleservice.service';
+import {MatButtonModule, MatCheckboxModule,MatInputModule,MatAutocompleteModule,MatDatepickerModule,MatNativeDateModule } from '@angular/material';
+
 
 
 
@@ -41,6 +43,10 @@ import { HttpClientModule, HttpClient } from '@angular/common/http';
     FormsModule,
     HttpClientModule,
     ReactiveFormsModule,
+    MatInputModule,
+    MatAutocompleteModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
 
 
   ],

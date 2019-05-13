@@ -11,37 +11,50 @@
 
   <form [formGroup]="sendForm" (ngSubmit)="onSubmit()">
 
-  <ion-item>
-      <ion-label position="stacked">{{language.from}}</ion-label>
-      <ion-input type="text" placeholder="from city" formControlName="fromPlace" #searchBox id="search-box" (input)="searchCity(searchBox.value)"  required ></ion-input>
+
+
+  <ion-item >
+    <mat-form-field class="mn5 example-full-width">
+      <input type="text" placeholder="{{language.from}}" aria-label="Number" matInput formControlName="fromPlace" [matAutocomplete]="auto" #searchBox id="search-box" (input)="searchCity(searchBox.value)"  required>
+      <mat-autocomplete #auto="matAutocomplete">
+        <mat-option *ngFor="let city of citylist" [value]="city.Name">
+          {{city.Name}}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
   </ion-item>
 
-  <ion-list class="hidecitylist"   *ngFor="let city of citylist" (click)="clickCity(city.Name)" >
-          <ion-item *ngIf="checkformnumber == 1" color='primary'>
-            <ion-label>{{city.Name}}</ion-label>
-          </ion-item>
-  </ion-list>
 
 
-
-  <ion-item>
-      <ion-label position="stacked">{{language.to}}</ion-label>
-      <ion-input type="text" placeholder="to city" formControlName="toPlace" #searchBoxtwo id="search-boxtwo" (input)="searchCityto(searchBoxtwo.value)" required></ion-input>
+  <ion-item >
+    <mat-form-field class="example-full-width">
+      <input type="text" placeholder="{{language.to}}" aria-label="Number" matInput formControlName="toPlace" [matAutocomplete]="auto" #searchBoxtwo id="search-boxtwo" (input)="searchCityto(searchBoxtwo.value)"  required>
+      <mat-autocomplete #auto="matAutocomplete">
+        <mat-option *ngFor="let city of citylist" [value]="city.Name">
+          {{city.Name}}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
   </ion-item>
-
-  <ion-list class="hidecitylistto"  *ngFor="let city of citylist" (click)="clickCity(city.Name)" >
-          <ion-item color='primary' *ngIf="checkformnumber == 2">
-            <ion-label>{{city.Name}}</ion-label>
-          </ion-item>
-  </ion-list>
 
   <!-- <ion-item>
       <ion-label position="stacked">Date</ion-label>
       <ion-input type="text" formControlName="date" required></ion-input>
   </ion-item> -->
-  <ion-item>
+
+  <!-- <ion-item>
     <ion-label position="stacked">{{language.date}}</ion-label>
     <ion-input type="date" formControlName="date" required></ion-input>
+  </ion-item> -->
+
+  <ion-item>
+
+    <mat-form-field class="example-full-width">
+      <input matInput [matDatepicker]="picker" placeholder="{{language.date}}" formControlName="date" required>
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
   </ion-item>
 
   <ion-item>

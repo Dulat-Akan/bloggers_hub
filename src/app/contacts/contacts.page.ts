@@ -50,6 +50,7 @@ export class ContactsPage implements OnInit {
         this.contacts = data.data;
         this.data = data.data;
     });
+
   }
 
   trackByFn(index,item){
@@ -125,6 +126,7 @@ export class ContactsPage implements OnInit {
     this.listenjoinUser();
     this.RouteListener();
     this.getTranslate();
+
     //check Onlineuser status
   }
 
