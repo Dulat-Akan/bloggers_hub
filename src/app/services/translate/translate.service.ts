@@ -3,9 +3,11 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, of, Subject } from 'rxjs';
 
 
-@Injectable({
-  providedIn: 'root'
-})
+// @Injectable({
+//   providedIn: 'root'
+// })
+@Injectable()
+
 export class TranslateService {
 
   constructor(private http: HttpClient) {
@@ -17,7 +19,9 @@ export class TranslateService {
       localStorage.setItem("language","en");
     }
 
-    this.setLanguage();
+    //console.log(enlang);
+
+    //this.setLanguage();
     //setDefault language
 
   }

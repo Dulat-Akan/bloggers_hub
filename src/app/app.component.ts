@@ -3,7 +3,6 @@ import { Component } from '@angular/core';
 import { Platform,ModalController,AlertController,MenuController } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
-import { HomeserviceService } from './services/homeservice/homeservice.service';
 import { TranslateService } from './services/translate/translate.service';
 import { Observable, Subject, interval } from 'rxjs';
 import * as $ from 'jquery';
@@ -38,7 +37,6 @@ export class AppComponent {
   ];
 
   constructor(
-    public homeservice:HomeserviceService,
     private platform: Platform,
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
@@ -63,7 +61,6 @@ export class AppComponent {
   }
 
   triggerComponent(){
-
     $("#customBtn").trigger('click');
   }
 

@@ -10,9 +10,14 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HomeserviceService } from './services/homeservice/homeservice.service';
 import { TranslateService } from './services/translate/translate.service';
 import { Device } from '@ionic-native/device/ngx';
+import { HomeserviceService } from './services/homeservice/homeservice.service';
+import { ContactserviceService } from './services/contactservice/contactservice.service';
+import { OnlineusersService } from './services/onlineusers/onlineusers.service';
+import { AuthService } from './services/auth/auth.service';
+import { NotificationService } from './services/notification/notification.service';
+import { SetroleserviceService } from './services/setroleservice/setroleservice.service';
 
 
 
@@ -42,9 +47,14 @@ import { HttpClientModule, HttpClient } from '@angular/common/http';
   providers: [
     StatusBar,
     SplashScreen,
-    HomeserviceService,
     TranslateService,
     Device,
+    HomeserviceService,
+    ContactserviceService,
+    OnlineusersService,
+    AuthService,
+    NotificationService,
+    SetroleserviceService,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]

@@ -33,9 +33,10 @@ export class NotificationService {
   }
 
   checkNewMessagesinTime(){
-    setInterval(() => {
+
+    this.homeservice.timer300000s$.subscribe(val => {
       this.checkNotificationsMessages(); //check every 5 min
-    }, 300000);
+    });
   }
 
 

@@ -14,11 +14,12 @@ import { SelectrolePage } from '../selectrole/selectrole.page';
 import { SelectlanguagePage } from '../selectlanguage/selectlanguage.page';
 import { SlideshowPage } from '../slideshow/slideshow.page';
 
-import { HomeserviceService } from '../services/homeservice/homeservice.service';
-import { OnlineusersService } from '../services/onlineusers/onlineusers.service';
-import { NotificationService } from '../services/notification/notification.service';
-import { SetroleserviceService } from '../services/setroleservice/setroleservice.service';
-import { TranslateService } from '../services/translate/translate.service';
+//import { HomeserviceService } from '../services/homeservice/homeservice.service';
+// import { OnlineusersService } from '../services/onlineusers/onlineusers.service';
+// import { NotificationService } from '../services/notification/notification.service';
+// import { SetroleserviceService } from '../services/setroleservice/setroleservice.service';
+// import { TranslateService } from '../services/translate/translate.service';
+// import { AuthService } from '../services/auth/auth.service';
 import {MatButtonModule, MatCheckboxModule} from '@angular/material';
 import { MatTabsModule } from '@angular/material';
 
@@ -38,7 +39,6 @@ const routes: Routes = [
     MatButtonModule,
     MatCheckboxModule,
     MatTabsModule,
-
     RouterModule.forChild(routes)
   ],
   declarations: [
@@ -59,11 +59,12 @@ const routes: Routes = [
     SlideshowPage
   ],
   providers: [
-    HomeserviceService, // <-- List providers here
-    OnlineusersService,
-    NotificationService,
-    SetroleserviceService,
-    TranslateService
+    //HomeserviceService, // <-- List providers here
+  //  OnlineusersService,
+  //  NotificationService,
+    //SetroleserviceService,
+    //TranslateService,
+  //  AuthService
   ]
 })
 export class DashboardPageModule {}

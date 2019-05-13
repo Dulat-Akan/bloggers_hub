@@ -28,10 +28,10 @@ const routes: Routes = [
   ],
   declarations: [ContactsPage],
   providers: [
-    HomeserviceService, // <-- List providers here
-    ContactserviceService,
-    OnlineusersService,
-    TranslateService
+  //  HomeserviceService, // <-- List providers here
+    //ContactserviceService,
+    //OnlineusersService,
+    //TranslateService
   ]
 })
 export class ContactsPageModule {}

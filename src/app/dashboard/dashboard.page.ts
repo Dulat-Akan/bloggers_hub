@@ -7,6 +7,7 @@ import { OnlineusersService } from '../services/onlineusers/onlineusers.service'
 import { NotificationService } from '../services/notification/notification.service';
 import { TranslateService } from '../services/translate/translate.service';
 import { SetroleserviceService } from '../services/setroleservice/setroleservice.service';
+import { AuthService } from '../services/auth/auth.service';
 
 import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
@@ -16,9 +17,6 @@ import { PhonenumberPage } from '../phonenumber/phonenumber.page';
 import { SelectrolePage } from '../selectrole/selectrole.page';
 import { SelectlanguagePage } from '../selectlanguage/selectlanguage.page';
 import { SlideshowPage } from '../slideshow/slideshow.page';
-
-
-
 
 
 import * as $ from 'jquery';
@@ -47,7 +45,8 @@ export class DashboardPage implements OnInit {
               private modalCtrl:ModalController,
               public alertController:AlertController,
               private menu: MenuController,
-              private router: Router
+              private router: Router,
+              public authservice:AuthService,
             ){
         this.deviceid = this.homeservice.deviceid;
   }
@@ -173,13 +172,12 @@ loggingsearch;
     this.homeservice.sendRequest(data);
   }
 
-  getAllData(){
-      //const id = +this.route.snapshot.paramMap.get('id');
+  listengetAllData(){
 
       this.homeservice.getAllData()
         .subscribe(data => {
           this.details = data.sdata;
-          //console.log(data.userdata);
+          //console.log(data.sdata);
           //set User Profile
             if(data.userdata.length > 0){
 
@@ -210,9 +208,13 @@ loggingsearch;
         });
   }
 
-  checkPhoneMemory(){
+
+
+  listenPhoneMemory(){
 
     this.homeservice.CheckStoragestate.subscribe(data => {
+
+      //console.log(data);
 
         this.loadAllData(); //send Request after load memory
         this.permitForUpdating = 1;
@@ -228,56 +230,76 @@ loggingsearch;
 
 //google auth
 
+  public checkAuthNew$:Observable<any>;
 
   listenAuth(){
 
-      this.homeservice.checkAuthNew()
-        .subscribe(data => {
+          this.checkAuthNew$ = this.authservice.checkAuthNew();
 
-          console.log(data);
-          this.menu.close('first');
-          //this.menu.open('first');
+          this.checkAuthNew$.subscribe(data => {
 
-          if(data.user == "newuser"){
+              if(data.user == "newuser"){
 
-            this.homeservice.email = data.email;
-            localStorage.setItem("email",data.email);
-            //this.presentAlert();
-            this.SelectrolePageModal();
+                this.homeservice.email = data.email;
+                localStorage.setItem("email",data.email);
+                this.SelectrolePageModal();
 
-          }else if(data.user == "olduser"){
+              }else if(data.user == "olduser"){
 
-            this.homeservice.email = data.email;
-            localStorage.setItem("email",data.email);
+                this.homeservice.email = data.email;
+                localStorage.setItem("email",data.email);
 
-            if(data.role == 0){
-              //this.presentAlert();
-              this.SelectrolePageModal();
-            }else{
+                if(data.role == 0){
+                  this.SelectrolePageModal();
+                }else{
+                  this.homeservice.role = data.role;
+                  localStorage.setItem("role",data.role);
+                  this.loadAllData();
+                  this.permitForUpdating = 1;
+                }
 
-              this.homeservice.role = data.role;
-              localStorage.setItem("role",data.role);
+              }
 
-              this.loadAllData();
-              this.permitForUpdating = 1;
-            }
+          });
+
+  }
 
 
-          }
+  newFunc(data){
+    console.log(data);
+    this.menu.close('first');
+    //this.menu.open('first');
 
-        });
+    if(data.user == "newuser"){
 
+      this.homeservice.email = data.email;
+      localStorage.setItem("email",data.email);
+      //this.presentAlert();
+      this.SelectrolePageModal();
+
+    }else if(data.user == "olduser"){
+
+      this.homeservice.email = data.email;
+      localStorage.setItem("email",data.email);
+
+      if(data.role == 0){
+        //this.presentAlert();
+        this.SelectrolePageModal();
+      }else{
+
+        this.homeservice.role = data.role;
+        localStorage.setItem("role",data.role);
+
+        this.loadAllData();
+        this.permitForUpdating = 1;
+      }
+
+
+    }
   }
 //google auth
 
-  trackByFn(index,item){
-      return item.id;
-   }
 
-
-  detailRoute(id){
-      this.router.navigate(['/detail/' + id]);
-  }
 
 
   listenNotificationsMessages(){
@@ -321,7 +343,7 @@ loggingsearch;
     this.homeservice.nextAction
     .subscribe(data => {
 
-      console.log(data);
+      //console.log(data);
         if(data == "1"){
           this.SlideShowModal();
         }else if(data == "2"){
@@ -334,49 +356,66 @@ loggingsearch;
           this.loadAllData();
         }
 
-
         this.translateservice.setLanguage();
     });
   }
 
 
   UpdateDataThroughInterval(){
-      setInterval(() => {
 
-        if(this.permitForUpdating == 1){
-          if(this.fixedUpdating == 1){
-            //this.just update all data
-            this.loadAllData();
-            //console.log("alldata");
-          }else if(this.fixedUpdating == 0){
-            //this.working for update search data
-            //console.log("logsearch");
-            this.homeservice.searchData(this.loggingsearch);
-          }
+    this.homeservice.timer10s$.subscribe(val => {
+
+      if(this.permitForUpdating == 1){
+        if(this.fixedUpdating == 1){
+          //this.just update all data
+          this.loadAllData();
+          //console.log("alldata");
+        }else if(this.fixedUpdating == 0){
+          //this.working for update search data
+          //console.log("logsearch");
+          this.homeservice.searchData(this.loggingsearch);
         }
+      }
 
-      }, 10000);
+    });
+
+  }
+
+  trackByFn(index,item){
+      return item.id;
+   }
+
+
+  detailRoute(id){
+      this.router.navigate(['/detail/' + id]);
+  }
+
+  initializeMain(){
+    this.listengetAllData();//1
+    this.listenPhoneMemory();//1
+
+    this.checkInputSearchData();//2
+    this.getSearchUsersData();//2
+
+
+    this.roleListener();//4
+
+    this.listenNotificationsMessages();
+
+    this.checkFirstAuth();//check first auth
+
+    this.getTranslate();
+    this.translateservice.setLanguage();
+    this.ListenerNextAction();//action listener
+    this.UpdateDataThroughInterval();
+    this.listenAuth();
+    //this.SelectrolePageModal();
   }
 
 
   ngOnInit() {
 
-    //console.log("init");
-
-    this.getAllData();//1
-    this.checkPhoneMemory();//1
-
-    this.checkInputSearchData();//2
-    this.getSearchUsersData();//2
-
-    this.listenAuth();//3
-    this.roleListener();//4
-
-    this.listenNotificationsMessages();
-    //this.checkFirstAuth();//check first auth
-    this.getTranslate();
-    this.ListenerNextAction();//action listener
-    this.UpdateDataThroughInterval();
+    this.initializeMain();
 
   }
 

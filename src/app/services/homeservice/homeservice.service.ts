@@ -3,15 +3,16 @@ import { HttpClient,HttpParams } from '@angular/common/http';
 import { ToastController } from '@ionic/angular';
 import * as io from 'socket.io-client';
 import { Device } from '@ionic-native/device/ngx';
-import { Observable, of, Subject } from 'rxjs';
-import { catchError, map, tap, timeout } from 'rxjs/operators';
-import { Hero } from '../../hero';
-import { HEROES } from '../../mock-heroes';
+import { Observable, of,interval, Subject } from 'rxjs';
+// import { catchError, map, tap, timeout } from 'rxjs/operators';
+// import { AuthService } from '../auth/auth.service';
 import { MessageService } from '../message/message.service';
 
-@Injectable({
-  providedIn: 'root'
-})
+
+// @Injectable({
+//   providedIn: 'root'
+// })
+@Injectable()
 
 export class HomeserviceService {
 
@@ -21,18 +22,13 @@ export class HomeserviceService {
   public role = "";
   public CheckStoragestate = new Subject<string>();
   public nextAction = new Subject<string>();
+  public timer3s = new Subject<any>();
+  public timer10s$ = new Subject<any>();
+  public timer300000s$ = new Subject<any>();
 
 
-  //public CheckStoragestate = new AsyncSubject();
-  //let phone = localStorage.getItem("phone")
-  baseurl:string = "http://localhost:8100";
-
-  // const httpOptions = {
-  //   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-  // };
-
-  private url = 'http://localhost:3002';
-  //private url = 'http://kazpoisk.kz:3002';
+  //private url = 'http://localhost:3002';
+  private url = 'http://kazpoisk.kz:3002';
   public socket;
 
 
@@ -43,20 +39,10 @@ export class HomeserviceService {
     private device: Device
   ) {
           this.initSocket();
-          this.reConnect();
-
+          //this.reConnect();
+          this.initTimers();
           this.checkStorage();
-
-          this.checkAuthData();
           this.initDeviceId();
-
-
-          // this.checkAuthNew().subscribe(data => {
-          //   console.log(data);
-          // });
-
-
-
 
    }
 
@@ -83,6 +69,30 @@ export class HomeserviceService {
    }
 
 
+   initTimers(){
+
+      const source = interval(3000);
+      const source10s = interval(10000);
+      const source300000s = interval(300000);
+
+      source.subscribe(val => {
+         this.timer3s.next(val);
+       });
+      source10s.subscribe(val => {
+         this.timer10s$.next(val);
+       });
+      source300000s.subscribe(val => {
+         this.timer300000s$.next(val);
+       });
+
+
+
+
+   }
+
+
+
+
 
 
   checkStorage(){
@@ -101,11 +111,10 @@ export class HomeserviceService {
     if(role){
       this.role = role;
 
-
-
       setTimeout(() => {
+        //console.log("1");
         this.CheckStoragestate.next("checkmemory");
-      }, 100);
+      }, 200);
 
       //console.log(role);
     }
@@ -123,81 +132,13 @@ export class HomeserviceService {
     }
   }
 
-  sendAuth(data){
-      this.socket.emit('google_auth', data);
-  }
-
-
-  checkAuthNew(): Observable<any>{
-
-    return new Observable<any>(observer => {
-
-        // this.socket.on('google_auth', (data) => {
-        //     observer.next(data);
-        // });
-
-        setInterval(() => {
-          observer.next("1");
-        },2000);
-
-    });
-
-  }
-
-  
 
 
 
-  checkAuthData(){
-
-    setInterval(() => {
-
-      var email = localStorage.getItem("email");
-      var name = localStorage.getItem("name");
-      var image_url = localStorage.getItem("image_url");
-      var status = localStorage.getItem("status");
-
-      var login = localStorage.getItem("login");
 
 
 
-      //stopping next
-      if(login){
-        if(login == "disable"){
 
-        }else{
-          return false;
-        }
-      }else{
-        return false;
-      }
-      //stopping next
-
-      if(status){
-
-          if(status == "enable"){
-
-            //console.log(email);
-
-                var data = {
-                  device:this.deviceid,
-                  email:email,
-                  name:name,
-                  image_url:image_url
-                }
-
-                this.sendAuth(data);
-                //console.log("checking..");
-                //this.nextAction.next("selectrole");
-
-                localStorage.setItem("status","disable");
-
-          }
-      }
-
-    }, 1000);
-
-  }
 
 
   searchData(data){
@@ -220,6 +161,7 @@ export class HomeserviceService {
 
   sendRequest(data){
 
+    //console.log(data);
     this.socket.emit('getAllData', data);
 
   }
@@ -249,65 +191,33 @@ export class HomeserviceService {
 
 
 
-  getHeroes(): Observable<Hero[]> {
-
-    this.messageService.add('HeroService: fetched heroes');
-
-    return of(HEROES);
-  }
-
-  // getHeroes (): Observable<Hero[]> {
-  //   return this.http.get<Hero[]>(this.heroesUrl)
-  //     .pipe(
-  //       tap(_ => this.log('fetched heroes')),
-  //       catchError(this.handleError<Hero[]>('getHeroes', []))
-  //     );
-  // }
-
-  // getHero(id: number): Observable<Hero> {
+  // sendData(title:string):Observable<any>{
   //
-  //   this.messageService.add(`HeroService: fetched hero id=${id}`);
-  //   return of(HEROES.find(hero => hero.id === id));
-  // }
-
-
-  // updateHero(value:string): Observable<any>{
   //
-  // }
-
-  // return this.http.get<Hero>(url).pipe(
-  //   tap(_ => this.log(`fetched hero id=${id}`)),
-  //   catchError(this.handleError<Hero>(`getHero id=${id}`))
-  // );
-
-
-  sendData(title:string):Observable<any>{
-
-
-    return this.http.get('http://www.test.com&s=${stringvalue}')
-    .pipe(
-      map(results => {
-        console.log('logrequest' + results);
-        return results['key'];
-      })
-    );
-
-  };
-
-  sendRegistration(phone:string,email:string,password:string):Observable<any>{
-
-
-    let json = {
-      phone: phone,
-      email:email,
-      password:password
-    }
-
-    console.log(json);
-
-    return this.http.post(this.baseurl + "/api/registration", json);
-
-  };
+  //   return this.http.get('http://www.test.com&s=${stringvalue}')
+  //   .pipe(
+  //     map(results => {
+  //       console.log('logrequest' + results);
+  //       return results['key'];
+  //     })
+  //   );
+  //
+  // };
+  //
+  // sendRegistration(phone:string,email:string,password:string):Observable<any>{
+  //
+  //  baseurl:string = "http://localhost:8100";
+  //   let json = {
+  //     phone: phone,
+  //     email:email,
+  //     password:password
+  //   }
+  //
+  //   console.log(json);
+  //
+  //   return this.http.post(this.baseurl + "/api/registration", json);
+  //
+  // };
 
   generateRandomNumber(min_value , max_value)
   {
