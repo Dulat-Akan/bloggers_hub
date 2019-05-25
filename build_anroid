@@ -1,0 +1,16 @@
+sudo rm -r app-release.apk
+sudo mkdir temp
+cd www/
+sudo cp -R img assets cordova-js-src plugins svg ../temp/.
+sudo rm -r *
+cd ..
+cd temp/
+sudo cp -R * ../www/.
+cd ..
+sudo rm -r temp
+cd www/
+sudo chmod -R 777 assets cordova-js-src plugins svg
+cd ..
+ionic cordova build --release android
+jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore release.keystore /Users/apple/myproject/shelter_front/platforms/android/app/build/outputs/apk/release/app-release-unsigned.apk nobody
+/Volumes/HDD/sdk/build-tools/28.0.3/zipalign -v 4 /Users/apple/myproject/shelter_front/platforms/android/app/build/outputs/apk/release/app-release-unsigned.apk ./app-release.apk

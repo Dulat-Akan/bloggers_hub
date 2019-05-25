@@ -19,7 +19,7 @@ import { AuthService } from './services/auth/auth.service';
 import { NotificationService } from './services/notification/notification.service';
 import { SetroleserviceService } from './services/setroleservice/setroleservice.service';
 import {MatButtonModule, MatCheckboxModule,MatInputModule,MatAutocompleteModule,MatDatepickerModule,MatNativeDateModule } from '@angular/material';
-
+import { GooglePlus } from '@ionic-native/google-plus/ngx';
 
 
 
@@ -61,6 +61,7 @@ import { HttpClientModule, HttpClient } from '@angular/common/http';
     AuthService,
     NotificationService,
     SetroleserviceService,
+    GooglePlus,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]

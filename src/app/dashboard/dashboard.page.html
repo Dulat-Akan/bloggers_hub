@@ -12,6 +12,7 @@
 <div class="globtwo" *ngIf="language">
 
   <ul class="myhidescrolledtwo" >
+    
     <li class="listv" *ngFor="let detail of details;index as i;trackBy: trackByFn;" (click)="detailRoute(detail.id)">
       <div class="leftBlock">
 

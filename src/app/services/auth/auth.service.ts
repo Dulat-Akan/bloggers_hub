@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { HomeserviceService } from '../homeservice/homeservice.service';
 import { Observable, of, Subject } from 'rxjs';
 
+
+
 // @Injectable({
 //   providedIn: 'root'
 // })
@@ -14,6 +16,7 @@ export class AuthService {
 
     this.socket = this.homeservice.socket;
     this.checkAuthData();
+
 
     // this.checkAuthNew().subscribe(data => {
     //     console.log(data);

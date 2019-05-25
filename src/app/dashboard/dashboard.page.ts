@@ -19,6 +19,7 @@ import { SelectlanguagePage } from '../selectlanguage/selectlanguage.page';
 import { SlideshowPage } from '../slideshow/slideshow.page';
 
 
+
 import * as $ from 'jquery';
 
 //declare function TransferAuth(data):any;
@@ -46,7 +47,7 @@ export class DashboardPage implements OnInit {
               public alertController:AlertController,
               private menu: MenuController,
               private router: Router,
-              public authservice:AuthService,
+              public authservice:AuthService
             ){
         this.deviceid = this.homeservice.deviceid;
   }
@@ -411,6 +412,7 @@ loggingsearch;
     this.listenAuth();
   //  this.LoginModal();
   }
+
 
 
   ngOnInit() {

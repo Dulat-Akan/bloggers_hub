@@ -6,6 +6,8 @@ import { HomeserviceService } from '../services/homeservice/homeservice.service'
 import * as $ from 'jquery';
 import { Observable, Subject, interval } from 'rxjs';
 import { FormBuilder, Validators, FormArray,FormGroup, FormControl} from '@angular/forms';
+import { GooglePlus } from '@ionic-native/google-plus/ngx';
+import { Platform } from '@ionic/angular';
 
 @Component({
   selector: 'app-login-modal',
@@ -21,7 +23,9 @@ export class LoginModalPage implements OnInit {
     public modalCtrl:ModalController,
     public navParams:NavParams,
     public translateservice:TranslateService,
-    public homeservice:HomeserviceService
+    public homeservice:HomeserviceService,
+    private googlePlus: GooglePlus,
+    public plt: Platform
   ) {
 
 
@@ -193,7 +197,7 @@ export class LoginModalPage implements OnInit {
    }
 
 
-
+  browser = true;
 
 
   trigger(){
@@ -210,6 +214,51 @@ export class LoginModalPage implements OnInit {
     }
 
   }
+
+
+
+  loginApp(){
+
+
+      this.googlePlus.login({
+        'webClientId': '818015353741-m97ohmk6tpqf067gcgff0kb3i6t4k8go.apps.googleusercontent.com',
+      })
+      .then( r => {
+
+        var response = JSON.stringify(r);
+
+        var email = JSON.parse(response).email;
+        var name = JSON.parse(response).givenName;
+        var image_url = JSON.parse(response).imageUrl;
+
+        localStorage.setItem("email",email);
+        localStorage.setItem("name",name);
+        localStorage.setItem("image_url",image_url);
+        localStorage.setItem("status","enable");
+        localStorage.setItem("login","enable");
+
+        // console.log(email);
+        // console.log(name);
+        // console.log(image_url);
+
+      })
+      .catch( e => {
+        console.log('error => '+ JSON.stringify(e) );
+      });
+
+
+  }
+
+  checkPlatforms(){
+    if(this.plt.is('android')){
+      this.browser = false;
+    }
+
+    if(this.plt.is('ios')){
+      this.browser = false;
+    }
+  }
+
 
   dismiss(){
     this.modalCtrl.dismiss();
@@ -238,6 +287,8 @@ export class LoginModalPage implements OnInit {
     this.listenRegistration();
     this.listenLogin();
     this.listenForgot();
+    this.checkPlatforms();
+
 
   }
 

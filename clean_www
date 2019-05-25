@@ -1,0 +1,12 @@
+sudo mkdir temp
+cd www/
+sudo cp -R img assets cordova-js-src plugins svg ../temp/.
+sudo rm -r *
+cd ..
+cd temp/
+sudo cp -R * ../www/.
+cd ..
+sudo rm -r temp
+cd www/
+sudo chmod -R 777 assets cordova-js-src plugins svg
+cd ..
