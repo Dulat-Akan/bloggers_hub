@@ -1,85 +1,72 @@
 <ion-header>
   <ion-toolbar color="primary">
-    <ion-buttons slot="start">
+    <!-- <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
-    </ion-buttons>
+    </ion-buttons> -->
     <ion-title *ngIf="language">{{language.create}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content *ngIf="language">
+<ion-content *ngIf="language" >
 
   <form [formGroup]="sendForm" (ngSubmit)="onSubmit()">
 
 
-
-  <ion-item >
-    <mat-form-field class="mn5 example-full-width">
-      <input type="text" placeholder="{{language.from}}" aria-label="Number" matInput formControlName="fromPlace" [matAutocomplete]="auto" #searchBox id="search-box" (input)="searchCity(searchBox.value)"  required>
-      <mat-autocomplete #auto="matAutocomplete">
-        <mat-option *ngFor="let city of citylist" [value]="city.Name">
-          {{city.Name}}
-        </mat-option>
-      </mat-autocomplete>
-    </mat-form-field>
+  <ion-item>
+      <ion-label position="stacked">{{language.url}}</ion-label>
+      <ion-input type="url" pattern="http.*" size="30" formControlName="url" placeholder="{{language.url}}" required></ion-input>
   </ion-item>
 
-
-
-  <ion-item >
-    <mat-form-field class="example-full-width">
-      <input type="text" placeholder="{{language.to}}" aria-label="Number" matInput formControlName="toPlace" [matAutocomplete]="auto" #searchBoxtwo id="search-boxtwo" (input)="searchCityto(searchBoxtwo.value)"  required>
-      <mat-autocomplete #auto="matAutocomplete">
-        <mat-option *ngFor="let city of citylist" [value]="city.Name">
-          {{city.Name}}
-        </mat-option>
-      </mat-autocomplete>
-    </mat-form-field>
+  <ion-item>
+    <ion-label position="stacked">{{language.Description}}</ion-label>
+    <ion-textarea type="text" formControlName="description" placeholder="you description,example box size..etc.." required rows="4" cols="20"></ion-textarea>
   </ion-item>
 
-  <!-- <ion-item>
-      <ion-label position="stacked">Date</ion-label>
-      <ion-input type="text" formControlName="date" required></ion-input>
-  </ion-item> -->
-
-  <!-- <ion-item>
-    <ion-label position="stacked">{{language.date}}</ion-label>
-    <ion-input type="date" formControlName="date" required></ion-input>
-  </ion-item> -->
+  <ion-item>
+    <ion-label position="stacked">{{language.currentLocation}}</ion-label>
+    <ion-input type="text" (ionFocus)="goToMap()" formControlName="location"  required></ion-input>
+  </ion-item>
 
   <ion-item>
 
-    <mat-form-field class="example-full-width">
-      <input matInput [matDatepicker]="picker" placeholder="{{language.date}}" formControlName="date" required>
-      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-      <mat-datepicker #picker></mat-datepicker>
-    </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <input matInput [matDatepicker]="picker" placeholder="{{language.date}}" formControlName="date" required>
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
 
   </ion-item>
 
   <ion-item>
     <ion-label position="stacked">{{language.time}}</ion-label>
-    <ion-datetime displayFormat="H:mm" placeholder="desired started time format 24h" formControlName="time" required></ion-datetime>
+    <ion-datetime displayFormat="H:mm"  placeholder="desired started time format 24h" formControlName="time" required></ion-datetime>
   </ion-item>
 
-  <ion-item>
-      <ion-label position="stacked">{{language.desired}}</ion-label>
-      <ion-input type="number" formControlName="amount" placeholder="you desired amount $" required></ion-input>
-  </ion-item>
-  <ion-item>
-      <ion-label position="stacked">{{language.Weight}}</ion-label>
-      <ion-input type="number" formControlName="weight" placeholder="Weight" required></ion-input>
-  </ion-item>
-  <ion-item>
-    <ion-label position="stacked">{{language.Description}}</ion-label>
-    <!-- <ion-input type="text" formControlName="description" required></ion-input> -->
-    <ion-textarea type="text" formControlName="description" placeholder="you description,example box size..etc.." required rows="4" cols="20"></ion-textarea>
-  </ion-item>
+  <ion-item-group>
+
+
+    <ion-item>
+      <ion-label position="stacked">{{language.currentSum}}</ion-label>
+      <ion-input type="number" formControlName="sum" disabled value="1"></ion-input>
+    </ion-item>
+
+  </ion-item-group>
+
+  <ion-radio-group>
+    <ion-item-divider>
+      <ion-label class="blackM">{{language.countvideo}}</ion-label>
+    </ion-item-divider>
+    <ion-item>
+      <ion-label>{{peoplecount}}{{ language.fivevideo}}</ion-label>
+      <ion-radio slot="start"    (ionSelect)="VideoSelect(b.value)" #b color="tertiary" value="5" checked></ion-radio>
+    </ion-item>
+  </ion-radio-group>
+
+
+
+
 
   <ion-button type="submit" *ngIf="checksendForm == 0" [disabled]="!sendForm.valid" expand="block" >{{language.Create}}</ion-button>
-
-
-<!-- formGroupName="address" -->
 
     </form>
 

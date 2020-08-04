@@ -73,6 +73,7 @@ export class PhonenumberPage implements OnInit {
       this.phonenumberservice.listenPhone()
       .subscribe(data => {
         if(data.status == "ok"){
+          this.homeservice.nextAction.next("redirect");
           this.modalCtrl.dismiss();
         }
       })

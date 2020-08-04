@@ -31,7 +31,7 @@
 
         <ion-list *ngIf="language" class="menu-background">
 
-            <ion-item  class="menu-background">
+            <ion-item  class="menu-background hidecreate">
               <ion-label><ion-button (click)="autoClose()" routerLink="/add-first-action" >{{language.create}}</ion-button></ion-label>
             </ion-item>
 
@@ -46,24 +46,20 @@
             <ion-item class="menu-background">
               <ion-label><ion-button (click)="autoClose()" routerLink="/contacts" >{{language.Messages}}</ion-button></ion-label>
             </ion-item>
-            <ion-item class="menu-background">
+            <ion-item class="menu-background hidecard">
+              <ion-label><ion-button (click)="autoClose()" routerLink="/carddata" >{{language.cardInfo}}</ion-button></ion-label>
+            </ion-item>
+            <ion-item class="menu-background hidegetmoney">
+              <ion-label><ion-button (click)="autoClose()" routerLink="/getmoney" >{{language.getmoney}}</ion-button></ion-label>
+            </ion-item>
+            <ion-item class="menu-background hideemployerinstructions">
+              <ion-label><ion-button (click)="autoClose()" routerLink="/instructions" >{{language.rules}}</ion-button></ion-label>
+            </ion-item>
+            <!-- <ion-item class="menu-background">
               <ion-label><ion-button (click)="autoClose()" routerLink="/favorite" >{{language.Favorite}}</ion-button></ion-label>
             </ion-item>
             <ion-item class="menu-background">
               <ion-label><ion-button (click)="autoClose()" routerLink="/myrequest" >{{language.myrequest}}</ion-button></ion-label>
-            </ion-item>
-            <!-- <ion-item>
-              <ion-label>Личный кабинет</ion-label>
-            </ion-item>
-
-            <ion-item>
-              <ion-label>Обратная связь</ion-label>
-            </ion-item>
-            <ion-item>
-              <ion-label>Оставить отзыв</ion-label>
-            </ion-item>
-            <ion-item>
-              <ion-label>Предложить друзьям</ion-label>
             </ion-item> -->
 
         </ion-list>

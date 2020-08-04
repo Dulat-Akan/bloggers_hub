@@ -17,11 +17,6 @@ export class AuthService {
     this.socket = this.homeservice.socket;
     this.checkAuthData();
 
-
-    // this.checkAuthNew().subscribe(data => {
-    //     console.log(data);
-    // });
-
   }
 
 

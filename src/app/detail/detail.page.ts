@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef,NgZone } from '@angular/core';
 import { ActivatedRoute,Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { Observable, Subject, interval } from 'rxjs';
@@ -11,6 +11,10 @@ import { TranslateService } from '../services/translate/translate.service';
 import * as $ from 'jquery';
 import { ToastController } from '@ionic/angular';
 
+// npm install @google/maps
+import { google } from '@google/maps';
+declare var google: any;
+
 @Component({
   selector: 'app-detail',
   templateUrl: './detail.page.html',
@@ -19,9 +23,7 @@ import { ToastController } from '@ionic/angular';
 export class DetailPage implements OnInit {
 
   UsersData: Observable<any>;
-  Users: Observable<any>;
-  favoriteState:boolean = false;
-
+  @ViewChild('chart') chartElement: any;
 
   constructor(
     public storeservice:StoreserviceService,
@@ -34,9 +36,35 @@ export class DetailPage implements OnInit {
 
   ){
 
+
+
+
       }
 
+details;
+countvideo = 0;
+countobjectarray;
 
+  title = 'Plan execution report';
+   type = 'LineChart';
+
+   data = [
+     ["Jan",0]
+   ];
+
+   columnNames = ["Month", "Views"];
+   options = {
+      hAxis: {
+         title: 'Month'
+      },
+      vAxis:{
+         title: 'Views'
+      },
+   };
+
+
+   width = window.innerWidth;
+   height = window.innerHeight / 2;
 
 
   trackByFn(index,item){
@@ -50,39 +78,57 @@ export class DetailPage implements OnInit {
     this.location.back();
   }
 
+  sendCheckvideo(id){
 
-  getDetailData(){
-    this.detailservice.getDetailData()
+    var senddata = {
+      project_id:id,
+      email:this.homeservice.email
+    }
+
+    this.detailservice.sendCheckvideo(senddata);
+  }
+
+unsubvideo;
+
+  getCheckvideo(){
+    this.unsubvideo = this.detailservice.getCheckvideo()
     .subscribe(data => {
 
+        //console.log(data);
 
-        this.UsersData = data.UsersData;
-        this.Users = data.Users;
-        localStorage.setItem("sendemail",data.Users.email);
-        localStorage.setItem("sendimage_url",data.Users.image_url);
+        var montharray = data.montharray;
+        var countingarray = data.monthcount;
+
+        this.countvideo = data.count;
+
+        this.data = [
+          ["Jan",0]
+        ];
+        for(var i = 0;i < montharray.length;i++){
+          var createar = [montharray[i].month,  countingarray[i]];
+          this.data.push(createar);
+          //console.log(this.data);
+        }
+
+
+        this.details = data.data;
+        //this.data[] =
+        // this.UsersData = data.UsersData;
+        //
+        // localStorage.setItem("sendemail",data.Users.email);
+        // localStorage.setItem("sendimage_url",data.Users.image_url);
 
 
     });
   }
 
-  ShareLink(){
-
-
-    let selBox = document.createElement('textarea');
-    selBox.style.position = 'fixed';
-    selBox.style.left = '0';
-    selBox.style.top = '0';
-    selBox.style.opacity = '0';
-    selBox.value = window.location.href;
-    document.body.appendChild(selBox);
-    selBox.focus();
-    selBox.select();
-    document.execCommand('copy');
-    document.body.removeChild(selBox);
-
-    this.homeservice.Toast("copied to clipboard");
-
+  goToUrl(url){
+    //window.location.href = url;
+    var win = window.open(url, '_blank');
+    win.focus();
   }
+
+
 
   Backbutton(){
 
@@ -97,68 +143,63 @@ export class DetailPage implements OnInit {
     }
 
 
+    getPack(){
+      //var pack = JSON.stringify({ data: data });
+      var pack = localStorage.getItem("detail");
 
-  Favorite(name){
+      if(pack){
 
-        if(name == "enable"){
-          this.storeservice.favoriteButtonStore.dispatch({ type: 'ENABLE',updateDatabase:true });
-        }else if(name == "disable"){
-          this.storeservice.favoriteButtonStore.dispatch({ type: 'DISABLE',updateDatabase:true });
-        }
+        var unpack = JSON.parse(pack);
+        this.UsersData = unpack.data;
+        //console.log(unpack.data);
 
+        this.sendCheckvideo(unpack.data.id);
+
+      }
     }
 
 
-  checkFavoriteStates(){
-    this.storeservice.buttonstateObservable.subscribe(data => {
-        if(data == true){
-          this.favoriteState = true;
-        }else{
-          this.favoriteState = false;
-        }
-    });
-  }
+    //charts
 
+
+    //charts
+
+
+
+
+
+
+
+
+  unsubscribetranslateservice;
   language:Observable<any>;
 
   getTranslate(){
-    this.translateservice.getTranslate().subscribe(data => {
+    this.unsubscribetranslateservice = this.translateservice.getTranslate().subscribe(data => {
         this.language = data;
       });
   }
 
+  drawBasic() {
 
+
+  }
 
   ngOnInit() {
 
-    this.getDetailData();//listen getdetails data
 
-    var id = +this.route.snapshot.paramMap.get('id');
-    this.detailservice.page_id = id;
-    this.detailservice.sendDetailData(id);
-
-
-    this.Backbutton();//initialize back button
-
-    this.storeservice.checkDetailsState(id);
-
-    this.checkFavoriteStates()//listen button states
+    this.Backbutton();
     this.getTranslate();
-    //this.storeservice.favoriteButtonStore.dispatch({ type: 'ENABLE',id:2 });
+    this.getPack();
+    this.getCheckvideo();
 
 
-    // this.route
-    //   .queryParams
-    //   .subscribe(v => {
-    //
-    //     this.unitNumber = v.unit;
-    //
-    //   });
 
   }
 
   ngOnDestroy() {
-
+    this.unsubscribetranslateservice.unsubscribe();
+    this.unsubvideo.unsubscribe();
   }
 
 }

@@ -1,0 +1,89 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title *ngIf="language">{{language.cardInfo}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="language" >
+
+  <form [formGroup]="sendForm" (ngSubmit)="onSubmit()">
+
+
+  <ion-item>
+      <ion-label position="stacked">{{language.cardnumber}}</ion-label>
+      <ion-input type="text" pattern="^(?:4[0-9]{12}(?:[0-9]{3})?|[25][1-7][0-9]{14}|6(?:011|5[0-9][0-9])[0-9]{12}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|(?:2131|1800|35\d{3})\d{11})$" size="16" formControlName="cardnumber" placeholder="{{language.cardnumber}}" required></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="stacked">{{language.bankname}}</ion-label>
+    <ion-input type="text" formControlName="bankname" placeholder="{{language.bankname}}" required ></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="stacked">{{language.cardholdername}}</ion-label>
+    <ion-input type="text" formControlName="cardname" placeholder="{{language.cardholdername}}" required ></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="stacked">{{language.currentLocation}}</ion-label>
+    <ion-input type="text" (ionFocus)="goToMap()" formControlName="location"  required></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="stacked">{{language.address}}</ion-label>
+    <ion-input type="text" formControlName="address" placeholder="{{language.address}}" required ></ion-input>
+  </ion-item>
+
+
+  <ion-button type="submit"  [disabled]="!sendForm.valid" expand="block" >{{language.addcreditcard}}</ion-button>
+
+    </form>
+
+
+
+    <ion-card *ngFor="let detail of details;index as i;trackBy: trackByFn;" >
+          <ion-item href="#" class="activated">
+            <i class="material-icons">
+              money
+            </i>
+            <ion-label class="paddingleft10">{{detail.cardnumber}}</ion-label>
+          </ion-item>
+
+          <ion-item href="#">
+            <i class="material-icons">
+              perm_identity
+            </i>
+            <ion-label class="paddingleft10">{{detail.cardname}}</ion-label>
+          </ion-item>
+
+          <ion-item class="activated">
+            <i class="material-icons">
+              location_city
+            </i>
+            <ion-label class="paddingleft10">{{detail.address}}</ion-label>
+          </ion-item>
+
+          <ion-item class="activated">
+            <i class="material-icons">
+              store
+            </i>
+            <ion-label class="paddingleft10">{{detail.bankname}}</ion-label>
+          </ion-item>
+          <ion-item class="activated">
+            <ion-button (click)="deleteCard(detail.id)" style="margin-left:40%;" size="small" >{{language.deletebutton}}</ion-button>
+          </ion-item>
+
+    </ion-card>
+
+    <!-- <div *ngFor="let detail of details;index as i;trackBy: trackByFn;" (click)="detailRoute(detail)">
+       <ion-item *ngIf="detail.pay_status == 1" color="secondary" >
+         <ion-icon slot="end" name="arrow-dropright"></ion-icon>
+
+         <ion-label>{{ detail.url }}</ion-label>
+       </ion-item>
+    </div> -->
+
+</ion-content>

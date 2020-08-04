@@ -1,0 +1,50 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <!-- <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons> -->
+    <ion-title *ngIf="language">{{language.tasks_statictics}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-list>
+
+      <div *ngFor="let detail of details;index as i;trackBy: trackByFn;" (click)="detailRoute(detail)">
+         <ion-item *ngIf="detail.pay_status == 1" color="secondary" >
+           <ion-icon slot="end" name="arrow-dropright"></ion-icon>
+           <!-- <ion-icon slot="end" name="close"></ion-icon> -->
+
+           <ion-label>{{ detail.url }}</ion-label>
+         </ion-item>
+      </div>
+
+      <div *ngFor="let detail of details;index as i;trackBy: trackByFn;" (click)="presentActionSheet(detail)">
+         <ion-item *ngIf="detail.pay_status == 0" color="danger" >
+           <ion-icon slot="end" name="close"></ion-icon>
+
+           <ion-label>{{ detail.url }}</ion-label>
+         </ion-item>
+      </div>
+
+
+
+   </ion-list>
+
+   <!-- <ion-fab vertical="bottom" horizontal="start" slot="fixed">
+    <ion-fab-button (click)="addNew()">
+      <ion-icon name="add" ></ion-icon>
+    </ion-fab-button>
+  </ion-fab> -->
+  <div class="my_menu">
+      <div class="first_icon">
+        <i (click)="openMenu()" class="menu_icon material-icons">
+          view_module
+          </i>
+      </div>
+  </div>
+
+
+
+</ion-content>

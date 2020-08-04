@@ -1,98 +1,318 @@
 <ion-content *ngIf="language">
-    <ion-slides pager="false" [options]="slideOpts">
-          <ion-slide>
+
+      <mat-tab-group>
+        <mat-tab label="{{language.find}}">
+
+          <ion-button expand="full">{{language.never}}</ion-button>
+
+            <ion-card>
+
+              <ion-card-content>
+                <ion-item>
+                  <ion-icon color="primary" name="globe" slot="start"></ion-icon>
+                  <ion-label class="moveText">{{language.work}} </ion-label>
+                  <!-- <ion-button fill="outline" slot="end">Next step</ion-button> -->
+                </ion-item>
+
+              </ion-card-content>
+
+            </ion-card>
+            <ion-card>
+              <ion-item >
+                <ion-icon color="primary" class="optimizeCenter"  name="arrow-round-down" ></ion-icon>
+              </ion-item>
+            </ion-card>
+
+          <ion-button expand="full">{{language.how}}</ion-button>
+
+            <ion-card>
+
+
+              <ion-card-content>
+                <ion-item>
+                  <ion-icon color="primary" name="logo-youtube" slot="start"></ion-icon>
+                  <ion-label class="moveText">{{language.do_task}}</ion-label>
+                </ion-item>
+
+                <ion-item>
+                  <ion-icon color="primary" name="paper-plane" slot="start"></ion-icon>
+                  <ion-label class="moveText">{{language.enter_to}}</ion-label>
+                </ion-item>
+
+                <ion-item>
+                  <ion-icon color="primary" name="cloud-upload" slot="start"></ion-icon>
+                  <ion-label class="moveText">{{language.need_to}}</ion-label>
+                </ion-item>
+
+              </ion-card-content>
+            </ion-card>
+
+            <ion-card>
+              <ion-item >
+                <ion-icon color="primary" class="optimizeCenter"  name="arrow-round-down" ></ion-icon>
+              </ion-item>
+            </ion-card>
+
+
+          <ion-button expand="full">{{language.What_after}}</ion-button>
+
+            <ion-card>
+              <ion-card-content>
+                <ion-item>
+                  <ion-icon color="primary" name="logo-usd" slot="start"></ion-icon>
+                  <ion-label class="moveText">{{language.get_money}} </ion-label>
+                  <!-- <ion-button fill="outline" slot="end">Next step</ion-button> -->
+                </ion-item>
+              </ion-card-content>
+            </ion-card>
+
+            <ion-card>
+              <ion-item >
+                <ion-icon color="primary" class="optimizeCenter"  name="arrow-round-down" ></ion-icon>
+              </ion-item>
+            </ion-card>
+
+            <ion-button expand="block" (click)="nextPage()" color="secondary">{{language.Next_Step}}</ion-button>
 
 
 
-              <div class="main_slide">
 
-                <div class="fr_parent">
-                  <!-- <div class="fr_im">
+        </mat-tab>
+        <mat-tab label="{{language.getway}}">
 
-                  </div> -->
-                </div>
+              <ion-button expand="full">{{language.never}}</ion-button>
 
-                <div class="newlist">
+                <ion-card>
 
-                  <ion-list>
-
-
-                    <ion-item >
-                      <ion-thumbnail slot="start">
-                        <i class="myiconst material-icons">
-                          search
-                          </i>
-                      </ion-thumbnail>
-                      <ion-label class="mytext">
-                        {{language.slideone}}
-                      </ion-label>
+                  <ion-card-content>
+                    <ion-item>
+                      <ion-icon color="primary" name="globe" slot="start"></ion-icon>
+                      <ion-label class="moveText">{{language.Do_you_want}}</ion-label>
+                      <!-- <ion-button fill="outline" slot="end">Next step</ion-button> -->
                     </ion-item>
-
-                    <ion-item >
-                      <ion-thumbnail slot="start">
-                        <i class="myiconst material-icons">
-                          thumb_up
-                          </i>
-                      </ion-thumbnail>
-                      <ion-label class="mytext">
-                        {{language.slidetwo}}
-                      </ion-label>
-
+                    <ion-item>
+                      <ion-icon color="primary" name="person-add" slot="start"></ion-icon>
+                      <ion-label class="moveText">{{language.that_1000}}</ion-label>
+                      <!-- <ion-button fill="outline" slot="end">Next step</ion-button> -->
                     </ion-item>
-
-
-                    <ion-item >
-                      <ion-thumbnail slot="start">
-                        <i class="myiconst material-icons">
-                          attach_money
-                          </i>
-                      </ion-thumbnail>
-                      <ion-label class="mytext">
-                        {{language.three}}
-                      </ion-label>
-
+                    <ion-item>
+                      <ion-icon color="primary" name="alert" slot="start"></ion-icon>
+                      <ion-label class="moveText">{{language.Comunity_Stream_Effect}}</ion-label>
+                      <!-- <ion-button fill="outline" slot="end">Next step</ion-button> -->
                     </ion-item>
-                    <ion-item >
-                      <ion-thumbnail slot="start">
-                        <i class="myiconst material-icons">
-                          timer
-                          </i>
-                      </ion-thumbnail>
-                      <ion-label class="mytext">
-                        {{language.four}}
-                      </ion-label>
+                  </ion-card-content>
 
+                </ion-card>
+                <ion-card>
+                  <ion-item >
+                    <ion-icon color="primary" class="optimizeCenter"  name="arrow-round-down" ></ion-icon>
+                  </ion-item>
+                </ion-card>
+
+              <ion-button expand="full">{{language.How_it_work}}</ion-button>
+
+                <ion-card>
+
+
+                  <ion-card-content>
+                    <ion-item>
+                      <ion-icon color="primary" name="book" slot="start"></ion-icon>
+                      <ion-label class="moveText">{{language.Create_a_description}}</ion-label>
+                      <!-- <ion-button fill="outline" slot="end">Next step</ion-button> -->
                     </ion-item>
-                    <ion-item >
-                      <ion-thumbnail slot="start">
-                        <i class="myiconst material-icons">
-                          airplanemode_active
-                          </i>
-                      </ion-thumbnail>
-                      <ion-label class="mytext">
-                        {{language.five}}
-                      </ion-label>
+                  </ion-card-content>
+                </ion-card>
 
+
+                <ion-card>
+                  <ion-item >
+                    <ion-icon color="primary" class="optimizeCenter"  name="arrow-round-down" ></ion-icon>
+                  </ion-item>
+                </ion-card>
+
+
+              <ion-button expand="full">{{language.What_after}}</ion-button>
+
+                <ion-card>
+                  <ion-card-content>
+                    <ion-item>
+                      <ion-icon color="primary" name="trending-up" slot="start"></ion-icon>
+                      <ion-label class="moveText">{{language.onethousand_more}} </ion-label>
+                      <!-- <ion-button fill="outline" slot="end">Next step</ion-button> -->
                     </ion-item>
+                  </ion-card-content>
+                </ion-card>
 
-                  </ion-list>
+                <ion-card>
+                  <ion-item >
+                    <ion-icon color="primary" class="optimizeCenter"  name="arrow-round-down" ></ion-icon>
+                  </ion-item>
+                </ion-card>
+
+                <ion-button expand="full">{{language.Why_does}}</ion-button>
+
+                  <ion-card>
+                    <ion-card-content>
+                      <ion-item>
+                        <ion-icon color="primary" name="trending-up" slot="start"></ion-icon>
+                        <ion-label class="moveText">{{language.Because_if}} </ion-label>
+                        <!-- <ion-button fill="outline" slot="end">Next step</ion-button> -->
+                      </ion-item>
+                    </ion-card-content>
+                  </ion-card>
+
+                  <ion-card>
+                    <ion-item >
+                      <ion-icon color="primary" class="optimizeCenter"  name="arrow-round-down" ></ion-icon>
+                    </ion-item>
+                  </ion-card>
+
+                <ion-button expand="block" (click)="nextPage()" color="secondary">{{language.Next_Step}}</ion-button>
 
 
 
-                </div>
-                <ion-button class="mybtnn" (click)="nextPage()" color="primary">{{language.next}}</ion-button>
+
+         </mat-tab>
+         <mat-tab label="{{language.invest}}">
+                   <ion-button expand="full">{{language.what_this}}</ion-button>
+
+                   <ion-card>
+
+                     <ion-card-content>
+                       <ion-item>
+                         <ion-icon color="primary" name="globe" slot="start"></ion-icon>
+                         <ion-label class="moveText">{{language.what_this_exp}} </ion-label>
+                         <!-- <ion-button fill="outline" slot="end">Next step</ion-button> -->
+                       </ion-item>
 
 
-              </div>
+                     </ion-card-content>
+
+                   </ion-card>
+
+                   <ion-card>
+                     <ion-item >
+                       <ion-icon color="primary" class="optimizeCenter"  name="arrow-round-down" ></ion-icon>
+                     </ion-item>
+                   </ion-card>
 
 
+                   <ion-button expand="full">{{language.How_it}}</ion-button>
 
-          </ion-slide>
-          <!-- <ion-slide>
-            <h1>Slide 2</h1>
-          </ion-slide>
-          <ion-slide>
-            <h1>Slide 3</h1>
-          </ion-slide> -->
-        </ion-slides>
+                   <ion-card>
+
+                     <ion-card-content>
+                       <ion-item>
+                         <ion-icon color="primary" name="globe" slot="start"></ion-icon>
+                         <ion-label class="moveText">{{language.Person_create}} </ion-label>
+                         <!-- <ion-button fill="outline" slot="end">Next step</ion-button> -->
+                       </ion-item>
+
+
+                     </ion-card-content>
+
+                   </ion-card>
+
+                   <ion-card>
+                     <ion-item >
+                       <ion-icon color="primary" class="optimizeCenter"  name="arrow-round-down" ></ion-icon>
+                     </ion-item>
+                   </ion-card>
+
+                   <ion-button expand="full">{{language.What__after}}</ion-button>
+
+                   <ion-card>
+
+                     <ion-card-content>
+                       <ion-item>
+                         <ion-icon color="primary" name="globe" slot="start"></ion-icon>
+                         <ion-label class="moveText">{{language.more__people}} </ion-label>
+                         <!-- <ion-button fill="outline" slot="end">Next step</ion-button> -->
+                       </ion-item>
+
+
+                     </ion-card-content>
+
+                   </ion-card>
+
+                   <ion-card>
+                     <ion-item >
+                       <ion-icon color="primary" class="optimizeCenter"  name="arrow-round-down" ></ion-icon>
+                     </ion-item>
+                   </ion-card>
+
+                     <ion-button expand="full">{{language.Why_it_system}}</ion-button>
+
+                     <ion-card>
+
+                       <ion-card-content>
+                         <ion-item>
+                           <ion-icon color="primary" name="globe" slot="start"></ion-icon>
+                           <ion-label class="moveText">{{language.Because_peoples_need}} </ion-label>
+                           <!-- <ion-button fill="outline" slot="end">Next step</ion-button> -->
+                         </ion-item>
+                         <ion-item>
+                           <ion-icon color="primary" name="globe" slot="start"></ion-icon>
+                           <ion-label class="moveText">{{language.Now_is_the}} </ion-label>
+                           <!-- <ion-button fill="outline" slot="end">Next step</ion-button> -->
+                         </ion-item>
+                         <ion-item>
+                           <ion-icon color="primary" name="globe" slot="start"></ion-icon>
+                           <ion-label class="moveText">{{language.People_ready}} </ion-label>
+                           <!-- <ion-button fill="outline" slot="end">Next step</ion-button> -->
+                         </ion-item>
+
+
+                       </ion-card-content>
+
+                     </ion-card>
+                     <ion-card>
+                       <ion-item >
+                         <ion-icon color="primary" class="optimizeCenter"  name="arrow-round-down" ></ion-icon>
+                       </ion-item>
+                     </ion-card>
+                     <ion-button expand="full">{{language.Why_you}}</ion-button>
+
+                     <ion-card>
+
+                       <ion-card-content>
+                         <ion-item>
+                           <ion-icon color="primary" name="globe" slot="start"></ion-icon>
+                           <ion-label class="moveText">{{language.Because_this_biznes}} </ion-label>
+                           <!-- <ion-button fill="outline" slot="end">Next step</ion-button> -->
+                         </ion-item>
+                         <ion-item>
+                           <ion-icon color="primary" name="globe" slot="start"></ion-icon>
+                           <ion-label class="moveText">{{language.You_need_to}} </ion-label>
+                           <!-- <ion-button fill="outline" slot="end">Next step</ion-button> -->
+                         </ion-item>
+
+
+                       </ion-card-content>
+
+                     </ion-card>
+                     <ion-card>
+                       <ion-item >
+                         <ion-icon color="primary" class="optimizeCenter"  name="arrow-round-down" ></ion-icon>
+                       </ion-item>
+                     </ion-card>
+
+                     <ion-button expand="block"  (click)="nextPage()" color="secondary">{{language.Next_Step}}</ion-button>
+
+          </mat-tab>
+      </mat-tab-group>
+
+        <!-- <ion-slides pager="false" [options]="slideOpts">
+            <ion-slide>
+
+            </ion-slide>
+            <ion-slide>
+              <h1>Slide 2</h1>
+            </ion-slide>
+            <ion-slide>
+              <h1>Slide 3</h1>
+            </ion-slide>
+        </ion-slides> -->
+
+        <!-- (click)="nextPage() -->
 </ion-content>

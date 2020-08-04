@@ -8,6 +8,7 @@ import { NotificationService } from '../services/notification/notification.servi
 import { TranslateService } from '../services/translate/translate.service';
 import { SetroleserviceService } from '../services/setroleservice/setroleservice.service';
 import { AuthService } from '../services/auth/auth.service';
+import {PublicserviceService} from '../services/publicservices/publicservice.service';
 
 import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
@@ -17,8 +18,6 @@ import { PhonenumberPage } from '../phonenumber/phonenumber.page';
 import { SelectrolePage } from '../selectrole/selectrole.page';
 import { SelectlanguagePage } from '../selectlanguage/selectlanguage.page';
 import { SlideshowPage } from '../slideshow/slideshow.page';
-
-
 
 import * as $ from 'jquery';
 
@@ -36,7 +35,7 @@ export class DashboardPage implements OnInit {
 
   deviceid:string;
   fixedUpdating = 1;
-  permitForUpdating = 0;
+
 
   constructor(public homeservice: HomeserviceService,
               public onlineservice:OnlineusersService,
@@ -47,7 +46,8 @@ export class DashboardPage implements OnInit {
               public alertController:AlertController,
               private menu: MenuController,
               private router: Router,
-              public authservice:AuthService
+              public authservice:AuthService,
+              public publicservice:PublicserviceService
             ){
         this.deviceid = this.homeservice.deviceid;
   }
@@ -112,8 +112,6 @@ export class DashboardPage implements OnInit {
             this.PhonenumberModal();
             //getPhonefromUser
 
-            this.loadAllData();
-            this.permitForUpdating = 1;
 
           });
     }
@@ -121,93 +119,8 @@ export class DashboardPage implements OnInit {
 loggingsearch;
 
 //1
-  checkInputSearchData(){
-
-      this.Observablesearch.subscribe(searchnumber => {
-
-          var data = {
-            device:this.homeservice.deviceid,
-            email:this.homeservice.email,
-            role:this.homeservice.role,
-            searchnumber:searchnumber
-          }
-
-          if(searchnumber.length < 1){
-            this.fixedUpdating = 1;
-          }else{
-            this.fixedUpdating = 0;
-            this.loggingsearch = data;
-          }
-
-          this.homeservice.searchData(data);
-
-      });
-
-  }
-
-  getSearchUsersData(){
-      //const id = +this.route.snapshot.paramMap.get('id');
-
-      this.homeservice.getSearchUsersData()
-        .subscribe(data => {
-          this.details = data.sdata;
-          //console.log(data.sdata);
-          //this.router.navigate(['/product-list'], { queryParams: { serviceId: serviceId} });
-
-        });
-  }
-
-  //1
-
-  //2
-
-  loadAllData(){
-
-    var data = {
-      device:this.homeservice.deviceid,
-      email:this.homeservice.email,
-      role:this.homeservice.role,
-      message:"1"
-    }
-
-    this.homeservice.sendRequest(data);
-  }
-
-  listengetAllData(){
-
-      this.homeservice.getAllData()
-        .subscribe(data => {
-          this.details = data.sdata;
-          //console.log(data.sdata);
-          //set User Profile
-            if(data.userdata.length > 0){
-
-              if(data.userdata[0].image_url == "0"){
-
-              }else{
-                $(".circle").attr("src",data.userdata[0].image_url);
-              }
-
-              $(".userName").text(data.userdata[0].name);
-              //hide login button
-              $(".logininput").hide();
-              //hide login button
 
 
-            }
-
-
-            //set Online user status
-            this.onlineservice.joinUser();
-            this.notificationservice.checkNotificationsMessages();
-            //set Online user status
-
-
-
-          //
-          //set User Profile
-        });
-  }
 
 
 
@@ -215,10 +128,6 @@ loggingsearch;
 
     this.homeservice.CheckStoragestate.subscribe(data => {
 
-      //console.log(data);
-
-        this.loadAllData(); //send Request after load memory
-        this.permitForUpdating = 1;
 
     });
   }
@@ -247,6 +156,8 @@ loggingsearch;
 
               }else if(data.user == "olduser"){
 
+                //console.log(data);
+
                 this.homeservice.email = data.email;
                 localStorage.setItem("email",data.email);
 
@@ -255,9 +166,25 @@ loggingsearch;
                 }else{
                   this.homeservice.role = data.role;
                   localStorage.setItem("role",data.role);
-                  this.loadAllData();
-                  this.permitForUpdating = 1;
+
+
+                    if(data.role == "1"){
+                      //redirect to employer
+
+                      this.router.navigate(['/employer']);
+                    }else if(data.role == "2"){
+                      //redirect to promote
+                      this.router.navigate(['/ocabinet']);
+
+                    }else if(data.role == "3"){
+                      //redirect to investor
+                      this.router.navigate(['/investor']);
+                    }
+
+
                 }
+
+                //redirect role 2 to
 
               }
 
@@ -291,9 +218,13 @@ loggingsearch;
         this.homeservice.role = data.role;
         localStorage.setItem("role",data.role);
 
-        this.loadAllData();
-        this.permitForUpdating = 1;
       }
+
+      if(data.role == 2){
+        this.router.navigate(['/ocabinet']);
+      }
+
+
 
 
     }
@@ -351,36 +282,65 @@ loggingsearch;
           this.LoginModal();
         }else if(data == "selectrole"){
           this.SelectrolePageModal();
-        }else if(data == "loadalldata"){
-          //console.log("loadalldata");
-          this.permitForUpdating = 1;
-          this.loadAllData();
+        }else if(data == "redirect"){
+            var r = localStorage.getItem("role");
+            console.log(r);
+            console.log("redirect");
+
+            if(r){
+              if(r == "1"){
+                //redirect to employer
+                var s = {
+                  email:this.homeservice.email,
+                  role:this.homeservice.role,
+                  type:1
+                }
+
+                this.publicservice.checkAutomaticMessages(s);
+
+                this.router.navigate(['/employer']);
+              }else if(r == "2"){
+                //redirect to promote
+                this.router.navigate(['/add-first-action']);
+
+              }else if(r == "3"){
+                //redirect to investor
+                this.router.navigate(['/investorpay']);
+              }
+            }
+
         }
 
         this.translateservice.setLanguage();
     });
   }
 
-
-  UpdateDataThroughInterval(){
-
-    this.homeservice.timer10s$.subscribe(val => {
-
-      if(this.permitForUpdating == 1){
-        if(this.fixedUpdating == 1){
-          //this.just update all data
-          this.loadAllData();
-          //console.log("alldata");
-        }else if(this.fixedUpdating == 0){
-          //this.working for update search data
-          //console.log("logsearch");
-          this.homeservice.searchData(this.loggingsearch);
-        }
-      }
-
+  listencheckAutomaticMessages(){
+    this.publicservice.listencheckAutomaticMessages().subscribe(data => {
+      console.log(data);
     });
+  }
+
+
+  checlRole(){
+
+    var currentRole = this.homeservice.role;
+
+    if(currentRole == "1"){
+      //redirect to employer
+
+      this.router.navigate(['/employer']);
+    }else if(currentRole == "2"){
+      //redirect to promote
+      this.router.navigate(['/ocabinet']);
+
+    }else if(currentRole == "3"){
+      //redirect to investor
+      this.router.navigate(['/investor']);
+    }
 
   }
+
 
   trackByFn(index,item){
       return item.id;
@@ -392,12 +352,7 @@ loggingsearch;
   }
 
   initializeMain(){
-    this.listengetAllData();//1
     this.listenPhoneMemory();//1
-
-    this.checkInputSearchData();//2
-    this.getSearchUsersData();//2
-
 
     this.roleListener();//4
 
@@ -408,9 +363,12 @@ loggingsearch;
     this.getTranslate();
     this.translateservice.setLanguage();
     this.ListenerNextAction();//action listener
-    this.UpdateDataThroughInterval();
-    this.listenAuth();
+    this.listenAuth();//google auth
+    this.listencheckAutomaticMessages();
+    this.checlRole();
   //  this.LoginModal();
+  //this.SelectrolePageModal();
+    //
   }
 
 
@@ -418,6 +376,7 @@ loggingsearch;
   ngOnInit() {
 
     this.initializeMain();
+
 
   }
 

@@ -1,0 +1,32 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title *ngIf="language">{{language.create}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content >
+
+  <!-- <div #Map class="map"></div> -->
+
+  <!-- <input #Pac class="controls" type="text" placeholder="Search Box">
+    <div #Map class="map"></div> -->
+
+
+
+      <div class="form-group">
+        <input placeholder="search for location" autocorrect="off" autocapitalize="off" spellcheck="off" type="text" class="form-control myclass"  (focusout)="changeValue($event)" #search id="search" [formControl]="searchControl">
+      </div>
+      <!-- <agm-map [latitude]="latitude" [longitude]="longitude" [scrollwheel]="false" [zoom]="zoom">
+        <agm-marker [latitude]="latitude" [longitude]="longitude"></agm-marker>
+      </agm-map> -->
+      <div #gmap id="gmap" class="map"></div>
+
+
+      <ion-button *ngIf="language" class="mapButton" (click)="goBack()" color="secondary">{{language.choose}}</ion-button>
+
+
+
+</ion-content>

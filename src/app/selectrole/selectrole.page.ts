@@ -25,7 +25,7 @@ export class SelectrolePage implements OnInit {
 
   Find(){
 
-    var role = 1; //send
+    var role = 1; //send ..I want to work
 
     var datas = {
       device:this.homeservice.deviceid,
@@ -40,7 +40,21 @@ export class SelectrolePage implements OnInit {
 
   Get(){
 
-    var role = 2;//deliver
+    var role = 2;//website promotion
+
+    var datas = {
+      device:this.homeservice.deviceid,
+      email:this.homeservice.email,
+      role:role,
+    }
+
+    this.setroleservice.sendRole(datas);
+    this.modalCtrl.dismiss();
+
+  }
+  Invest(){
+
+    var role = 3;//investor
 
     var datas = {
       device:this.homeservice.deviceid,

@@ -86,6 +86,30 @@
   text-align:center;
 }
 
+.fontsize20{
+  font-size: 20px;
+}
+.fontsize18{
+  font-size: 18px;
+}
+
+.boldtext{
+  font-weight: 500;
+}
+
+.description{
+  font-size: 18px;
+  color: #808080;
+}
+
+.colorred{
+  color:red !important;
+}
+
+.greytext{
+  color: #808080;
+}
+
 .top10{
   margin-top:2% !important;
 }
@@ -116,6 +140,50 @@ $app_color:#3880ff;
   font-size: 1.3em;
   font-weight: 600;
 }
+
+.paddingleft10{
+  padding-left:10px;
+}
+
+.moveText{
+  white-space: normal !important;
+}
+
+@media only screen and (max-width : 2560px) and (max-height:1440px){
+  .optimizeCenter{
+    margin-left:48%;
+  }
+
+  .mt{
+    margin-top:22%;
+  }
+}
+
+@media only screen and (max-width : 800px) and (max-height:1440px){
+  .optimizeCenter{
+    margin-left:47%;
+  }
+
+  .mt{
+    margin-top:22%;
+  }
+}
+
+
+@media only screen and (max-width : 480px) and (max-height:855px){
+  .optimizeCenter{
+    margin-left:46%;
+  }
+
+  .mt{
+    margin-top:40%;
+  }
+}
+
+#paypal-button-container{
+  text-align: center;
+}
+
 
 
 

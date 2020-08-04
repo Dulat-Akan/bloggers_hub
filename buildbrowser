@@ -1,9 +1,7 @@
-cd /Users/apple/myproject/shelter_front/platforms/browser/www
+cd /Users/apple/projectsFolder/neiron/shelter_front/platforms/browser/www/
 sudo rm -r *
-cd /Users/apple/myproject/shelter_front
+cd /Users/apple/projectsFolder/neiron/shelter_front/
 ionic cordova build browser --prod
-cd /Users/apple/myproject/shelter_front/platforms/browser
+cd /Users/apple/projectsFolder/neiron/shelter_front/platforms/browser/
 sudo rm -r www.zip
 zip -r www.zip www
-
-

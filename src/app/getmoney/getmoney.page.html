@@ -1,0 +1,57 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title *ngIf="language">{{language.getmoney}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+
+  <ion-list *ngIf="language">
+
+      <!-- <div *ngFor="let detail of details;index as i;trackBy: trackByFn;">
+         <ion-item color="primary" >
+           <div>{{i+1}}.</div>
+           <ion-label class="paddingleft10">{{ detail.url }}</ion-label>
+         </ion-item>
+      </div> -->
+
+      <ion-row>
+        <ion-col class="fontsize20 boldtext center">
+          {{language.counttask}}
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col class="description center">
+          {{usertasklength}}
+        </ion-col>
+      </ion-row>
+
+      <ion-row *ngIf="total_paydsum == 0">
+        <ion-col  class="colorred fontsize20 boldtext center">
+          {{language.topayoffrules}} {{mintaskcount}} {{language.ctasks}}
+        </ion-col>
+      </ion-row>
+
+
+      <ion-row *ngIf="total_paydsum > 0">
+        <ion-col class="fontsize20 boldtext center">
+          {{language.topayoff}}
+        </ion-col>
+      </ion-row>
+      <ion-row *ngIf="total_paydsum > 0">
+        <ion-col class="description center">
+          {{total_paydsum}} usd
+        </ion-col>
+      </ion-row>
+
+      <ion-button  *ngIf="total_paydsum > 0" type="button"  expand="block" (click)="PayOut()" color="primary">{{language.reqpayout}}</ion-button>
+
+
+   </ion-list>
+
+
+</ion-content>

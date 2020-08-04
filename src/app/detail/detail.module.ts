@@ -11,6 +11,7 @@ import { HomeserviceService } from '../services/homeservice/homeservice.service'
 import { StoreserviceService } from '../services/storeseservice/storeservice.service';
 import { DetailserviceService } from '../services/detailservice/detailservice.service';
 import { TranslateService } from '../services/translate/translate.service';
+import { GoogleChartsModule } from 'angular-google-charts';
 
 const routes: Routes = [
   {
@@ -24,7 +25,8 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     IonicModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    GoogleChartsModule
   ],
   declarations: [DetailPage],
   providers: [

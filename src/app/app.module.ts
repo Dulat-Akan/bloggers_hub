@@ -18,8 +18,19 @@ import { OnlineusersService } from './services/onlineusers/onlineusers.service';
 import { AuthService } from './services/auth/auth.service';
 import { NotificationService } from './services/notification/notification.service';
 import { SetroleserviceService } from './services/setroleservice/setroleservice.service';
-import {MatButtonModule, MatCheckboxModule,MatInputModule,MatAutocompleteModule,MatDatepickerModule,MatNativeDateModule } from '@angular/material';
+import { PayserviceService } from './services/payservice/payservice.service';
+import { OcabinetService } from './services/ocabinet/ocabinet.service';
+import {PublicserviceService} from './services/publicservices/publicservice.service';
+
+import {MatButtonModule,MatTabsModule,MatTableModule,MatPaginatorModule, MatCheckboxModule,MatInputModule,MatAutocompleteModule,MatDatepickerModule,MatNativeDateModule } from '@angular/material';
 import { GooglePlus } from '@ionic-native/google-plus/ngx';
+import {Geolocation} from '@ionic-native/geolocation/ngx';
+import { PayPal } from '@ionic-native/paypal/ngx';
+import { FCM } from '@ionic-native/fcm/ngx';
+
+import { AgmCoreModule } from '@agm/core';
+
+
 
 
 
@@ -28,6 +39,8 @@ import { GooglePlus } from '@ionic-native/google-plus/ngx';
 
 
 import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 
 
@@ -36,7 +49,10 @@ import { HttpClientModule, HttpClient } from '@angular/common/http';
   declarations: [AppComponent],
   entryComponents: [],
   imports: [
-    //BrowserModule,
+    BrowserModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyCY5PUdnImZFQE_u9ODDmjaVeGWI_ojc6I'
+    }),
     BrowserAnimationsModule,
     IonicModule.forRoot(),
     AppRoutingModule,
@@ -47,6 +63,10 @@ import { HttpClientModule, HttpClient } from '@angular/common/http';
     MatAutocompleteModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    MatPaginatorModule,
+    MatTabsModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
+
 
 
   ],
@@ -61,7 +81,12 @@ import { HttpClientModule, HttpClient } from '@angular/common/http';
     AuthService,
     NotificationService,
     SetroleserviceService,
+    PayserviceService,
+    PublicserviceService,
     GooglePlus,
+    Geolocation,
+    PayPal,
+    FCM,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]

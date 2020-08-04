@@ -157,9 +157,10 @@ export class LoginModalPage implements OnInit {
             localStorage.setItem("role",data.data.role);
             this.homeservice.role = data.data.role;
             this.homeservice.email = data.data.email;
+            this.homeservice.nextAction.next("redirect");
             this.modalCtrl.dismiss();
             clearInterval(this.interval);
-            this.homeservice.nextAction.next("loadalldata");
+
 
         }else if(data.status == "notcorrect"){
             this.homeservice.Toast("Password incorrect.. Please check your password!");
@@ -216,16 +217,17 @@ export class LoginModalPage implements OnInit {
   }
 
 
-
+//mobile app login
   loginApp(){
 
 
       this.googlePlus.login({
-        'webClientId': '818015353741-m97ohmk6tpqf067gcgff0kb3i6t4k8go.apps.googleusercontent.com',
+        'webClientId': '884078982145-ragaa5jem96ts64f7gme3jb0t8kqet23.apps.googleusercontent.com',
       })
       .then( r => {
 
         var response = JSON.stringify(r);
+      //  console.log(response);
 
         var email = JSON.parse(response).email;
         var name = JSON.parse(response).givenName;

@@ -1,0 +1,56 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title *ngIf="language">{{language.investorinformation}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <google-chart #charttwo
+     [title]="title"
+     [type]="type"
+     [data]="datapayments"
+     [columnNames]="columnNames"
+     [options]="optionstwo"
+     [width]="width"
+     [height]="height">
+  </google-chart>
+
+  <ion-list>
+
+      <ion-item  *ngIf="language && countvideo > 0">
+        <ion-label  class="fontsize20 boldtext center">{{language.totalpayments}} : {{countpayments}}</ion-label>
+      </ion-item>
+
+  </ion-list>
+
+  <google-chart #chart
+     [title]="title"
+     [type]="type"
+     [data]="data"
+     [columnNames]="columnNames"
+     [options]="options"
+     [width]="width"
+     [height]="height">
+  </google-chart>
+
+  <ion-list>
+
+      <ion-item  *ngIf="language && countvideo > 0">
+        <ion-label  class="fontsize20 boldtext center">{{language.counttask}} : {{countvideo}}</ion-label>
+      </ion-item>
+
+      <ion-item  *ngFor="let detail of details;index as i;trackBy: trackByFn;" (click)="goToUrl(detail.url)">
+        <ion-label >{{ detail.url }}</ion-label>
+      </ion-item>
+  </ion-list>
+
+   <div class="my_menu">
+       <div class="first_icon">
+         <i (click)="openMenu()" class="menu_icon material-icons">
+           view_module
+           </i>
+       </div>
+   </div>
+
+</ion-content>

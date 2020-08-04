@@ -51,3 +51,35 @@ $app_color:#3880ff;
   margin-left: 3%;
   margin-top: 0.5%;
 }
+
+.w_text{
+  width: 91%;
+  height: 10%;
+  padding: 1%;
+  padding-top: 2.5%;
+  text-align: center;
+  background-color: white;
+  border-radius: 20px;
+  font-size: 1.3em;
+  font-weight: 500;
+  margin-left: 5%;
+  margin-top: 60%;
+
+}
+
+.phoneclass{
+    margin-top:10%;
+}
+
+.googleLogin{
+
+  background: lightblue url("/assets/icon/googlebutton.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 50%;
+  height: 2em;
+  border-radius: 10px;
+  margin-top:5%;
+  margin-left: 25%;
+}

@@ -1,0 +1,37 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <!-- <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons> -->
+    <ion-title *ngIf="language" style="text-align:center;">{{language.selectproject}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+
+
+  <ion-list>
+
+      <div *ngFor="let detail of details;index as i;trackBy: trackByFn;" (click)="detailRoute(detail)">
+         <ion-item *ngIf="detail.pay_status == 1" color="primary" >
+           <ion-icon slot="end" name="arrow-dropright"></ion-icon>
+           <!-- <ion-icon slot="end" name="close"></ion-icon> -->
+
+           <ion-label>{{ detail.url }}</ion-label>
+         </ion-item>
+      </div>
+
+
+
+   </ion-list>
+
+   <div class="my_menu">
+       <div class="first_icon">
+         <i (click)="openMenu()" class="menu_icon material-icons">
+           view_module
+           </i>
+       </div>
+   </div>
+
+</ion-content>

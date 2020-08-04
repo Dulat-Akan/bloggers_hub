@@ -1,0 +1,111 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title class="center"></ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+
+
+  <ion-grid *ngIf="language">
+
+    <ion-row>
+      <ion-col class="fontsize20 boldtext center">
+        {{language.projectLink}}
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col class="description">
+        {{details.url}}
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col class="fontsize20 boldtext center">
+        {{language.currentLocation}}
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col class="description">
+        {{details.location_name}}
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col class="fontsize20 boldtext center">
+        {{language.Description}}
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col class="description">
+        {{details.description}}
+      </ion-col>
+    </ion-row>
+
+
+
+    <ion-row>
+      <ion-col class="fontsize20 boldtext center">
+        {{language.projecttask}}
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="9" class="fontsize18 greytext">
+        {{language.taskone}}
+      </ion-col>
+      <ion-col size="3" class="fontsize18 greytext">
+        {{numberviewsmaked}} / {{details.peoplecount}}
+      </ion-col>
+    </ion-row>
+    <!-- url -->
+    <ion-row >
+      <ion-col  class="fontsize18 greytext generatedUrl">
+
+      </ion-col>
+    </ion-row>
+    <!-- url -->
+    <!-- taskfinishedviews -->
+    <ion-button *ngIf="taskfinishedviews == 1"  expand="block" size="small" color="warning">{{language.taskfinished}}</ion-button>
+    <ion-button *ngIf="button_one_indicator == 1 && taskfinishedviews == 0" expand="block" size="small" (click)="Copy()" color="primary">{{language.copy}}</ion-button>
+    <ion-button *ngIf="button_one_indicator == 0" expand="block" size="small" (click)="MakeViews()" color="primary">{{language.start}}</ion-button>
+    <ion-row *ngIf="taskfinished == 0">
+      <ion-col  class="fontsize18  center ">
+        {{language.taskthree}}
+      </ion-col>
+    </ion-row>
+    <ion-row *ngIf="taskfinished == 0">
+      <ion-col size="9" class="fontsize18 greytext">
+        {{language.taskfour}}
+      </ion-col>
+      <ion-col size="3" class="fontsize18 greytext">
+        {{numbervideosmaked}} / {{details.countvideo}}
+      </ion-col>
+    </ion-row>
+
+
+    <ion-button *ngIf="taskfinished == 1"  expand="block" size="small" color="warning">{{language.taskfinished}}</ion-button>
+
+    <form *ngIf="taskfinished == 0" [formGroup]="sendForm" (ngSubmit)="onSendUrl()">
+
+    <ion-row >
+      <ion-col >
+        <ion-item>
+            <ion-label position="floating">{{language.entervideourl}}</ion-label>
+            <ion-input type="url" formControlName="url" pattern="http.*" size="30" required placeholder="example https://youtubevideo.com"></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-button type="submit" [disabled]="!sendForm.valid" expand="block" size="small" color="primary">{{language.setvideourl}}</ion-button>
+
+    </form>
+
+
+
+  </ion-grid>
+
+
+
+</ion-content>

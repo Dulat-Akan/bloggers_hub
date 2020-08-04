@@ -1,0 +1,37 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Payments</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<div id="paypal-button-container" *ngIf="browser == true" style="margin-top:10px;"></div>
+
+<ion-content>
+
+  <ion-button *ngIf="browser == false" expand="full" color="success" style="text-align:center;margin-top:5vh;" (click)="payWithPaypal()">Pay with PayPal</ion-button>
+
+  <form class="sendyan_form" #form action="https://money.yandex.ru/eshop.xml" method="post"  [formGroup]="sendForm" (ngSubmit)="onSubmit()">
+       <input formControlName="shopId" name="shopId" value="530496" type="hidden"/>
+       <input  formControlName="scid" name="scid" value="864356" type="hidden"/>
+       <input formControlName="sum" name="sum" class="yan_sum" value="2" type="hidden">
+       <input formControlName="customerNumber" class="customer_number" name="customerNumber" value="abc000" type="hidden"/>
+       <!-- <input name="paymentType" value="AC" type="hidden"/> -->
+       <input formControlName="paymentType" name="paymentType" value="" type="hidden"/>
+       <!-- unique number -->
+       <input formControlName="orderNumber" class="orderNumber_n" name="orderNumber" value="abc1111111" type="hidden"/>
+       <input formControlName="cps_phone" class="customer_number" name="cps_phone" value="+77083531200" type="hidden"/>
+
+       <input formControlName="shopDefaultUrl" type="hidden" name="shopDefaultUrl" value="https://mobile.kazpoisk.kz/main.html">
+       <input formControlName="nnn" type="hidden" name="nnn" value="2click">
+       <input formControlName="ident" type="hidden" name="ident" >
+
+     <ion-button *ngIf="language" type="submit" expand="block" color="secondary" >{{language.yandex_pay}}</ion-button>
+   </form>
+
+
+
+   <ion-button *ngIf="language" class="bottom_n" (click)="goCabinet()" expand="block" color="primary" >{{language.finished}}</ion-button>
+
+
+
+</ion-content>

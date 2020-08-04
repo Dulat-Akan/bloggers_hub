@@ -9,6 +9,12 @@ import { ToastController } from '@ionic/angular';
 import { Location } from '@angular/common';
 import * as $ from 'jquery';
 
+//fix
+import { Event as NavigationEvent } from "@angular/router";
+import { filter } from "rxjs/operators";
+import { NavigationStart } from "@angular/router";
+//fix
+
 
 
 @Component({
@@ -33,37 +39,48 @@ export class AddFirstActionPage implements OnInit {
 
 
     sendForm = this.fb.group({
-       fromPlace: ['', Validators.required],
-       toPlace: [''],
+
+       url: [''],
+       description: [''],
+       location: [''],
+       sum: [''],
        date: [''],
        time: [''],
-       amount: [''],
-       weight: [''],
-       description: [''],
+       minviews: ['0'],
+       minvideos: ['0']
+
      });
 
  checksendForm = 0;
+ sendlocation:any;
 
      onSubmit() {
+
+       //console.log(this.sendForm.value);
+
+       var sum = this.sendForm.get('sum').value;
+
+       localStorage.setItem("s",sum);
+       localStorage.setItem("page","ocabinet");
+       //
+
 
         var senddata = {
           data:this.sendForm.value,
           role:this.homeservice.role,
           deviceid:this.homeservice.deviceid,
-          email:this.homeservice.email
+          email:this.homeservice.email,
+          location:this.sendlocation
         }
+
 
         this.searchservice.sendFormData(senddata);
         this.checksendForm = 1;
 
-        // var date = this.sendForm.controls['date'].value;
-        // var time = this.sendForm.controls['time'].value;
-
-        // var datenewdate = new Date(t).getTime();
-        // var newtime = new Date(t).getTime();
-
 
       }
+
+
   getFormData$;
 
   getFormDataResponse(){
@@ -72,12 +89,14 @@ export class AddFirstActionPage implements OnInit {
 
         if(data.status == "ok"){
 
+            localStorage.setItem("insertId",data.insertId);
+
             this.presentToast();
 
             setTimeout(() => {
 
-              //this.router.navigate(['/']);
-              this.location.back();
+              //this.location.back();
+              this.router.navigate(['/yandex-pay']);
 
             },2000);
 
@@ -90,48 +109,44 @@ export class AddFirstActionPage implements OnInit {
 
   citylist: Observable<any>;
   //checkformnumber = 1;
-
+  videoPrice = 0;
+  peoplecount = 0;
   //searchone
-  searchCity(search: string): void {
 
-    var data = {
-      deviceid:this.homeservice.deviceid,
-      search:search
-    }
 
-    //this.checkformnumber = 1;
-    this.searchservice.searchCity(data);
+
+appParams;
+
+  listenLoadInfo(){
+
+    this.homeservice.getLoadAllInfo().subscribe(data => {
+
+        this.appParams = data.alldata;
+
+        this.sendForm.controls['sum'].setValue(data.alldata.pricevideo);
+        this.sendForm.controls['minviews'].setValue(data.alldata.minviews);
+        this.sendForm.controls['minvideos'].setValue(data.alldata.minvideos);
+
+        this.peoplecount = data.alldata.peoplecount;
+        this.videoPrice = data.alldata.pricevideo;
+
+
+        if(this.peoplecount < 100){
+          this.peoplecount = 1000;
+        }
+
+          //console.log(data);
+    });
+
+  }
+
+  goToMap(){
+
+      this.router.navigate(['/googlemap']);
 
   }
 
   //cityListStatus = 0;
-
-  getCity$;
-
-  checkCitySearchData(){
-      this.getCity$ = this.searchservice.getCity().subscribe(data => {
-
-
-          this.citylist = data.data;
-
-
-      });
-  }
-
-
-
-  searchCityto(search: string): void {
-
-
-    var data = {
-      deviceid:this.homeservice.deviceid,
-      search:search
-    }
-
-    this.searchservice.searchCity(data);
-
-  }
-
 
   async presentToast() {
     const toast = await this.toastController.create({
@@ -152,18 +167,58 @@ export class AddFirstActionPage implements OnInit {
 
 
 
+  RouteListener(){
+
+            this.router.events
+            .pipe(
+                filter(
+                    ( event: NavigationEvent ) => {
+                        return( event instanceof NavigationStart );
+                    }
+                )
+            ).subscribe((event: NavigationStart) => {
+                if(event.url == "/add-first-action"){
+
+                  var storage = localStorage.getItem("places");
+
+                  if(storage){
+
+                    var obj = JSON.parse(storage);
+                    //console.log(obj.places);
+                    var insertPlace = obj.places[0].name;
+                    this.sendlocation = obj;
+                    this.sendForm.controls['location'].setValue(insertPlace);
+
+                  }
+
+                  //console.log("add route");
+                }
+            });
+
+   }
+
+
+
+
+
 
   ngOnInit() {
 
-    this.checkCitySearchData();
+
     this.getFormDataResponse();
     this.getTranslate();
+    this.RouteListener();
+
+    this.listenLoadInfo()//listener
+    this.homeservice.loadAllInfo({email:this.homeservice.email});
+
+
 
   }
 
   ngOnDestroy(){
     this.getFormData$.unsubscribe();
-    this.getCity$.unsubscribe();
+
     this.getTranslate$.unsubscribe();
   }
 

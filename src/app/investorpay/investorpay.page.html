@@ -1,0 +1,59 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <!-- <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons> -->
+    <ion-title *ngIf="language">{{language.investorpay}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="language" >
+
+  <form [formGroup]="sendForm" (ngSubmit)="onSubmit()">
+
+    <ion-item>
+      <ion-label position="stacked">{{language.currentSum}}</ion-label>
+      <ion-input type="number" pattern="[0-9]+" required formControlName="sum" #sumBox id="sum-box" (input)="calculateSum(sumBox.value)"></ion-input>
+    </ion-item>
+
+    <ion-row style="background:white;">
+      <ion-col size="9" class="fontsize18 greytext">
+        {{language.willbuy}}
+      </ion-col>
+      <ion-col size="3" class="fontsize18 greytext">
+        {{count}} {{language.stockName}}
+      </ion-col>
+    </ion-row>
+
+    <ion-row style="background:white;">
+      <ion-col size="9" class="fontsize18 greytext">
+        {{language.totalStock}}
+      </ion-col>
+      <ion-col size="3" class="fontsize18 greytext">
+        {{countBoughtstocks}} / {{totalstock}}
+      </ion-col>
+    </ion-row>
+
+    <ion-row style="background:white;">
+      <ion-col size="9" class="fontsize18 greytext">
+        {{language.stockPrice}}
+      </ion-col>
+      <ion-col size="3" class="fontsize18 greytext">
+        {{stockprice}}
+      </ion-col>
+    </ion-row>
+
+
+
+
+
+
+
+
+
+
+  <ion-button type="submit" *ngIf="checksendForm == 0" [disabled]="!sendForm.valid" expand="block" >{{language.Create}}</ion-button>
+
+    </form>
+
+</ion-content>

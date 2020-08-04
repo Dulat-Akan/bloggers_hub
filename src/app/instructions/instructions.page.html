@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title *ngIf="language">{{language.rules}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+
+  <ion-list>
+
+
+    <ion-card *ngFor="let detail of details;index as i;trackBy: trackByFn;" >
+
+          <ion-card-content style="color:black;font-size:1.1em;">
+            {{i+1}}. {{detail.text}}
+          </ion-card-content>
+
+
+    </ion-card>
+
+
+
+
+
+   </ion-list>
+
+
+
+</ion-content>

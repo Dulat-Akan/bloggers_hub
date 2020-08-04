@@ -1,0 +1,20 @@
+ion-content{
+   --background: linear-gradient(to right, #e6efff 0%, #b3cfff 100%);
+}
+
+.my_menu{
+  position: fixed;
+  left: 3%;
+  bottom: 2%;
+  width: 15%;
+  height: 6%;
+  z-index: 100;
+}
+
+.first_icon{
+
+}
+.menu_icon{
+  font-size: 45px;
+  color:#3880ff;
+}
